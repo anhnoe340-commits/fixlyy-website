@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const APP_URL = 'https://app.fixlyy.fr';
 
@@ -10,9 +11,9 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="md:col-span-2">
-            <span className="text-white font-black text-xl tracking-tight mb-4 block">
-              Fix<span className="text-brand">lyy</span>
-            </span>
+            <a href="/" className="flex items-center mb-4">
+              <img src="/logo-full-clean.svg" alt="Fixlyy" className="h-10 w-auto" />
+            </a>
             <p className="text-muted-2 text-sm leading-relaxed max-w-xs mb-5">
               Secrétaire IA 24/7 pour plombiers et électriciens indépendants en Île-de-France. Ne ratez plus jamais un appel client.
             </p>
@@ -63,9 +64,9 @@ export default function Footer() {
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted">
           <p>© 2025 Fixlyy. Tous droits réservés.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">Mentions légales</a>
-            <a href="#" className="hover:text-white transition-colors">Politique de confidentialité</a>
-            <a href="#" className="hover:text-white transition-colors">CGU</a>
+            <Link to="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</Link>
+            <Link to="/confidentialite" className="hover:text-white transition-colors">Politique de confidentialité</Link>
+            <Link to="/cgu" className="hover:text-white transition-colors">CGU</Link>
           </div>
         </div>
       </div>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Dark navy rounded background -->
+  <rect width="100" height="100" rx="22" fill="#061225"/>
+  <!-- Blue geometric mark — diamond dot -->
+  <rect x="47" y="10" width="10" height="10" rx="1" transform="rotate(45 52 15)" fill="#ffffff"/>
+  <!-- Stylized F in brand blue -->
+  <text
+    x="50" y="74"
+    font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    font-size="58"
+    font-weight="900"
+    text-anchor="middle"
+    fill="#3B5BF5"
+    letter-spacing="-2"
+  >F</text>
+</svg>

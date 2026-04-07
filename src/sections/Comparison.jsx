@@ -44,7 +44,8 @@ export default function Comparison() {
             <div className="p-5 text-muted-2 text-sm font-medium">Fonctionnalité</div>
             <div className="p-5 text-center border-l border-white/8">
               <div className="inline-flex items-center gap-2 bg-brand/10 border border-brand/20 text-brand text-sm font-bold px-4 py-1.5 rounded-full">
-                Fix<span className="text-white">lyy</span>
+                <img src="/logo-icon.svg" alt="Fixlyy" className="w-5 h-5 rounded" />
+                Fixlyy
                 <span className="text-xs bg-brand text-white px-2 py-0.5 rounded-full">Recommandé</span>
               </div>
             </div>

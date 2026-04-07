@@ -2,23 +2,44 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/logo-icon.svg" />
+    <meta name="theme-color" content="#061225" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fixlyy - Secrétaire IA 24/7 pour Artisans | Zéro Appel Manqué</title>
-    <meta name="description" content="Fixlyy répond à vos appels 24/7, génère vos devis automatiquement. Pour plombiers et électriciens IDF. 79€/mois. Essai 7 jours gratuit." />
+    <meta name="description" content="Fixlyy répond à vos appels 24/7, génère vos devis automatiquement. Pour plombiers et électriciens IDF. 79€/mois. Essai 30 jours gratuit." />
     <meta name="keywords" content="secrétaire IA, plombier, électricien, devis automatique, appels manqués, Île-de-France" />
-    
-    <meta property="og:title" content="Fixlyy - Zéro Appel Manqué. Garanti." />
-    <meta property="og:description" content="Secrétaire IA 24/7 pour artisans. Génération devis auto. 79€/mois." />
-    <meta property="og:image" content="https://fixlyy.fr/og-image.jpg" />
+
+    <!-- Open Graph (LinkedIn, Facebook, WhatsApp, iMessage) -->
+    <meta property="og:title" content="Fixlyy — Ne ratez plus jamais un appel client." />
+    <meta property="og:description" content="Secrétaire IA 24/7 pour plombiers et électriciens. Répond à vos appels, génère vos devis, envoie le SMS en 30 sec. À partir de 79€/mois. Essai 30 jours gratuit." />
+    <meta property="og:image" content="https://fixlyy.fr/og-image.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content="https://fixlyy.fr" />
     <meta property="og:type" content="website" />
-    
+    <meta property="og:site_name" content="Fixlyy" />
+    <meta property="og:locale" content="fr_FR" />
+
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Fixlyy - Secrétaire IA 24/7" />
-    <meta name="twitter:description" content="Récupérez 28 800€/an en appels manqués" />
-    <meta name="twitter:image" content="https://fixlyy.fr/twitter-card.jpg" />
-    
+    <meta name="twitter:title" content="Fixlyy — Zéro appel manqué. Garanti." />
+    <meta name="twitter:description" content="Secrétaire IA 24/7 pour artisans IDF. Devis auto · SMS en 30 sec · À partir de 79€/mois." />
+    <meta name="twitter:image" content="https://fixlyy.fr/og-image.svg" />
+
+    <!-- Prevent flash of wrong theme -->
+    <script>(function(){var t=localStorage.getItem('fixlyy-theme')||'dark';document.documentElement.classList.add(t);})();</script>
+
+    <!-- PostHog Analytics -->
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+" (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_uREVdsFo2iS7Wm7J4UWATVLvziKqDd45y7S7R6YrHibK', {
+        api_host: 'https://eu.i.posthog.com',
+        person_profiles: 'identified_only',
+      })
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />

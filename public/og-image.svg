@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090D1A"/>
+      <stop offset="100%" stop-color="#0F1527"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B5BF5" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#3B5BF5" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="centerGlow" cx="35%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#3B5BF5" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#3B5BF5" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="40"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Glow blobs -->
+  <circle cx="300" cy="280" r="300" fill="#3B5BF5" opacity="0.08" filter="url(#blur)"/>
+  <circle cx="950" cy="400" r="200" fill="#3B5BF5" opacity="0.05" filter="url(#blur)"/>
+
+  <!-- Subtle grid lines -->
+  <g stroke="#3B5BF5" stroke-opacity="0.06" stroke-width="1">
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+  </g>
+
+  <!-- Left content zone -->
+  <!-- Logo icon simplified (dark square + F) -->
+  <rect x="64" y="64" width="64" height="64" rx="16" fill="#061225"/>
+  <rect x="64" y="64" width="64" height="64" rx="16" fill="none" stroke="#3B5BF5" stroke-width="1.5" stroke-opacity="0.4"/>
+  <!-- Diamond dot -->
+  <rect x="89" y="73" width="10" height="10" rx="1" transform="rotate(45 94 78)" fill="white" opacity="0.9"/>
+  <!-- F letter -->
+  <text x="96" y="118" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="40" font-weight="900" text-anchor="middle" fill="#3B5BF5">F</text>
+
+  <!-- Brand name -->
+  <text x="148" y="107" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="32" font-weight="900" fill="white" letter-spacing="-0.5">Fix</text>
+  <text x="207" y="107" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="32" font-weight="900" fill="#3B5BF5" letter-spacing="-0.5">lyy</text>
+
+  <!-- Badge -->
+  <rect x="64" y="162" width="232" height="32" rx="16" fill="#3B5BF5" fill-opacity="0.12"/>
+  <rect x="64" y="162" width="232" height="32" rx="16" fill="none" stroke="#3B5BF5" stroke-opacity="0.3" stroke-width="1"/>
+  <circle cx="85" cy="178" r="5" fill="#3B5BF5"/>
+  <text x="97" y="183" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="13" font-weight="600" fill="#3B5BF5">Secrétaire IA · Île-de-France</text>
+
+  <!-- Main headline -->
+  <text x="64" y="280" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="58" font-weight="900" fill="white" letter-spacing="-1.5">Ne ratez plus</text>
+  <text x="64" y="350" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="58" font-weight="900" fill="#3B5BF5" letter-spacing="-1.5">jamais</text>
+  <text x="64" y="350" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="58" font-weight="900" fill="white" letter-spacing="-1.5" x="276">&#160;un appel.</text>
+
+  <!-- Line 3 of headline with text continuation -->
+  <text font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="58" font-weight="900" fill="white" letter-spacing="-1.5">
+    <tspan x="64" dy="0" y="350">
+      <tspan fill="#3B5BF5">jamais</tspan>
+      <tspan fill="white"> un appel.</tspan>
+    </tspan>
+  </text>
+
+  <!-- Sub text -->
+  <text x="64" y="408" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="20" fill="#9CA3AF">Répond 24h/24 · Devis en 2 min · SMS en 30 sec · À partir de 79€/mois</text>
+
+  <!-- 3 stat pills -->
+  <!-- Pill 1 -->
+  <rect x="64" y="450" width="140" height="44" rx="10" fill="white" fill-opacity="0.05"/>
+  <rect x="64" y="450" width="140" height="44" rx="10" fill="none" stroke="white" stroke-opacity="0.1" stroke-width="1"/>
+  <text x="134" y="477" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="13" font-weight="700" fill="white" text-anchor="middle">📞 24h/24 · 7j/7</text>
+
+  <!-- Pill 2 -->
+  <rect x="218" y="450" width="150" height="44" rx="10" fill="white" fill-opacity="0.05"/>
+  <rect x="218" y="450" width="150" height="44" rx="10" fill="none" stroke="white" stroke-opacity="0.1" stroke-width="1"/>
+  <text x="293" y="477" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="13" font-weight="700" fill="white" text-anchor="middle">⚡ Essai 30j gratuit</text>
+
+  <!-- Pill 3 -->
+  <rect x="382" y="450" width="166" height="44" rx="10" fill="white" fill-opacity="0.05"/>
+  <rect x="382" y="450" width="166" height="44" rx="10" fill="none" stroke="white" stroke-opacity="0.1" stroke-width="1"/>
+  <text x="465" y="477" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="13" font-weight="700" fill="white" text-anchor="middle">🛡️ Satisfait remboursé</text>
+
+  <!-- Divider -->
+  <line x1="620" y1="60" x2="620" y2="570" stroke="white" stroke-opacity="0.06" stroke-width="1"/>
+
+  <!-- Right zone — Dashboard mockup -->
+  <rect x="660" y="60" width="480" height="510" rx="20" fill="white" fill-opacity="0.03"/>
+  <rect x="660" y="60" width="480" height="510" rx="20" fill="none" stroke="white" stroke-opacity="0.08" stroke-width="1"/>
+
+  <!-- Dashboard header -->
+  <rect x="680" y="80" width="440" height="56" rx="12" fill="white" fill-opacity="0.04"/>
+  <circle cx="706" cy="108" r="16" fill="#3B5BF5" fill-opacity="0.2"/>
+  <text x="706" y="114" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="14" font-weight="700" fill="#3B5BF5" text-anchor="middle">AI</text>
+  <text x="732" y="103" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="13" font-weight="600" fill="white">Tableau de bord live</text>
+  <text x="732" y="120" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="11" fill="#6B7280">Fixlyy répond à votre place</text>
+  <!-- Active dot -->
+  <circle cx="1094" cy="104" r="5" fill="#10B981"/>
+  <circle cx="1094" cy="104" r="8" fill="#10B981" fill-opacity="0.2"/>
+  <text x="1082" y="120" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="10" fill="#10B981" text-anchor="middle">Actif</text>
+
+  <!-- Call card 1 -->
+  <rect x="680" y="152" width="440" height="80" rx="12" fill="white" fill-opacity="0.05"/>
+  <rect x="680" y="152" width="440" height="80" rx="12" fill="none" stroke="white" stroke-opacity="0.08" stroke-width="1"/>
+  <text x="700" y="180" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="14" font-weight="700" fill="white">M. Dupont</text>
+  <text x="700" y="198" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="12" fill="#9CA3AF">Fuite sous évier · 08:42</text>
+  <rect x="1040" y="162" width="64" height="24" rx="12" fill="#3B5BF5" fill-opacity="0.2"/>
+  <rect x="1040" y="162" width="64" height="24" rx="12" fill="none" stroke="#3B5BF5" stroke-opacity="0.4" stroke-width="1"/>
+  <text x="1072" y="178" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="11" font-weight="700" fill="#3B5BF5" text-anchor="middle">URGENT</text>
+  <text x="700" y="222" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="12" fill="#10B981" font-weight="600">✓ Devis 280 € · SMS envoyé</text>
+
+  <!-- Call card 2 -->
+  <rect x="680" y="246" width="440" height="80" rx="12" fill="white" fill-opacity="0.03"/>
+  <rect x="680" y="246" width="440" height="80" rx="12" fill="none" stroke="white" stroke-opacity="0.06" stroke-width="1"/>
+  <text x="700" y="274" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="14" font-weight="700" fill="white">Mme Bernard</text>
+  <text x="700" y="292" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="12" fill="#9CA3AF">Chauffe-eau en panne · 11:15</text>
+  <rect x="1046" y="256" width="58" height="24" rx="12" fill="#3B5BF5" fill-opacity="0.1"/>
+  <rect x="1046" y="256" width="58" height="24" rx="12" fill="none" stroke="#3B5BF5" stroke-opacity="0.25" stroke-width="1"/>
+  <text x="1075" y="272" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="11" font-weight="700" fill="#6B8AFF" text-anchor="middle">RDV</text>
+  <text x="700" y="316" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="12" fill="#10B981" font-weight="600">✓ Devis 450 € · SMS envoyé</text>
+
+  <!-- Stats row -->
+  <rect x="680" y="342" width="136" height="72" rx="12" fill="white" fill-opacity="0.04"/>
+  <text x="748" y="375" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="26" font-weight="900" fill="white" text-anchor="middle">127</text>
+  <text x="748" y="396" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="11" fill="#6B7280" text-anchor="middle">appels</text>
+
+  <rect x="830" y="342" width="136" height="72" rx="12" fill="white" fill-opacity="0.04"/>
+  <text x="898" y="375" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="26" font-weight="900" fill="white" text-anchor="middle">94</text>
+  <text x="898" y="396" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="11" fill="#6B7280" text-anchor="middle">devis</text>
+
+  <rect x="980" y="342" width="140" height="72" rx="12" fill="white" fill-opacity="0.04"/>
+  <text x="1050" y="375" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="26" font-weight="900" fill="#10B981" text-anchor="middle">+2 400€</text>
+  <text x="1050" y="396" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="11" fill="#6B7280" text-anchor="middle">récupérés/mois</text>
+
+  <!-- SMS preview -->
+  <rect x="680" y="430" width="440" height="110" rx="12" fill="white" fill-opacity="0.03"/>
+  <rect x="680" y="430" width="440" height="110" rx="12" fill="none" stroke="white" stroke-opacity="0.06" stroke-width="1"/>
+  <text x="700" y="455" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="11" fill="#6B7280" font-weight="600">💬 SMS · envoyé en 30 sec</text>
+  <text x="700" y="476" font-family="Courier New, monospace" font-size="12" fill="rgba(255,255,255,0.6)">📞 M. Dupont · Fuite sous évier</text>
+  <text x="700" y="496" font-family="Courier New, monospace" font-size="12" fill="rgba(255,255,255,0.6)">⚡ URGENT · Devis estimé :</text>
+  <text x="700" y="496" font-family="Courier New, monospace" font-size="12" fill="#10B981">
+    <tspan dx="232">280 €</tspan>
+  </text>
+  <text x="700" y="516" font-family="Courier New, monospace" font-size="12" fill="rgba(255,255,255,0.6)">📍 Vincennes · <tspan fill="#3B5BF5">08:42</tspan></text>
+
+  <!-- Bottom URL -->
+  <rect x="0" y="588" width="1200" height="42" fill="white" fill-opacity="0.03"/>
+  <line x1="0" y1="588" x2="1200" y2="588" stroke="white" stroke-opacity="0.06" stroke-width="1"/>
+  <text x="600" y="614" font-family="-apple-system, BlinkMacSystemFont, Arial, sans-serif" font-size="16" font-weight="700" fill="white" text-anchor="middle" opacity="0.5">fixlyy.fr</text>
+</svg>
