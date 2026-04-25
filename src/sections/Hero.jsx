@@ -72,10 +72,18 @@ export default function Hero() {
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-                className="inline-flex items-center gap-2 bg-brand/10 border border-brand/20 text-brand text-sm font-medium px-4 py-2 rounded-full mb-6"
+                className="flex flex-wrap gap-2 mb-6"
               >
-                <span className="w-2 h-2 bg-brand rounded-full animate-pulse" />
-                Secrétaire IA 100% française · Île-de-France
+                <span className="inline-flex items-center gap-2 bg-brand/10 border border-brand/20 text-brand text-sm font-medium px-4 py-2 rounded-full">
+                  <span className="w-2 h-2 bg-brand rounded-full animate-pulse" />
+                  Secrétaire IA 24h/24 · Île-de-France
+                </span>
+                <span className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 text-white/70 text-sm font-medium px-3 py-2 rounded-full">
+                  🌍 Parle 10+ langues
+                </span>
+                <span className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 text-white/70 text-sm font-medium px-3 py-2 rounded-full">
+                  ∞ 1 000 appels en simultané
+                </span>
               </motion.div>
 
               <motion.h1
@@ -91,8 +99,8 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
                 className="text-lg text-muted-2 leading-relaxed mb-8 max-w-md"
               >
-                Fixlyy répond à vos appels 24h/24, génère vos devis en 2 minutes, et vous envoie le résumé par SMS en 30 secondes.
-                Récupérez <span className="text-white font-bold">2 400 €/mois</span> de CA perdu.
+                Fixlyy répond à vos appels 24h/24 — en français, anglais, arabe ou espagnol — et vous envoie le résumé par SMS en 30 secondes.
+                Récupérez <span className="text-white font-bold">2 400 €/mois</span> de CA perdu, même la nuit.
               </motion.p>
 
               <motion.div
