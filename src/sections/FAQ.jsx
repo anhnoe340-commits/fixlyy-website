@@ -16,8 +16,8 @@ const faqs = [
     a: 'Moins de 10 minutes. Vous renseignez votre profil (nom, métier, zone, tarifs), on configure la voix, et c\'est opérationnel. Notre équipe vous accompagne en cas de question via le chat support.',
   },
   {
-    q: 'Quelle est la différence avec Allo Maxi ?',
-    a: 'Trois différences majeures : (1) Tarif fixe mensuel vs facturation à la minute — fini les factures imprévisibles. (2) SMS récap en 30 secondes garanti avec qualification des urgences — Allo Maxi ne fait pas ça. (3) Vocabulaire métier bâtiment 100% français. De plus, Fixlyy est une équipe française, avec un support français.',
+    q: 'Pourquoi Fixlyy plutôt qu\'un autre service ?',
+    a: 'Trois différences majeures : (1) Tarif fixe mensuel vs facturation à la minute — fini les factures imprévisibles. (2) SMS récap en 30 secondes avec qualification des urgences incluse dès le plan Pro. (3) Vocabulaire métier bâtiment 100% français, équipe et support français.',
   },
   {
     q: 'Puis-je changer de plan ou résilier à tout moment ?',

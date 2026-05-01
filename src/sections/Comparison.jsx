@@ -5,16 +5,16 @@ import { Check, X } from 'lucide-react';
 const APP_URL = 'https://app.fixlyy.fr';
 
 const rows = [
-  { feature: 'Réponse 24h/24, 7j/7', fixlyy: true, maxi: true },
-  { feature: 'Tarif fixe mensuel prévisible', fixlyy: true, maxi: false },
-  { feature: 'SMS récap détaillé en 30 secondes', fixlyy: true, maxi: false },
-  { feature: 'SMS récap en 30 secondes', fixlyy: true, maxi: false },
-  { feature: 'Mise en service en 10 minutes', fixlyy: true, maxi: false, maxiNote: '20+ min' },
-  { feature: 'Vocabulaire métier artisan FR', fixlyy: true, maxi: true },
-  { feature: 'Support en français', fixlyy: true, maxi: true },
-  { feature: 'Équipe 100% française', fixlyy: true, maxi: false },
-  { feature: 'Sans engagement', fixlyy: true, maxi: false },
-  { feature: 'Garantie 30 jours remboursé', fixlyy: true, maxi: false },
+  { feature: 'Réponse 24h/24, 7j/7', fixlyy: true, other: true },
+  { feature: 'Tarif fixe mensuel prévisible', fixlyy: true, other: false },
+  { feature: 'SMS récap en 30 secondes', fixlyy: true, other: false },
+  { feature: 'Qualification des urgences', fixlyy: true, other: false },
+  { feature: 'Mise en service en 10 minutes', fixlyy: true, other: false, otherNote: '20+ min' },
+  { feature: 'Vocabulaire métier artisan FR', fixlyy: true, other: true },
+  { feature: 'Support en français', fixlyy: true, other: true },
+  { feature: 'Équipe 100% française', fixlyy: true, other: false },
+  { feature: 'Sans engagement', fixlyy: true, other: false },
+  { feature: 'Garantie 30 jours remboursé', fixlyy: true, other: false },
 ];
 
 export default function Comparison() {
@@ -28,10 +28,10 @@ export default function Comparison() {
         >
           <p className="text-brand text-sm font-semibold uppercase tracking-widest mb-4">Comparatif</p>
           <h2 className="text-3xl md:text-5xl font-black text-white mb-4 md:mb-5">
-            Fixlyy vs Allo Maxi
+            Fixlyy vs les autres
           </h2>
           <p className="text-muted-2 text-base md:text-lg max-w-xl mx-auto">
-            Allo Maxi facture à la minute — votre facture varie chaque mois. Fixlyy, c'est un forfait fixe avec plus de fonctionnalités incluses.
+            La plupart des concurrents facturent à la minute — votre facture varie chaque mois. Fixlyy, c'est un forfait fixe avec plus de fonctionnalités incluses.
           </p>
         </motion.div>
 
@@ -59,7 +59,7 @@ export default function Comparison() {
                   </div>
                 </div>
                 <div className="p-4 md:p-5 text-center border-l border-white/8">
-                  <span className="text-muted-2 text-xs md:text-sm font-medium">Allo Maxi</span>
+                  <span className="text-muted-2 text-xs md:text-sm font-medium">Concurrent type</span>
                 </div>
               </div>
 
@@ -78,7 +78,7 @@ export default function Comparison() {
                     }
                   </div>
                   <div className="p-3 md:p-4 border-l border-white/5 flex items-center justify-center gap-1.5 md:gap-2">
-                    {row.maxi
+                    {row.other
                       ? <div className="w-6 h-6 md:w-7 md:h-7 bg-white/5 border border-white/10 rounded-full flex items-center justify-center">
                           <Check className="w-3 h-3 md:w-3.5 md:h-3.5 text-muted" />
                         </div>
@@ -86,7 +86,7 @@ export default function Comparison() {
                           <div className="w-6 h-6 md:w-7 md:h-7 bg-error/10 border border-error/20 rounded-full flex items-center justify-center">
                             <X className="w-3 h-3 md:w-3.5 md:h-3.5 text-error" />
                           </div>
-                          {row.maxiNote && <span className="text-[10px] text-muted">{row.maxiNote}</span>}
+                          {row.otherNote && <span className="text-[10px] text-muted">{row.otherNote}</span>}
                         </div>
                     }
                   </div>

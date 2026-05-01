@@ -36,8 +36,8 @@ const testimonials = [
     city: 'Massy (91)',
     avatar: 'M',
     stars: 5,
-    text: 'Le tarif fixe c\'est ce qui m\'a convaincu. Allo Maxi m\'envoyait des factures à 200€+ certains mois. Avec Fixlyy je sais exactement ce que je paye. 149€ et c\'est réglé.',
-    highlight: 'Tarif prévisible vs Allo Maxi',
+    text: 'Le tarif fixe c\'est ce qui m\'a convaincu. Avant mes factures variaient à 200€+ certains mois. Avec Fixlyy je sais exactement ce que je paye. 149€ et c\'est réglé.',
+    highlight: 'Tarif prévisible, zéro surprise',
   },
 ];
 
