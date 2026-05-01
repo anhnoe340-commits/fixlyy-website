@@ -10,7 +10,7 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="bg-dark py-24 px-6" id="how-it-works">
+    <section className="bg-dark py-16 md:py-24 px-4 md:px-6" id="how-it-works">
       <div className="max-w-5xl mx-auto">
         <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-black text-white mb-4">🚀 C'est simple.</h2>

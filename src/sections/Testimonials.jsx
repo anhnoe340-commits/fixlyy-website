@@ -43,7 +43,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-dark py-24 px-6" id="testimonials">
+    <section className="bg-dark py-16 md:py-24 px-4 md:px-6" id="testimonials">
       <div className="max-w-6xl mx-auto">
 
         <motion.div
@@ -51,7 +51,7 @@ export default function Testimonials() {
           className="text-center mb-16"
         >
           <p className="text-brand text-sm font-semibold uppercase tracking-widest mb-4">Témoignages</p>
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-5">
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-4 md:mb-5">
             Ce que disent les artisans.
           </h2>
           <div className="flex items-center justify-center gap-1 mb-2">
@@ -87,7 +87,7 @@ export default function Testimonials() {
                     <p className="text-muted text-xs">{t.role} · {t.city}</p>
                   </div>
                 </div>
-                <span className="text-xs text-brand bg-brand/10 border border-brand/20 px-3 py-1 rounded-full font-medium">
+                <span className="hidden sm:block text-xs text-brand bg-brand/10 border border-brand/20 px-3 py-1 rounded-full font-medium">
                   {t.highlight}
                 </span>
               </div>

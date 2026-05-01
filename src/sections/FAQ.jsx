@@ -41,7 +41,7 @@ export default function FAQ() {
   const [open, setOpen] = useState(null);
 
   return (
-    <section className="bg-dark-2 py-24 px-6" id="faq">
+    <section className="bg-dark-2 py-16 md:py-24 px-4 md:px-6" id="faq">
       <div className="max-w-3xl mx-auto">
 
         <motion.div
@@ -49,7 +49,7 @@ export default function FAQ() {
           className="text-center mb-14"
         >
           <p className="text-brand text-sm font-semibold uppercase tracking-widest mb-4">FAQ</p>
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-5">
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-4 md:mb-5">
             Questions fréquentes
           </h2>
           <p className="text-muted-2 text-lg">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { PhoneCall, Clock, FileText, MessageSquare, ChevronDown } from 'lucide-react';
+import { PhoneCall, Clock, FileText, MessageSquare, ChevronDown, Menu, X as XIcon } from 'lucide-react';
 import ThemeToggle from '../components/ThemeToggle';
 
 const APP_URL = 'https://app.fixlyy.fr';
@@ -15,6 +15,7 @@ const liveNotifications = [
 export default function Hero() {
   const [notifIndex, setNotifIndex] = useState(0);
   const [visible, setVisible] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,10 +41,10 @@ export default function Hero() {
 
       {/* Nav */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-dark/90 backdrop-blur-md border-b border-white/5">
-        <div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 py-3 flex items-center justify-between">
           {/* Logo */}
           <a href="/" className="flex items-center">
-            <img src="/logo-full-clean.svg" alt="Fixlyy" className="h-10 w-auto" />
+            <img src="/logo-full-clean.svg" alt="Fixlyy" className="h-9 md:h-10 w-auto" />
           </a>
 
           <div className="hidden md:flex items-center gap-8 text-sm text-muted-2">
@@ -53,20 +54,45 @@ export default function Hero() {
             <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 md:gap-3">
             <ThemeToggle />
             <a href={APP_URL} target="_blank" rel="noopener noreferrer"
-              className="bg-brand hover:bg-brand-dark text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
+              className="bg-brand hover:bg-brand-dark text-white text-sm font-semibold px-4 md:px-5 py-2 md:py-2.5 rounded-lg transition-colors">
               Essai gratuit
             </a>
+            {/* Hamburger */}
+            <button
+              onClick={() => setMenuOpen(o => !o)}
+              className="md:hidden p-2 text-muted-2 hover:text-white transition-colors"
+              aria-label="Menu"
+            >
+              {menuOpen ? <XIcon className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile menu */}
+        {menuOpen && (
+          <div className="md:hidden border-t border-white/5 bg-dark/95 px-4 py-4 flex flex-col gap-4">
+            {[
+              { href: '#how-it-works', label: 'Comment ça marche' },
+              { href: '#pricing',      label: 'Tarifs' },
+              { href: '#comparison',   label: 'Comparatif' },
+              { href: '#faq',          label: 'FAQ' },
+            ].map(link => (
+              <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}
+                className="text-muted-2 hover:text-white text-sm transition-colors py-1">
+                {link.label}
+              </a>
+            ))}
+          </div>
+        )}
       </nav>
 
       {/* Hero content */}
       <div className="flex-1 flex items-center">
-        <div className="max-w-6xl mx-auto px-6 pt-28 pb-16 w-full">
-          <div className="grid lg:grid-cols-2 gap-14 items-center">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 pt-24 md:pt-28 pb-12 md:pb-16 w-full">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
 
             {/* Left — Copy */}
             <div>
@@ -88,7 +114,7 @@ export default function Hero() {
 
               <motion.h1
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-6"
+                className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-5 md:mb-6"
               >
                 Ne ratez plus<br />
                 <span className="text-brand">jamais</span> un<br />

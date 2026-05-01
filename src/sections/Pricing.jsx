@@ -63,7 +63,7 @@ export default function Pricing() {
   const [annual, setAnnual] = useState(false);
 
   return (
-    <section className="bg-dark-2 py-24 px-6" id="pricing">
+    <section className="bg-dark-2 py-16 md:py-24 px-4 md:px-6" id="pricing">
       <div className="max-w-6xl mx-auto">
 
         <motion.div
@@ -71,7 +71,7 @@ export default function Pricing() {
           className="text-center mb-12"
         >
           <p className="text-brand text-sm font-semibold uppercase tracking-widest mb-4">Tarifs</p>
-          <h2 className="text-4xl md:text-5xl font-black text-white mb-5">
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-4 md:mb-5">
             Tarif fixe. Zéro surprise.
           </h2>
           <p className="text-muted-2 text-lg max-w-lg mx-auto mb-8">
