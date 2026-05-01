@@ -36,7 +36,7 @@ const proFeatures = [
   'Rapport d\'appels hebdomadaire',
   'Intégration Google Calendar',
   'Statistiques détaillées',
-  "Jusqu'à 5 utilisateurs",
+  "Jusqu'à 3 utilisateurs",
   'Support prioritaire par email',
   'Numéro de téléphone dédié',
 ];
@@ -98,7 +98,7 @@ export default function Pricing() {
           </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 items-start">
+        <div className="grid md:grid-cols-3 gap-6 items-stretch">
 
           {/* ── Solo ── */}
           <motion.div

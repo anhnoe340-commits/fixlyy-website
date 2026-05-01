@@ -117,13 +117,13 @@ html.light .prose-legal .info-box { border-color: rgba(59,91,245,0.12) !importan
 
 /* Nav glass — fond dark semi-transparent, blur fort */
 .glass-nav {
-  background: rgba(15, 20, 40, 0.35) !important;
-  backdrop-filter: blur(40px) saturate(200%) brightness(1.15) !important;
-  -webkit-backdrop-filter: blur(40px) saturate(200%) brightness(1.15) !important;
-  border-bottom: 1px solid rgba(255,255,255,0.10) !important;
+  background: rgba(20, 28, 60, 0.18) !important;
+  backdrop-filter: blur(40px) saturate(180%) brightness(1.30) !important;
+  -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.30) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.12) !important;
   box-shadow:
-    0 1px 0 rgba(255,255,255,0.06),
-    0 4px 24px rgba(0,0,0,0.10) !important;
+    0 1px 0 rgba(255,255,255,0.08),
+    0 2px 16px rgba(0,0,0,0.06) !important;
 }
 
 /* Card glass — dark mode */
