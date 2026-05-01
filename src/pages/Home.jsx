@@ -1,6 +1,8 @@
 import React from 'react';
 import { ThemeProvider } from '../contexts/ThemeContext';
 import Hero from '../sections/Hero';
+import Features from '../sections/Features';
+import PhoneScroll from '../sections/PhoneScroll';
 import Problem from '../sections/Problem';
 import HowItWorks from '../sections/HowItWorks';
 import Comparison from '../sections/Comparison';
@@ -17,6 +19,8 @@ export default function Home() {
       <main className="min-h-screen bg-dark">
         <Hero />
         <Problem />
+        <Features />
+        <PhoneScroll />
         <HowItWorks />
         <AudioDemo />
         <Comparison />

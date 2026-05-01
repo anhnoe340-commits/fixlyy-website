@@ -1,48 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { PhoneCall, Clock, FileText, MessageSquare, ChevronDown, Menu, X as XIcon } from 'lucide-react';
+import { ChevronDown, Menu, X as XIcon } from 'lucide-react';
 import ThemeToggle from '../components/ThemeToggle';
+import Phone3D from '../components/Phone3D';
 
 const APP_URL = 'https://app.fixlyy.fr';
 
-const liveNotifications = [
-  { time: '08:42', name: 'M. Dupont', type: 'Fuite sous évier', urgence: 'URGENT', devis: '280 €' },
-  { time: '11:15', name: 'Mme Bernard', type: 'Chauffe-eau en panne', urgence: 'RDV', devis: '450 €' },
-  { time: '14:33', name: 'M. Martin', type: 'Prise électrique HS', urgence: 'URGENT', devis: '180 €' },
-  { time: '17:08', name: 'SCI Les Lilas', type: 'Tableau électrique', urgence: 'RDV', devis: '890 €' },
-];
-
 export default function Hero() {
-  const [notifIndex, setNotifIndex] = useState(0);
-  const [visible, setVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setVisible(false);
-      setTimeout(() => {
-        setNotifIndex(i => (i + 1) % liveNotifications.length);
-        setVisible(true);
-      }, 400);
-    }, 3200);
-    return () => clearInterval(interval);
-  }, []);
-
-  const notif = liveNotifications[notifIndex];
 
   return (
     <section className="relative min-h-screen flex flex-col bg-dark overflow-hidden">
 
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-brand/8 rounded-full blur-[150px]" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-brand/5 rounded-full blur-[100px]" />
+        <div className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-brand/8 rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-brand/5 rounded-full blur-[120px]" />
+        <div className="absolute top-0 right-1/4 w-[300px] h-[300px] bg-brand/4 rounded-full blur-[100px]" />
       </div>
+
+      {/* Grid pattern overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.02]"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(59,91,245,1) 1px, transparent 1px), linear-gradient(90deg, rgba(59,91,245,1) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }}
+      />
 
       {/* Nav */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-dark/90 backdrop-blur-md border-b border-white/5">
         <div className="max-w-6xl mx-auto px-4 md:px-6 py-3 flex items-center justify-between">
-          {/* Logo */}
           <a href="/" className="flex items-center">
             <img src="/logo-full-clean.svg" alt="Fixlyy" className="h-9 md:h-10 w-auto" />
           </a>
@@ -60,7 +48,6 @@ export default function Hero() {
               className="bg-brand hover:bg-brand-dark text-white text-sm font-semibold px-4 md:px-5 py-2 md:py-2.5 rounded-lg transition-colors">
               Essai gratuit
             </a>
-            {/* Hamburger */}
             <button
               onClick={() => setMenuOpen(o => !o)}
               className="md:hidden p-2 text-muted-2 hover:text-white transition-colors"
@@ -71,7 +58,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Mobile menu */}
         {menuOpen && (
           <div className="md:hidden border-t border-white/5 bg-dark/95 px-4 py-4 flex flex-col gap-4">
             {[
@@ -108,7 +94,7 @@ export default function Hero() {
                   🌍 Parle 10+ langues
                 </span>
                 <span className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 text-white/70 text-sm font-medium px-3 py-2 rounded-full">
-                  ∞ 1 000 appels en simultané
+                  ∞ 1 000 appels simultanés
                 </span>
               </motion.div>
 
@@ -155,89 +141,14 @@ export default function Hero() {
               </motion.div>
             </div>
 
-            {/* Right — Live widget */}
+            {/* Right — Phone 3D */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
-              className="relative"
+              initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.3 }}
+              className="flex justify-center lg:justify-end"
             >
-              <div className="bg-dark-3 rounded-2xl border border-white/10 p-6 shadow-card">
-
-                {/* Status header */}
-                <div className="flex items-center justify-between mb-5">
-                  <div>
-                    <p className="text-xs text-muted uppercase tracking-widest mb-1">Tableau de bord live</p>
-                    <p className="text-white font-semibold text-sm">Fixlyy répond à votre place</p>
-                  </div>
-                  <div className="flex items-center gap-2 bg-success/10 border border-success/20 text-success text-xs font-medium px-3 py-1.5 rounded-full">
-                    <span className="w-1.5 h-1.5 bg-success rounded-full animate-pulse" />
-                    Actif 24/7
-                  </div>
-                </div>
-
-                {/* Rotating notification */}
-                <div className={`transition-all duration-300 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'}`}>
-                  <div className="bg-dark-4 rounded-xl p-4 mb-3 border border-white/5">
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <p className="text-white font-semibold text-sm">{notif.name}</p>
-                        <p className="text-muted-2 text-xs mt-0.5">{notif.type}</p>
-                      </div>
-                      <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${
-                        notif.urgence === 'URGENT'
-                          ? 'bg-brand/20 text-brand border border-brand/30'
-                          : 'bg-brand/10 text-brand-light border border-brand/20'
-                      }`}>
-                        {notif.urgence}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="flex items-center gap-1.5 text-muted-2">
-                        <Clock className="w-3.5 h-3.5" /> {notif.time}
-                      </span>
-                      <span className="flex items-center gap-1.5 text-success font-bold">
-                        <FileText className="w-3.5 h-3.5" /> Devis {notif.devis}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* SMS preview */}
-                <div className="bg-dark-4 rounded-xl p-4 border border-white/5 mb-4">
-                  <div className="flex items-center gap-2 mb-2">
-                    <MessageSquare className="w-3.5 h-3.5 text-brand" />
-                    <p className="text-xs text-muted uppercase tracking-widest">SMS · envoyé en 30 sec</p>
-                  </div>
-                  <p className="text-white/70 text-xs leading-relaxed font-mono">
-                    📞 <span className="text-white">{notif.name}</span> · {notif.type}<br />
-                    ⚡ {notif.urgence} · Devis estimé : <span className="text-success">{notif.devis}</span><br />
-                    📍 Île-de-France · <span className="text-brand">{notif.time}</span>
-                  </p>
-                </div>
-
-                {/* Stats row */}
-                <div className="grid grid-cols-3 gap-2">
-                  {[
-                    { icon: <PhoneCall className="w-3.5 h-3.5" />, val: '127', label: 'appels' },
-                    { icon: <FileText className="w-3.5 h-3.5" />, val: '94', label: 'devis' },
-                    { icon: <MessageSquare className="w-3.5 h-3.5" />, val: '127', label: 'SMS' },
-                  ].map((s, i) => (
-                    <div key={i} className="bg-dark/60 rounded-lg p-2.5 text-center">
-                      <div className="text-brand mb-1 flex justify-center">{s.icon}</div>
-                      <p className="text-white font-bold text-sm">{s.val}</p>
-                      <p className="text-muted text-xs">{s.label}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Floating badge */}
-              <motion.div
-                animate={{ y: [0, -5, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-3 -right-3 bg-brand text-white text-xs font-bold px-4 py-2 rounded-full shadow-brand whitespace-nowrap"
-              >
-                +2 400 €/mois récupérés
-              </motion.div>
+              <Phone3D size="lg" showNotifications={true} />
             </motion.div>
+
           </div>
         </div>
       </div>
