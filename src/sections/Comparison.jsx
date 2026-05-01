@@ -7,7 +7,7 @@ const APP_URL = 'https://app.fixlyy.fr';
 const rows = [
   { feature: 'Réponse 24h/24, 7j/7', fixlyy: true, maxi: true },
   { feature: 'Tarif fixe mensuel prévisible', fixlyy: true, maxi: false },
-  { feature: 'Génération de devis automatique', fixlyy: true, maxi: false },
+  { feature: 'SMS récap détaillé en 30 secondes', fixlyy: true, maxi: false },
   { feature: 'SMS récap en 30 secondes', fixlyy: true, maxi: false },
   { feature: 'Mise en service en 10 minutes', fixlyy: true, maxi: false, maxiNote: '20+ min' },
   { feature: 'Vocabulaire métier artisan FR', fixlyy: true, maxi: true },
@@ -19,7 +19,7 @@ const rows = [
 
 export default function Comparison() {
   return (
-    <section className="bg-dark py-16 md:py-24 px-4 md:px-6" id="comparison">
+    <section className="bg-dark py-16 md:py-24 px-4 md:px-6 relative overflow-hidden" id="comparison">
       <div className="max-w-4xl mx-auto">
 
         <motion.div
@@ -35,9 +35,14 @@ export default function Comparison() {
           </p>
         </motion.div>
 
+      {/* Glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 right-1/4 w-[400px] h-[400px] bg-brand/6 rounded-full blur-[120px]" />
+      </div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-          className="bg-dark-3 border border-white/8 rounded-2xl overflow-hidden"
+          className="glass rounded-2xl overflow-hidden"
         >
           {/* Scrollable wrapper on mobile */}
           <div className="overflow-x-auto">

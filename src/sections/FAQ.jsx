@@ -17,15 +17,15 @@ const faqs = [
   },
   {
     q: 'Quelle est la différence avec Allo Maxi ?',
-    a: 'Trois différences majeures : (1) Tarif fixe mensuel vs facturation à la minute — fini les factures imprévisibles. (2) Génération de devis automatique incluse — Allo Maxi ne fait pas ça. (3) SMS récap en 30 secondes garanti. De plus, Fixlyy est 100% français : équipe, support et vocabulaire métier.',
+    a: 'Trois différences majeures : (1) Tarif fixe mensuel vs facturation à la minute — fini les factures imprévisibles. (2) SMS récap en 30 secondes garanti avec qualification des urgences — Allo Maxi ne fait pas ça. (3) Vocabulaire métier bâtiment 100% français. De plus, Fixlyy est une équipe française, avec un support français.',
   },
   {
     q: 'Puis-je changer de plan ou résilier à tout moment ?',
     a: 'Oui. Sans engagement, sans frais de résiliation. Vous changez ou annulez depuis votre dashboard en 2 clics. L\'abonnement prend fin à la fin de la période en cours.',
   },
   {
-    q: 'Les devis sont-ils vraiment professionnels ?',
-    a: 'Fixlyy génère des PDF avec votre logo, vos coordonnées, une numérotation automatique et les postes détaillés (main d\'oeuvre + matériaux). Vous pouvez les personnaliser depuis votre dashboard avant envoi.',
+    q: 'Comment Fixlyy qualifie-t-il les urgences ?',
+    a: 'Fixlyy est entraîné sur les métiers de la plomberie et de l\'électricité. Il reconnaît les situations urgentes (fuite active, coupure électrique, canalisation bouchée…) et vous envoie immédiatement un SMS prioritaire pour que vous puissiez rappeler en premier.',
   },
   {
     q: 'Que se passe-t-il après les 150 appels du plan Solo ?',
@@ -41,8 +41,11 @@ export default function FAQ() {
   const [open, setOpen] = useState(null);
 
   return (
-    <section className="bg-dark-2 py-16 md:py-24 px-4 md:px-6" id="faq">
-      <div className="max-w-3xl mx-auto">
+    <section className="bg-dark-2 py-16 md:py-24 px-4 md:px-6 relative overflow-hidden" id="faq">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand/5 rounded-full blur-[140px]" />
+      </div>
+      <div className="max-w-3xl mx-auto relative">
 
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
@@ -63,7 +66,7 @@ export default function FAQ() {
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-              className="bg-dark-3 border border-white/8 rounded-xl overflow-hidden"
+              className="glass rounded-xl overflow-hidden"
             >
               <button
                 onClick={() => setOpen(open === i ? null : i)}

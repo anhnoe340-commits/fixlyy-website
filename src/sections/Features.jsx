@@ -54,8 +54,14 @@ export default function Features() {
   const [activeFeature, setActiveFeature] = useState(0);
 
   return (
-    <section className="bg-dark-2 py-16 md:py-24 px-4 md:px-6 overflow-hidden" id="features">
-      <div className="max-w-6xl mx-auto">
+    <section className="bg-dark-2 py-16 md:py-24 px-4 md:px-6 overflow-hidden relative" id="features">
+      {/* Glows behind glass */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-brand/8 rounded-full blur-[140px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[120px]" />
+      </div>
+
+      <div className="max-w-6xl mx-auto relative">
 
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
@@ -86,10 +92,10 @@ export default function Features() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08 }}
                   onClick={() => setActiveFeature(i)}
-                  className={`w-full text-left p-4 md:p-5 rounded-2xl border transition-all duration-200 ${
+                  className={`w-full text-left p-4 md:p-5 rounded-2xl transition-all duration-200 ${
                     isActive
-                      ? 'bg-dark-3 border-brand/40 shadow-brand-sm'
-                      : 'bg-dark-3/50 border-white/5 hover:border-white/15'
+                      ? 'glass-brand'
+                      : 'glass hover:border-white/15'
                   }`}
                 >
                   <div className="flex items-start gap-4">

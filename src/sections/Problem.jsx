@@ -18,15 +18,19 @@ const pains = [
   {
     icon: <Clock className="w-6 h-6" />,
     stat: '2h/jour',
-    label: 'perdues sur les devis',
-    desc: 'Rappeler les clients, rédiger les devis à la main, envoyer les PDF... 15 heures par semaine sur de l\'administratif au lieu de facturer.',
+    label: 'perdues à rappeler',
+    desc: 'Rappeler les clients manqués, gérer les messages, noter les demandes à la main... 15 heures par semaine sur de l\'administratif au lieu de facturer.',
   },
 ];
 
 export default function Problem() {
   return (
-    <section className="bg-dark-2 py-16 md:py-24 px-4 md:px-6" id="problem">
-      <div className="max-w-6xl mx-auto">
+    <section className="bg-dark-2 py-16 md:py-24 px-4 md:px-6 relative overflow-hidden" id="problem">
+      {/* Glows for glass */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand/6 rounded-full blur-[130px]" />
+      </div>
+      <div className="max-w-6xl mx-auto relative">
 
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
@@ -46,7 +50,7 @@ export default function Problem() {
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-dark-3 border border-white/8 rounded-2xl p-7"
+              className="glass rounded-2xl p-7"
             >
               <div className="w-12 h-12 bg-brand/10 border border-brand/20 rounded-xl flex items-center justify-center text-brand mb-5">
                 {p.icon}
@@ -61,7 +65,7 @@ export default function Problem() {
         {/* Quote */}
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-12 bg-dark-3 border border-brand/20 rounded-2xl p-8 flex flex-col md:flex-row items-center gap-6 text-center md:text-left"
+          className="mt-12 glass-brand rounded-2xl p-8 flex flex-col md:flex-row items-center gap-6 text-center md:text-left"
         >
           <div className="w-16 h-16 rounded-full bg-brand/10 flex items-center justify-center text-brand text-2xl font-black shrink-0">
             T

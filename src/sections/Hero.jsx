@@ -29,7 +29,7 @@ export default function Hero() {
       />
 
       {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-dark/90 backdrop-blur-md border-b border-white/5">
+      <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
         <div className="max-w-6xl mx-auto px-4 md:px-6 py-3 flex items-center justify-between">
           <a href="/" className="flex items-center">
             <img src="/logo-full-clean.svg" alt="Fixlyy" className="h-9 md:h-10 w-auto" />
@@ -86,14 +86,14 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
                 className="flex flex-wrap gap-2 mb-6"
               >
-                <span className="inline-flex items-center gap-2 bg-brand/10 border border-brand/20 text-brand text-sm font-medium px-4 py-2 rounded-full">
+                <span className="inline-flex items-center gap-2 glass-pill text-brand text-sm font-medium px-4 py-2 rounded-full">
                   <span className="w-2 h-2 bg-brand rounded-full animate-pulse" />
                   Secrétaire IA 24h/24 · Île-de-France
                 </span>
-                <span className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 text-white/70 text-sm font-medium px-3 py-2 rounded-full">
+                <span className="inline-flex items-center gap-1.5 glass-pill text-white/70 text-sm font-medium px-3 py-2 rounded-full">
                   🌍 Parle 10+ langues
                 </span>
-                <span className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 text-white/70 text-sm font-medium px-3 py-2 rounded-full">
+                <span className="inline-flex items-center gap-1.5 glass-pill text-white/70 text-sm font-medium px-3 py-2 rounded-full">
                   ∞ 1 000 appels simultanés
                 </span>
               </motion.div>

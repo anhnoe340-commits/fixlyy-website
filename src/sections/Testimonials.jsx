@@ -9,7 +9,7 @@ const testimonials = [
     city: 'Vincennes (94)',
     avatar: 'T',
     stars: 5,
-    text: 'En 3 semaines, j\'ai récupéré 7 clients que j\'aurais perdus. Fixlyy répond quand je suis sous un évier — c\'est exactement ce dont j\'avais besoin. Le devis auto, c\'est du bonus.',
+    text: 'En 3 semaines, j\'ai récupéré 7 clients que j\'aurais perdus. Fixlyy répond quand je suis sous un évier — c\'est exactement ce dont j\'avais besoin. Le SMS récap immédiat, c\'est du bonus.',
     highlight: '+7 clients en 3 semaines',
   },
   {
@@ -27,7 +27,7 @@ const testimonials = [
     city: 'Boulogne (92)',
     avatar: 'S',
     stars: 5,
-    text: 'Avant je passais 2h par jour à rappeler les gens et faire des devis. Maintenant c\'est fait automatiquement. J\'ai gagné du temps et de l\'argent. La mise en service était vraiment simple.',
+    text: 'Avant je passais 2h par jour à rappeler les gens que j\'avais ratés. Maintenant Fixlyy gère tout ça. J\'ai gagné du temps et de l\'argent. La mise en service était vraiment simple.',
     highlight: '2h/jour récupérées',
   },
   {

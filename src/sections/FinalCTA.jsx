@@ -10,7 +10,7 @@ export default function FinalCTA() {
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="relative bg-dark-3 border border-brand/30 rounded-3xl p-12 text-center overflow-hidden"
+          className="relative glass-brand rounded-3xl p-12 text-center"
         >
           {/* Glow */}
           <div className="absolute inset-0 pointer-events-none">

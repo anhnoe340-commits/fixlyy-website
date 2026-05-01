@@ -14,7 +14,7 @@ const plans = [
     features: [
       "Jusqu'à 150 appels/mois",
       'Secrétaire IA 24h/24, 7j/7',
-      'Génération de devis automatique',
+      'Qualification des demandes en temps réel',
       'SMS récap en 30 secondes',
       'Qualification des urgences',
       'Planification des RDV',
@@ -33,7 +33,7 @@ const plans = [
     features: [
       'Appels illimités',
       'Tout ce qui est inclus dans Solo',
-      'Devis personnalisés avec votre logo',
+      'Rapport d\'appels hebdomadaire',
       'Intégration Google Calendar',
       'Statistiques détaillées',
       '2 utilisateurs',
@@ -63,8 +63,12 @@ export default function Pricing() {
   const [annual, setAnnual] = useState(false);
 
   return (
-    <section className="bg-dark-2 py-16 md:py-24 px-4 md:px-6" id="pricing">
-      <div className="max-w-6xl mx-auto">
+    <section className="bg-dark-2 py-16 md:py-24 px-4 md:px-6 relative overflow-hidden" id="pricing">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-brand/7 rounded-full blur-[150px]" />
+        <div className="absolute top-0 right-1/4 w-[300px] h-[300px] bg-purple-500/4 rounded-full blur-[100px]" />
+      </div>
+      <div className="max-w-6xl mx-auto relative">
 
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
@@ -79,7 +83,7 @@ export default function Pricing() {
           </p>
 
           {/* Toggle */}
-          <div className="inline-flex items-center bg-dark-3 border border-white/10 rounded-xl p-1 gap-1">
+          <div className="inline-flex items-center glass rounded-xl p-1 gap-1">
             <button
               onClick={() => setAnnual(false)}
               className={`px-5 py-2 rounded-lg text-sm font-medium transition-all ${!annual ? 'bg-brand text-white' : 'text-muted-2 hover:text-white'}`}
@@ -103,7 +107,7 @@ export default function Pricing() {
               <motion.div
                 key={plan.name}
                 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`relative bg-dark-3 rounded-2xl border-2 ${plan.color} p-7 flex flex-col ${plan.popular ? 'shadow-brand' : ''}`}
+                className={`relative rounded-2xl p-7 flex flex-col ${plan.popular ? 'glass-brand shadow-brand' : 'glass'}`}
               >
                 {plan.popular && (
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-brand text-white text-xs font-bold px-5 py-1.5 rounded-full flex items-center gap-1.5 whitespace-nowrap">
