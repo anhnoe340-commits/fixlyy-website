@@ -29,7 +29,7 @@ export default function FinalCTA() {
             </h2>
 
             <p className="text-muted-2 text-lg max-w-xl mx-auto mb-10">
-              Rejoignez les artisans d'Île-de-France qui ne ratent plus jamais un appel client. Essai gratuit 30 jours, aucune carte bancaire requise.
+              Rejoignez les artisans d'Île-de-France qui ne ratent plus jamais un appel client. Essai gratuit 7 jours, aucune carte bancaire requise.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

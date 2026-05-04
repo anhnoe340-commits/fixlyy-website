@@ -7,6 +7,7 @@ import Problem from '../sections/Problem';
 import HowItWorks from '../sections/HowItWorks';
 import Comparison from '../sections/Comparison';
 import Pricing from '../sections/Pricing';
+import WhyTeam from '../sections/WhyTeam';
 import Testimonials from '../sections/Testimonials';
 import AudioDemo from '../sections/AudioDemo';
 import FAQ from '../sections/FAQ';
@@ -25,6 +26,7 @@ export default function Home() {
         <AudioDemo />
         <Comparison />
         <Pricing />
+        <WhyTeam />
         <Testimonials />
         <FAQ />
         <FinalCTA />

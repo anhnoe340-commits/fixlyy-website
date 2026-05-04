@@ -120,7 +120,7 @@ export default function Comparison() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-bold text-sm md:text-base px-6 md:px-8 py-3.5 md:py-4 rounded-xl transition-all shadow-brand hover:shadow-none"
           >
-            Essayer Fixlyy gratuitement 30 jours →
+            Essayer Fixlyy gratuitement 7 jours →
           </a>
         </motion.div>
       </div>

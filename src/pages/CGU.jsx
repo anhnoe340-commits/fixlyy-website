@@ -51,7 +51,7 @@ export default function CGU() {
 
       <h2>4. Période d'essai gratuite</h2>
       <p>
-        Fixlyy offre une période d'essai gratuite de <strong>30 jours</strong> à compter de la création du compte, sans engagement et sans nécessité de renseigner une carte bancaire. À l'issue de cette période, l'accès au Service est conditionné à la souscription d'un Abonnement payant.
+        Fixlyy offre une période d'essai gratuite de <strong>7 jours</strong> à compter de la création du compte, sans engagement et sans nécessité de renseigner une carte bancaire. À l'issue de cette période, l'accès au Service est conditionné à la souscription d'un Abonnement payant.
       </p>
 
       <h2>5. Abonnements et facturation</h2>

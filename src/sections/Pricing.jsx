@@ -23,6 +23,8 @@ const soloFeatures = [
   "Jusqu'à 150 appels/mois",
   'Secrétaire IA 24h/24, 7j/7',
   'SMS récap en 30 secondes',
+  'Qualification automatique des urgences',
+  'Prise de rendez-vous pendant l\'appel',
   '1 utilisateur',
   'Support par email',
   'Mise en service gratuite',
@@ -129,6 +131,7 @@ export default function Pricing() {
               className="w-full text-center py-4 rounded-xl font-bold text-base transition-all bg-dark-4 hover:bg-dark text-white border border-white/10 hover:border-brand/30">
               Démarrer mon essai gratuit
             </a>
+            <p className="text-center text-xs text-muted mt-3">✓ Essai gratuit 7 jours · ✓ Sans engagement</p>
           </motion.div>
 
           {/* ── Pro ── */}
@@ -163,6 +166,7 @@ export default function Pricing() {
               className="w-full text-center py-4 rounded-xl font-bold text-base transition-all bg-brand hover:bg-brand-dark text-white shadow-brand hover:shadow-none">
               Démarrer mon essai gratuit
             </a>
+            <p className="text-center text-xs text-muted mt-3">✓ Essai gratuit 7 jours · ✓ Sans engagement</p>
           </motion.div>
 
           {/* ── Équipe — prix à la carte ── */}

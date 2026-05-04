@@ -159,7 +159,7 @@ export default function Features() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-bold text-base px-8 py-4 rounded-xl transition-all shadow-brand hover:shadow-none"
           >
-            Essayer gratuitement 30 jours →
+            Essayer gratuitement 7 jours →
           </a>
           <p className="text-muted text-sm mt-3">Sans engagement · Configuration en 10 min · Support français</p>
         </motion.div>
