@@ -5,7 +5,7 @@ const APP_URL = 'https://app.fixlyy.fr';
 
 export default function CGU() {
   return (
-    <LegalLayout title="Conditions Générales d'Utilisation" lastUpdated="7 avril 2025">
+    <LegalLayout title="Conditions Générales d'Utilisation" lastUpdated="8 mai 2026">
       <div className="info-box">
         <p className="!mb-0 text-sm">
           Les présentes Conditions Générales d'Utilisation (CGU) régissent l'accès et l'utilisation du service Fixlyy accessible à l'adresse <a href={APP_URL}>{APP_URL}</a>. En créant un compte, vous acceptez sans réserve l'intégralité des présentes CGU.
@@ -14,7 +14,7 @@ export default function CGU() {
 
       <h2>1. Définitions</h2>
       <ul>
-        <li><strong>« Fixlyy » / « nous » :</strong> Fixlyy, SASU représentée par son Président Irnand ANIHOUVI, dont les coordonnées figurent dans les Mentions légales</li>
+        <li><strong>« Fixlyy » / « nous » :</strong> Fixlyy, entreprise individuelle (micro-entreprise, SIREN 103 557 609) représentée par Irnand ANIHOUVI, dont les coordonnées figurent dans les Mentions légales</li>
         <li><strong>« Service » :</strong> la plateforme SaaS de secrétariat IA accessible sur app.fixlyy.fr</li>
         <li><strong>« Utilisateur » / « vous » :</strong> tout artisan ou professionnel ayant créé un compte sur le Service</li>
         <li><strong>« Caller » :</strong> personne physique appelant le numéro de téléphone configuré par l'Utilisateur</li>
@@ -28,8 +28,8 @@ export default function CGU() {
       <ul>
         <li>Ne manquer aucun appel entrant, 24h/24 et 7j/7</li>
         <li>Recevoir un résumé SMS de chaque appel dans les 30 secondes</li>
-        <li>Générer automatiquement des devis en fonction de la demande du caller</li>
-        <li>Qualifier et planifier des rendez-vous</li>
+        <li>Qualifier les demandes et planifier des rendez-vous</li>
+        <li>Relancer automatiquement les clients non répondus</li>
       </ul>
       <p>
         Fixlyy agit en qualité de <strong>sous-traitant au sens du RGPD</strong> pour le traitement des données des callers, dans les limites définies par l'Utilisateur (responsable de traitement).
@@ -57,12 +57,12 @@ export default function CGU() {
       <h2>5. Abonnements et facturation</h2>
       <h3>5.1 Formules disponibles</h3>
       <ul>
-        <li><strong>Solo :</strong> jusqu'à 150 appels/mois — 79 €/mois HT</li>
-        <li><strong>Pro :</strong> appels illimités, fonctionnalités avancées — 149 €/mois HT</li>
-        <li><strong>Équipe :</strong> appels illimités multi-lignes, jusqu'à 5 utilisateurs — 249 €/mois HT</li>
+        <li><strong>Solo :</strong> jusqu'à 150 appels/mois, 1 utilisateur — 79 €/mois</li>
+        <li><strong>Pro :</strong> appels illimités, jusqu'à 3 utilisateurs — 149 €/mois</li>
+        <li><strong>Équipe :</strong> appels illimités, utilisateurs illimités — 50 €/utilisateur/mois</li>
       </ul>
       <p>
-        Les tarifs annuels bénéficient d'une remise de 20%. TVA applicable selon la réglementation en vigueur.
+        Les tarifs annuels bénéficient d'une remise de 20%. TVA non applicable — franchise en base de TVA (art. 293 B du CGI).
       </p>
 
       <h3>5.2 Paiement</h3>

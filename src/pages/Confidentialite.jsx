@@ -3,7 +3,7 @@ import LegalLayout from '../components/LegalLayout';
 
 export default function Confidentialite() {
   return (
-    <LegalLayout title="Politique de confidentialité" lastUpdated="7 avril 2025">
+    <LegalLayout title="Politique de confidentialité" lastUpdated="8 mai 2026">
       <div className="info-box">
         <p className="!mb-0 text-sm">
           Fixlyy accorde une importance primordiale à la protection de vos données personnelles. La présente politique est conforme au <strong>Règlement Général sur la Protection des Données (RGPD — Règlement UE 2016/679)</strong> et à la loi n°78-17 du 6 janvier 1978 (Loi Informatique et Libertés).
@@ -15,8 +15,9 @@ export default function Confidentialite() {
         Le responsable du traitement des données à caractère personnel collectées via fixlyy.fr et app.fixlyy.fr est :
       </p>
       <ul>
-        <li><strong>Fixlyy</strong> — SASU au capital de [À COMPLÉTER] €, [Adresse], Île-de-France</li>
-        <li><strong>Représentant légal :</strong> Irnand ANIHOUVI, Président</li>
+        <li><strong>Fixlyy</strong> — Entrepreneur individuel (micro-entreprise) — SIREN 103 557 609</li>
+        <li><strong>Représentant légal :</strong> Irnand ANIHOUVI</li>
+        <li><strong>Siège social :</strong> 15 rue du Général de Gaulle, 94350 Villiers-sur-Marne, France</li>
         <li><strong>Email DPO / Contact vie privée :</strong> <a href="mailto:support@fixlyy.fr">support@fixlyy.fr</a></li>
       </ul>
 
