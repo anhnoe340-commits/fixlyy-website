@@ -3,7 +3,7 @@ import LegalLayout from '../components/LegalLayout';
 
 export default function MentionsLegales() {
   return (
-    <LegalLayout title="Mentions légales" lastUpdated="7 avril 2025">
+    <LegalLayout title="Mentions légales" lastUpdated="8 mai 2026">
       <div className="info-box">
         <p className="!mb-0 text-sm">
           Conformément aux dispositions de la loi n°2004-575 du 21 juin 2004 pour la confiance en l'économie numérique (LCEN), il est précisé aux utilisateurs du site <strong>fixlyy.fr</strong> l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi.
@@ -15,12 +15,16 @@ export default function MentionsLegales() {
         Le site <strong>fixlyy.fr</strong> est édité par :
       </p>
       <ul>
-        <li><strong>Dénomination sociale :</strong> Fixlyy</li>
-        <li><strong>Forme juridique :</strong> SASU (Société par Actions Simplifiée Unipersonnelle)</li>
-        <li><strong>Capital social :</strong> [À COMPLÉTER]</li>
-        <li><strong>SIRET :</strong> [À COMPLÉTER]</li>
-        <li><strong>Siège social :</strong> [Adresse complète], Île-de-France, France</li>
+        <li><strong>Nom commercial :</strong> Fixlyy</li>
+        <li><strong>Forme juridique :</strong> Entrepreneur individuel (micro-entreprise)</li>
+        <li><strong>Nom de l'entrepreneur :</strong> Irnand ANIHOUVI</li>
+        <li><strong>SIREN :</strong> 103 557 609</li>
+        <li><strong>SIRET :</strong> 103 557 609 00015</li>
+        <li><strong>Code APE :</strong> 5829C</li>
+        <li><strong>Date d'immatriculation :</strong> 10 avril 2026 (RNE)</li>
+        <li><strong>Siège social :</strong> 15 rue du Général de Gaulle, 94350 Villiers-sur-Marne, France</li>
         <li><strong>Email :</strong> <a href="mailto:support@fixlyy.fr">support@fixlyy.fr</a></li>
+        <li><strong>TVA :</strong> Non assujetti à la TVA — franchise en base (art. 293 B du CGI)</li>
         <li><strong>Directeur de la publication :</strong> Irnand ANIHOUVI</li>
       </ul>
 
