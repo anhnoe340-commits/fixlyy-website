@@ -1,99 +1,92 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Star } from 'lucide-react';
+import { Sparkles, Clock, ShieldCheck } from 'lucide-react';
 
-const testimonials = [
+const APP_URL = 'https://app.fixlyy.fr';
+
+const earlySignals = [
   {
-    name: 'Thomas D.',
-    role: 'Plombier indépendant',
-    city: 'Vincennes (94)',
-    avatar: 'T',
-    stars: 5,
-    text: 'En 3 semaines, j\'ai récupéré 7 clients que j\'aurais perdus. Fixlyy répond quand je suis sous un évier — c\'est exactement ce dont j\'avais besoin. Le SMS récap immédiat, c\'est du bonus.',
-    highlight: '+7 clients en 3 semaines',
+    icon: Clock,
+    color: '#3B5BF5',
+    title: 'Lancement en Île-de-France',
+    body: 'Fixlyy est en phase de lancement actif sur la région parisienne. Les premières places sont limitées pour garantir un accompagnement personnalisé à chaque artisan.',
   },
   {
-    name: 'Karim B.',
-    role: 'Électricien',
-    city: 'Saint-Denis (93)',
-    avatar: 'K',
-    stars: 5,
-    text: 'J\'étais sceptique sur l\'IA. Mais la voix est vraiment naturelle, les clients ne se rendent pas compte. Et les SMS récap en 30 secondes... je les reçois avant même d\'avoir rangé mes outils.',
-    highlight: 'Clients ne voient pas la différence',
+    icon: ShieldCheck,
+    color: '#10B981',
+    title: '30 jours satisfait ou remboursé',
+    body: "On ne vous demande pas de nous faire confiance sur parole. Essayez pendant 30 jours. Si Fixlyy ne vous convient pas, on vous rembourse intégralement — sans question.",
   },
   {
-    name: 'Sophie M.',
-    role: 'Plombière chauffagiste',
-    city: 'Boulogne (92)',
-    avatar: 'S',
-    stars: 5,
-    text: 'Avant je passais 2h par jour à rappeler les gens que j\'avais ratés. Maintenant Fixlyy gère tout ça. J\'ai gagné du temps et de l\'argent. La mise en service était vraiment simple.',
-    highlight: '2h/jour récupérées',
-  },
-  {
-    name: 'Marc L.',
-    role: 'Plombier',
-    city: 'Massy (91)',
-    avatar: 'M',
-    stars: 5,
-    text: 'Le tarif fixe c\'est ce qui m\'a convaincu. Avant mes factures variaient à 200€+ certains mois. Avec Fixlyy je sais exactement ce que je paye. 149€ et c\'est réglé.',
-    highlight: 'Tarif prévisible, zéro surprise',
+    icon: Sparkles,
+    color: '#F59E0B',
+    title: 'Construit avec des artisans IDF',
+    body: "Fixlyy a été conçu après des dizaines d'entretiens téléphoniques avec des plombiers et électriciens parisiens. Chaque fonctionnalité répond à un vrai besoin terrain.",
   },
 ];
 
 export default function Testimonials() {
   return (
     <section className="bg-dark py-16 md:py-24 px-4 md:px-6" id="testimonials">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-5xl mx-auto">
 
         <motion.div
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <p className="text-brand text-sm font-semibold uppercase tracking-widest mb-4">Témoignages</p>
+          <p className="text-brand text-sm font-semibold uppercase tracking-widest mb-4">Pourquoi nous faire confiance</p>
           <h2 className="text-3xl md:text-5xl font-black text-white mb-4 md:mb-5">
-            Ce que disent les artisans.
+            Un produit jeune,<br />
+            <span className="text-brand">une garantie béton.</span>
           </h2>
-          <div className="flex items-center justify-center gap-1 mb-2">
-            {Array(5).fill(0).map((_, i) => (
-              <Star key={i} className="w-5 h-5 text-brand fill-brand" />
-            ))}
-          </div>
-          <p className="text-muted-2 text-sm">4.9/5 · 87 avis vérifiés</p>
+          <p className="text-muted-2 text-lg max-w-xl mx-auto">
+            On ne va pas vous inventer des avis. Fixlyy est en lancement — et c'est pour ça qu'on offre 30 jours remboursés, sans condition.
+          </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-5">
-          {testimonials.map((t, i) => (
+        <div className="grid md:grid-cols-3 gap-6 mb-14">
+          {earlySignals.map(({ icon: Icon, color, title, body }, i) => (
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="bg-dark-3 border border-white/8 rounded-2xl p-7 flex flex-col gap-4"
+              key={title}
+              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="glass rounded-2xl p-7 flex flex-col gap-4"
             >
-              <div className="flex items-center gap-1">
-                {Array(t.stars).fill(0).map((_, j) => (
-                  <Star key={j} className="w-4 h-4 text-brand fill-brand" />
-                ))}
+              <div
+                className="w-12 h-12 rounded-xl flex items-center justify-center"
+                style={{ background: color + '18', border: `1px solid ${color}30` }}
+              >
+                <Icon className="w-6 h-6" style={{ color }} />
               </div>
-
-              <p className="text-white/90 text-base leading-relaxed italic">"{t.text}"</p>
-
-              <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-brand/20 border border-brand/30 flex items-center justify-center text-brand font-black text-sm">
-                    {t.avatar}
-                  </div>
-                  <div>
-                    <p className="text-white font-semibold text-sm">{t.name}</p>
-                    <p className="text-muted text-xs">{t.role} · {t.city}</p>
-                  </div>
-                </div>
-                <span className="hidden sm:block text-xs text-brand bg-brand/10 border border-brand/20 px-3 py-1 rounded-full font-medium">
-                  {t.highlight}
-                </span>
-              </div>
+              <h3 className="text-white font-bold text-base">{title}</h3>
+              <p className="text-muted-2 text-sm leading-relaxed">{body}</p>
             </motion.div>
           ))}
         </div>
+
+        {/* CTA honnête */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="glass-brand rounded-2xl p-8 text-center"
+        >
+          <p className="text-white font-bold text-xl mb-3">
+            Soyez parmi les premiers artisans à tester Fixlyy.
+          </p>
+          <p className="text-muted-2 text-sm max-w-lg mx-auto mb-6">
+            Essai gratuit 7 jours, aucune carte bancaire requise. Et si dans les 30 jours suivant votre abonnement vous n'êtes pas convaincu, on vous rembourse.
+          </p>
+          <a
+            href={APP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-bold px-8 py-4 rounded-xl transition-all shadow-brand hover:shadow-none text-sm"
+          >
+            Démarrer mon essai gratuit →
+          </a>
+          <p className="text-muted text-xs mt-4">Sans engagement · Configuration en 10 min · Support français</p>
+        </motion.div>
+
       </div>
     </section>
   );
