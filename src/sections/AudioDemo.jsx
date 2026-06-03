@@ -178,9 +178,9 @@ function VoiceOrb({ status, speaking }) {
 
 // ── Main Component ───────────────────────────────────────────────
 const buttonStates = {
-  idle:       { label: 'Parler à Mia',      cls: 'bg-brand hover:bg-brand-dark' },
-  connecting: { label: 'Connexion...',       cls: 'bg-brand/70 cursor-wait'      },
-  active:     { label: "Terminer l'appel",  cls: 'bg-red-500 hover:bg-red-600'  },
+  idle:       { label: 'Parler à Mia',         cls: 'bg-brand hover:bg-brand-dark' },
+  connecting: { label: 'Mia arrive (3-5s)…',   cls: 'bg-brand/70 cursor-wait'      },
+  active:     { label: "Terminer l'appel",      cls: 'bg-red-500 hover:bg-red-600'  },
 };
 
 export default function AudioDemo() {
@@ -188,19 +188,27 @@ export default function AudioDemo() {
   const [speaking, setSpeaking] = useState(false);
   const vapiRef = useRef(null);
 
+  // Cleanup uniquement — pas d'init au montage (composant above-the-fold)
   useEffect(() => {
-    const vapi = new Vapi(VAPI_PUBLIC_KEY);
-    vapiRef.current = vapi;
-    vapi.on('call-start',   () => setStatus('active'));
-    vapi.on('call-end',     () => { setStatus('idle'); setSpeaking(false); });
-    vapi.on('speech-start', () => setSpeaking(true));
-    vapi.on('speech-end',   () => setSpeaking(false));
-    return () => vapi.stop();
+    return () => vapiRef.current?.stop();
   }, []);
 
   const toggle = async () => {
-    if (status === 'active') { vapiRef.current.stop(); return; }
+    // Terminer l'appel
+    if (status === 'active') { vapiRef.current?.stop(); return; }
+
     setStatus('connecting');
+
+    // Lazy init : Vapi créé uniquement au premier clic
+    if (!vapiRef.current) {
+      const vapi = new Vapi(VAPI_PUBLIC_KEY);
+      vapi.on('call-start',   () => setStatus('active'));
+      vapi.on('call-end',     () => { setStatus('idle'); setSpeaking(false); vapiRef.current = null; });
+      vapi.on('speech-start', () => setSpeaking(true));
+      vapi.on('speech-end',   () => setSpeaking(false));
+      vapiRef.current = vapi;
+    }
+
     await vapiRef.current.start(ASSISTANT_ID);
   };
 
@@ -249,7 +257,7 @@ export default function AudioDemo() {
                 <p className="text-white font-bold text-xl mb-1">Mia</p>
                 <p className="text-muted-2 text-sm">
                   {status === 'idle'       && 'Secrétaire IA Fixlyy · Prête'}
-                  {status === 'connecting' && 'Connexion en cours...'}
+                  {status === 'connecting' && 'Mia se prépare, ça prend 3-5 secondes…'}
                   {status === 'active'     && (speaking ? 'Mia vous parle...' : 'Mia vous écoute...')}
                 </p>
               </div>
