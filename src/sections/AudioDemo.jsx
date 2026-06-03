@@ -7,7 +7,7 @@ const VAPI_PUBLIC_KEY = '261b2bc5-839e-4830-969d-fa940d83b0d7';
 const ASSISTANT_ID = 'aca557fb-b451-455c-b8a5-ed1aad643476';
 
 const states = {
-  idle:       { label: 'Parler à Emily',      icon: Phone,    cls: 'bg-brand hover:bg-brand-dark' },
+  idle:       { label: 'Parler à Mia',         icon: Phone,    cls: 'bg-brand hover:bg-brand-dark' },
   connecting: { label: 'Connexion...',         icon: Loader,   cls: 'bg-brand/70 cursor-wait' },
   active:     { label: 'Terminer l\'appel',    icon: PhoneOff, cls: 'bg-red-500 hover:bg-red-600' },
 };
@@ -41,7 +41,7 @@ export default function AudioDemo() {
       <div className="max-w-2xl mx-auto text-center">
         <motion.div initial={{opacity:0,y:20}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="mb-12">
           <h2 className="text-4xl md:text-5xl font-black text-white mb-4">🎧 Essayez Fixlyy en direct</h2>
-          <p className="text-muted-2 text-lg">Cliquez et parlez — Emily décroche immédiatement</p>
+          <p className="text-muted-2 text-lg">Cliquez et parlez — Mia décroche immédiatement</p>
         </motion.div>
 
         <motion.div initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:0.15}}
@@ -60,11 +60,11 @@ export default function AudioDemo() {
           </div>
 
           <div>
-            <p className="text-white font-bold text-xl mb-1">Emily</p>
+            <p className="text-white font-bold text-xl mb-1">Mia</p>
             <p className="text-muted-2 text-sm">
               {status === 'idle' && 'Secrétaire IA Fixlyy · Plomberie Paris'}
               {status === 'connecting' && 'Connexion en cours...'}
-              {status === 'active' && (speaking ? 'Emily parle...' : 'En écoute...')}
+              {status === 'active' && (speaking ? 'Mia parle...' : 'En écoute...')}
             </p>
           </div>
 
