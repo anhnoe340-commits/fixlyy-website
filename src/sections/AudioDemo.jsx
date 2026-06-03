@@ -186,36 +186,55 @@ const buttonStates = {
 export default function AudioDemo() {
   const [status, setStatus] = useState('idle');
   const [speaking, setSpeaking] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(null);
   const vapiRef = useRef(null);
+  const sectionRef = useRef(null);
 
-  // Cleanup uniquement — pas d'init au montage (composant above-the-fold)
+  function initVapi() {
+    if (vapiRef.current) return;
+    const vapi = new Vapi(VAPI_PUBLIC_KEY);
+    vapi.on('call-start',   () => { setStatus('active'); setErrorMsg(null); });
+    vapi.on('call-end',     () => { setStatus('idle'); setSpeaking(false); });
+    vapi.on('speech-start', () => setSpeaking(true));
+    vapi.on('speech-end',   () => setSpeaking(false));
+    vapi.on('error',        (e) => {
+      console.error('[Vapi]', e);
+      setErrorMsg('Microphone inaccessible ou erreur réseau. Autorisez le micro et réessayez.');
+      setStatus('idle');
+    });
+    vapiRef.current = vapi;
+  }
+
   useEffect(() => {
-    return () => vapiRef.current?.stop();
+    // Pré-chauffe le WebSocket Vapi dès que la section entre dans le viewport
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) initVapi(); },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => { observer.disconnect(); vapiRef.current?.stop(); };
   }, []);
 
   const toggle = async () => {
-    // Terminer l'appel
     if (status === 'active') { vapiRef.current?.stop(); return; }
 
+    setErrorMsg(null);
     setStatus('connecting');
+    initVapi(); // fallback si IntersectionObserver n'a pas encore tiré
 
-    // Lazy init : Vapi créé uniquement au premier clic
-    if (!vapiRef.current) {
-      const vapi = new Vapi(VAPI_PUBLIC_KEY);
-      vapi.on('call-start',   () => setStatus('active'));
-      vapi.on('call-end',     () => { setStatus('idle'); setSpeaking(false); vapiRef.current = null; });
-      vapi.on('speech-start', () => setSpeaking(true));
-      vapi.on('speech-end',   () => setSpeaking(false));
-      vapiRef.current = vapi;
+    try {
+      await vapiRef.current.start(ASSISTANT_ID);
+    } catch (e) {
+      console.error('[Vapi start]', e);
+      setErrorMsg('Impossible de démarrer. Autorisez le microphone dans votre navigateur et réessayez.');
+      setStatus('idle');
     }
-
-    await vapiRef.current.start(ASSISTANT_ID);
   };
 
   const btn = buttonStates[status];
 
   return (
-    <section className="bg-dark py-16 md:py-24 px-4 md:px-6 relative overflow-hidden" id="demo">
+    <section ref={sectionRef} className="bg-dark py-16 md:py-24 px-4 md:px-6 relative overflow-hidden" id="demo">
 
       {/* Glow background */}
       <div className="absolute inset-0 pointer-events-none">
@@ -276,6 +295,18 @@ export default function AudioDemo() {
                 }
                 {btn.label}
               </button>
+
+              {/* Message d'erreur */}
+              <AnimatePresence>
+                {errorMsg && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                    className="text-xs text-red-400 text-center bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-2 max-w-xs"
+                  >
+                    {errorMsg}
+                  </motion.p>
+                )}
+              </AnimatePresence>
 
               {/* Badges */}
               <div className="flex flex-wrap justify-center gap-2">
