@@ -5,7 +5,7 @@ const APP_URL = 'https://app.fixlyy.fr';
 
 export default function CGU() {
   return (
-    <LegalLayout title="Conditions Générales d'Utilisation" lastUpdated="8 mai 2026">
+    <LegalLayout title="Conditions Générales d'Utilisation" lastUpdated="12 juin 2026">
       <div className="info-box">
         <p className="!mb-0 text-sm">
           Les présentes Conditions Générales d'Utilisation (CGU) régissent l'accès et l'utilisation du service Fixlyy accessible à l'adresse <a href={APP_URL}>{APP_URL}</a>. En créant un compte, vous acceptez sans réserve l'intégralité des présentes CGU.
@@ -15,21 +15,22 @@ export default function CGU() {
       <h2>1. Définitions</h2>
       <ul>
         <li><strong>« Fixlyy » / « nous » :</strong> Fixlyy, entreprise individuelle (micro-entreprise, SIREN 103 557 609) représentée par Irnand ANIHOUVI, dont les coordonnées figurent dans les Mentions légales</li>
-        <li><strong>« Service » :</strong> la plateforme SaaS de secrétariat IA accessible sur app.fixlyy.fr</li>
+        <li><strong>« Service » :</strong> la plateforme SaaS de secrétariat téléphonique IA accessible sur app.fixlyy.fr</li>
         <li><strong>« Utilisateur » / « vous » :</strong> tout artisan ou professionnel ayant créé un compte sur le Service</li>
         <li><strong>« Caller » :</strong> personne physique appelant le numéro de téléphone configuré par l'Utilisateur</li>
-        <li><strong>« Abonnement » :</strong> formule tarifaire choisie par l'Utilisateur (Solo, Pro ou Équipe)</li>
+        <li><strong>« Abonnement » :</strong> formule tarifaire choisie par l'Utilisateur (Solo, Pro ou Max)</li>
+        <li><strong>« Minutes incluses » :</strong> volume de minutes d'appel compris dans l'Abonnement mensuel</li>
       </ul>
 
       <h2>2. Objet du service</h2>
       <p>
-        Fixlyy est une solution de secrétariat téléphonique basée sur l'intelligence artificielle. Elle permet à des artisans indépendants (plombiers, électriciens, et autres corps de métier) de :
+        Fixlyy est une solution de secrétariat téléphonique basée sur l'intelligence artificielle. Elle permet à des artisans indépendants (plombiers, électriciens, serruriers, et autres corps de métier) de :
       </p>
       <ul>
-        <li>Ne manquer aucun appel entrant, 24h/24 et 7j/7</li>
-        <li>Recevoir un résumé SMS de chaque appel dans les 30 secondes</li>
-        <li>Qualifier les demandes et planifier des rendez-vous</li>
-        <li>Relancer automatiquement les clients non répondus</li>
+        <li>Ne manquer aucun appel entrant, 24h/24 et 7j/7, via un renvoi d'appel conditionnel ou inconditionnel</li>
+        <li>Recevoir un résumé SMS de chaque appel (nom, numéro, adresse, motif, urgence) dans les 30 secondes</li>
+        <li>Qualifier les demandes clients et recueillir leurs coordonnées</li>
+        <li>Accéder à l'historique des appels, aux statistiques et aux rapports (selon la formule)</li>
       </ul>
       <p>
         Fixlyy agit en qualité de <strong>sous-traitant au sens du RGPD</strong> pour le traitement des données des callers, dans les limites définies par l'Utilisateur (responsable de traitement).
@@ -56,23 +57,24 @@ export default function CGU() {
 
       <h2>5. Abonnements et facturation</h2>
       <h3>5.1 Formules disponibles</h3>
+      <p>Les tarifs s'entendent hors taxes (TVA non applicable — franchise en base, art. 293 B du CGI).</p>
       <ul>
-        <li><strong>Solo :</strong> jusqu'à 150 appels/mois, 1 utilisateur — 79 €/mois</li>
-        <li><strong>Pro :</strong> appels illimités, jusqu'à 3 utilisateurs — 149 €/mois</li>
-        <li><strong>Équipe :</strong> appels illimités, utilisateurs illimités — 50 €/utilisateur/mois</li>
+        <li><strong>Solo — 97 €/mois :</strong> 300 minutes incluses, 1 numéro dédié, 1 utilisateur, SMS récap, qualification des urgences, support par email</li>
+        <li><strong>Pro — 197 €/mois :</strong> 500 minutes incluses, tout Solo inclus + SMS confirmation client, CRM clients, rapports hebdomadaires, statistiques détaillées, jusqu'à 3 utilisateurs, support prioritaire</li>
+        <li><strong>Max — 347 €/mois :</strong> 1 000 minutes incluses, tout Pro inclus + multilingue (FR, EN, AR, ES, PT), multi-numéros, rapports mensuels avancés, jusqu'à 10 utilisateurs, support dédié</li>
       </ul>
       <p>
-        Les tarifs annuels bénéficient d'une remise de 20%. TVA non applicable — franchise en base de TVA (art. 293 B du CGI).
+        Au-delà du volume de minutes incluses dans l'Abonnement, un tarif de dépassement s'applique : <strong>0,25 €/min (Solo et Pro) / 0,20 €/min (Max)</strong>. Ce tarif est indiqué sur la page de tarification et sur chaque facture.
       </p>
 
       <h3>5.2 Paiement</h3>
       <p>
-        Le paiement est prélevé mensuellement (ou annuellement) par avance, par carte bancaire via notre prestataire de paiement sécurisé. Tout abonnement commencé est dû dans son intégralité.
+        Le paiement est prélevé mensuellement par avance, par carte bancaire via notre prestataire de paiement sécurisé (Stripe, certifié PCI-DSS). Tout abonnement commencé est dû dans son intégralité.
       </p>
 
       <h3>5.3 Renouvellement</h3>
       <p>
-        L'abonnement se renouvelle automatiquement à son échéance. L'Utilisateur peut résilier à tout moment depuis son espace client ou en nous contactant, avec effet à la fin de la période en cours.
+        L'abonnement se renouvelle automatiquement à son échéance mensuelle. L'Utilisateur peut résilier à tout moment depuis son espace client ou en nous contactant, avec effet à la fin de la période en cours.
       </p>
 
       <h2>6. Garantie satisfait ou remboursé</h2>
@@ -80,7 +82,7 @@ export default function CGU() {
         Si l'Utilisateur n'est pas satisfait du Service dans les <strong>30 premiers jours suivant son premier paiement</strong>, Fixlyy s'engage à le rembourser intégralement, sur simple demande à <a href="mailto:support@fixlyy.fr">support@fixlyy.fr</a>, sans question posée.
       </p>
       <p>
-        Cette garantie est valable une seule fois par compte utilisateur et ne s'applique pas aux renouvellements.
+        Cette garantie est valable une seule fois par compte utilisateur et ne s'applique pas aux renouvellements ultérieurs.
       </p>
 
       <h2>7. Obligations de l'utilisateur</h2>
@@ -88,8 +90,8 @@ export default function CGU() {
       <ul>
         <li>Utiliser le Service uniquement à des fins professionnelles légales</li>
         <li>Ne pas détourner le Service à des fins de spam, harcèlement ou fraude</li>
-        <li>Informer ses callers que les appels sont traités par un service IA (obligatoire légalement)</li>
-        <li>Respecter la réglementation applicable au traitement des données personnelles de ses callers</li>
+        <li>Informer ses callers que les appels sont traités par un service d'assistance IA (obligation légale)</li>
+        <li>Respecter la réglementation applicable au traitement des données personnelles de ses callers (RGPD)</li>
         <li>Ne pas tenter de contourner, compromettre ou surcharger l'infrastructure technique de Fixlyy</li>
         <li>Maintenir à jour ses informations de compte et de facturation</li>
       </ul>
@@ -99,7 +101,7 @@ export default function CGU() {
         Fixlyy s'efforce de maintenir une disponibilité du Service de <strong>99,5 %</strong> en base mensuelle, hors maintenances planifiées (notifiées 48h à l'avance) et événements de force majeure.
       </p>
       <p>
-        En cas d'indisponibilité significative, l'Utilisateur peut demander un avoir proportionnel. Fixlyy ne saurait être tenu responsable des pertes de revenus ou d'opportunités commerciales résultant d'une indisponibilité du Service.
+        En cas d'indisponibilité significative imputable à Fixlyy, l'Utilisateur peut demander un avoir proportionnel. Fixlyy ne saurait être tenu responsable des pertes de revenus ou d'opportunités commerciales résultant d'une indisponibilité du Service.
       </p>
 
       <h2>9. Propriété intellectuelle</h2>
@@ -107,7 +109,7 @@ export default function CGU() {
         Fixlyy concède à l'Utilisateur une licence d'utilisation personnelle, non exclusive, non transmissible et révocable du Service, pour la durée de son abonnement actif.
       </p>
       <p>
-        L'Utilisateur conserve la propriété de ses données (contacts clients, devis, historique d'appels). Fixlyy ne revendique aucun droit sur ces contenus. L'Utilisateur autorise Fixlyy à les traiter dans le seul but de fournir le Service.
+        L'Utilisateur conserve la propriété de ses données (contacts clients, historique d'appels). Fixlyy ne revendique aucun droit sur ces contenus et les traite dans le seul but de fournir le Service.
       </p>
 
       <h2>10. Limitation de responsabilité</h2>
@@ -115,7 +117,7 @@ export default function CGU() {
         Dans les limites permises par la loi, la responsabilité de Fixlyy est limitée aux dommages directs prouvés, plafonnée au montant des sommes versées par l'Utilisateur au cours des 3 derniers mois précédant le sinistre.
       </p>
       <p>
-        Fixlyy ne peut être tenu responsable des dommages indirects, perte de chiffre d'affaires, perte de données, ni de la qualité des réponses générées par l'IA qui doit être considérée comme indicative et non comme un conseil professionnel certifié.
+        Fixlyy ne peut être tenu responsable des dommages indirects, perte de chiffre d'affaires, perte de données, ni de la qualité des réponses générées par l'IA, qui doit être considérée comme indicative et non comme un conseil professionnel certifié. Il appartient à l'Utilisateur de rappeler ses clients et de vérifier les informations collectées.
       </p>
 
       <h2>11. Résiliation</h2>
@@ -126,12 +128,12 @@ export default function CGU() {
 
       <h3>11.2 Par Fixlyy</h3>
       <p>
-        Fixlyy peut résilier ou suspendre l'accès d'un Utilisateur sans préavis en cas de violation grave des présentes CGU, de fraude, ou d'utilisation contraire à la loi. En cas de résiliation pour motif légitime de l'Utilisateur, les sommes versées d'avance sont remboursées au prorata.
+        Fixlyy peut résilier ou suspendre l'accès d'un Utilisateur sans préavis en cas de violation grave des présentes CGU, de fraude ou d'utilisation contraire à la loi. En cas de résiliation pour motif légitime de l'Utilisateur, les sommes versées d'avance sont remboursées au prorata.
       </p>
 
       <h3>11.3 Export des données</h3>
       <p>
-        À la résiliation, l'Utilisateur dispose de <strong>30 jours</strong> pour exporter ses données (contacts, devis, historique) depuis son espace client. Passé ce délai, les données sont supprimées de manière irréversible.
+        À la résiliation, l'Utilisateur dispose de <strong>30 jours</strong> pour exporter ses données (contacts, historique d'appels) depuis son espace client. Passé ce délai, les données sont supprimées de manière irréversible.
       </p>
 
       <h2>12. Modification des CGU</h2>

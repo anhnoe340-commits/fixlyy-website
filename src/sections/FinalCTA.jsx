@@ -1,57 +1,69 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, PhoneCall } from 'lucide-react';
 
-const APP_URL = 'https://app.fixlyy.fr';
+const COMMENCER_URL = 'https://app.fixlyy.fr/commencer';
+const DEMO_TEL = 'tel:+33939247081';
+const DEMO_NUMBER = '09 39 24 70 81';
 
 export default function FinalCTA() {
   return (
-    <section className="bg-dark py-16 md:py-24 px-4 md:px-6">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-20 md:py-28 bg-dark relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-brand/10 rounded-full blur-[160px]" />
+      </div>
+
+      <div className="relative max-w-3xl mx-auto px-4 md:px-6 text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.5 }}
+          className="text-brand text-sm font-semibold uppercase tracking-widest mb-4">
+          Prêt à démarrer
+        </motion.p>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-6">
+          Ne perdez plus<br />
+          <span className="text-brand">un seul appel.</span>
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-lg text-muted-2 leading-relaxed mb-10 max-w-xl mx-auto">
+          Mia est active en 3 minutes. 7 jours d'essai gratuit. Satisfait ou remboursé 30 jours.
+        </motion.p>
+
         <motion.div
-          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="relative glass-brand rounded-3xl p-12 text-center"
-        >
-          {/* Glow */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-brand/10 rounded-full blur-[80px]" />
-          </div>
+          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+          <a href={COMMENCER_URL}
+            className="w-full sm:w-auto inline-flex items-center justify-center bg-brand hover:bg-brand-dark text-white font-bold text-lg px-10 py-4 rounded-xl transition-all shadow-brand hover:shadow-none">
+            Démarrer mon essai gratuit →
+          </a>
+          <a href={DEMO_TEL}
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/8 hover:bg-white/12 border border-white/10 text-white font-semibold text-base px-8 py-4 rounded-xl transition-all">
+            📞 Entendre Mia · {DEMO_NUMBER}
+          </a>
+        </motion.div>
 
-          <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 bg-brand/10 border border-brand/20 text-brand text-sm font-medium px-4 py-2 rounded-full mb-6">
-              <PhoneCall className="w-4 h-4" />
-              Prêt en 10 minutes · Sans engagement
-            </div>
-
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
-              Commencez à récupérer<br />
-              <span className="text-brand">2 400 €/mois</span> dès demain.
-            </h2>
-
-            <p className="text-muted-2 text-lg max-w-xl mx-auto mb-10">
-              Rejoignez les artisans d'Île-de-France qui ne ratent plus jamais un appel client. Essai gratuit 7 jours, aucune carte bancaire requise.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href={APP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 bg-brand hover:bg-brand-dark text-white font-bold text-lg px-10 py-5 rounded-xl transition-all shadow-brand hover:shadow-none"
-              >
-                Démarrer mon essai gratuit
-                <ArrowRight className="w-5 h-5" />
-              </a>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center gap-6 mt-8 text-sm text-muted">
-              {['30 jours satisfait ou remboursé', 'Sans engagement', 'Support français inclus', 'Configuration en 10 min'].map(t => (
-                <span key={t} className="flex items-center gap-1.5">
-                  <span className="text-success">✓</span> {t}
-                </span>
-              ))}
-            </div>
-          </div>
+        <motion.div
+          initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+          viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }}
+          className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-muted">
+          {[
+            'Essai 7 jours gratuit',
+            'Satisfait ou remboursé 30j',
+            'Résiliable à tout moment',
+            'Mise en service 3 min',
+            'Conforme RGPD',
+          ].map(b => (
+            <span key={b} className="flex items-center gap-1.5">
+              <span className="text-success">✓</span> {b}
+            </span>
+          ))}
         </motion.div>
       </div>
     </section>

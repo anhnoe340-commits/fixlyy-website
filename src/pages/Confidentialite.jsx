@@ -3,7 +3,7 @@ import LegalLayout from '../components/LegalLayout';
 
 export default function Confidentialite() {
   return (
-    <LegalLayout title="Politique de confidentialité" lastUpdated="8 mai 2026">
+    <LegalLayout title="Politique de confidentialité" lastUpdated="12 juin 2026">
       <div className="info-box">
         <p className="!mb-0 text-sm">
           Fixlyy accorde une importance primordiale à la protection de vos données personnelles. La présente politique est conforme au <strong>Règlement Général sur la Protection des Données (RGPD — Règlement UE 2016/679)</strong> et à la loi n°78-17 du 6 janvier 1978 (Loi Informatique et Libertés).

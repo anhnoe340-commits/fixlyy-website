@@ -3,7 +3,7 @@ import LegalLayout from '../components/LegalLayout';
 
 export default function MentionsLegales() {
   return (
-    <LegalLayout title="Mentions légales" lastUpdated="8 mai 2026">
+    <LegalLayout title="Mentions légales" lastUpdated="12 juin 2026">
       <div className="info-box">
         <p className="!mb-0 text-sm">
           Conformément aux dispositions de la loi n°2004-575 du 21 juin 2004 pour la confiance en l'économie numérique (LCEN), il est précisé aux utilisateurs du site <strong>fixlyy.fr</strong> l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi.
