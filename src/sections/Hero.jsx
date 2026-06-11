@@ -101,7 +101,7 @@ export default function Hero() {
             ))}
           </div>
           <div className="flex items-center gap-2 md:gap-3">
-            <a href={APP_URL} className="hidden md:block text-sm text-muted-2 hover:text-white transition-colors px-3 py-2">
+            <a href={`${APP_URL}/connexion`} className="hidden md:block text-sm text-muted-2 hover:text-white transition-colors px-3 py-2">
               Se connecter
             </a>
             <a href={COMMENCER_URL}

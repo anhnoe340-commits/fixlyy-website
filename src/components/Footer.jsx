@@ -35,7 +35,7 @@ export default function Footer() {
               <li><a href="#pricing" className="hover:text-white transition-colors">Tarifs</a></li>
               <li><a href="#comparison" className="hover:text-white transition-colors">Comparatif</a></li>
               <li><a href="#faq" className="hover:text-white transition-colors">FAQ</a></li>
-              <li><a href={APP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Se connecter</a></li>
+              <li><a href={`${APP_URL}/connexion`} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Se connecter</a></li>
             </ul>
           </div>
 
