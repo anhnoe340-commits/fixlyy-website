@@ -1,246 +1,212 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Zap, Users } from 'lucide-react';
+import { Check } from 'lucide-react';
 
-const APP_URL = 'https://app.fixlyy.fr';
+const COMMENCER_URL = 'https://app.fixlyy.fr/commencer';
 
-const PRICE_PER_USER = 50; // €/utilisateur/mois
-
-function getDiscount(count) {
-  if (count >= 20) return 0.15;
-  if (count >= 10) return 0.10;
-  if (count >= 5)  return 0.05;
-  return 0;
-}
-
-function getTeamPrice(count, annual) {
-  const discount = getDiscount(count);
-  const base = PRICE_PER_USER * count * (1 - discount);
-  return annual ? Math.round(base * 0.8) : Math.round(base);
-}
-
-const soloFeatures = [
-  "Jusqu'à 150 appels/mois",
-  'Secrétaire IA 24h/24, 7j/7',
-  'SMS récap en 30 secondes',
-  'Qualification automatique des urgences',
-  'Prise de rendez-vous pendant l\'appel',
-  '1 utilisateur',
-  'Support par email',
-  'Mise en service gratuite',
+const PLANS = [
+  {
+    id: 'solo',
+    name: 'Solo',
+    price: 97,
+    includedMin: 300,
+    overageRate: '0,25',
+    roi: 'Amorti dès 1 client récupéré / mois',
+    popular: false,
+    features: [
+      '300 minutes incluses / mois',
+      'Mia répond 24h/24, 7j/7',
+      'SMS récap en 30 secondes',
+      'Qualification des urgences',
+      '1 numéro dédié',
+      '1 utilisateur',
+      'Support par email',
+    ],
+    cta: 'Démarrer Solo',
+  },
+  {
+    id: 'pro',
+    name: 'Pro',
+    price: 197,
+    includedMin: 500,
+    overageRate: '0,25',
+    roi: 'Rentabilisé à 2 clients récupérés / mois',
+    popular: true,
+    features: [
+      '500 minutes incluses / mois',
+      'Tout Solo inclus',
+      'SMS confirmation client',
+      'CRM clients natif',
+      'FAQ tarifaire configurable',
+      "Jusqu'à 10 motifs d'appel",
+      'Rapport hebdomadaire',
+      'Statistiques détaillées',
+      "Jusqu'à 3 utilisateurs",
+      'Support prioritaire',
+    ],
+    cta: 'Démarrer Pro',
+  },
+  {
+    id: 'max',
+    name: 'Max',
+    price: 347,
+    includedMin: 1000,
+    overageRate: '0,20',
+    roi: 'Pour les artisans multi-équipes',
+    popular: false,
+    features: [
+      '1 000 minutes incluses / mois',
+      'Tout Pro inclus',
+      'Multilingue (FR EN AR ES PT)',
+      "Jusqu'à 20 motifs d'appel",
+      'Multi-numéros',
+      "Jusqu'à 10 utilisateurs",
+      'Rapports mensuels avancés',
+      'Support dédié',
+    ],
+    cta: 'Démarrer Max',
+  },
 ];
 
-const proFeatures = [
-  'Appels illimités',
-  'Tout ce qui est inclus dans Solo',
-  'Qualification des urgences',
-  'Planification des RDV',
-  'Rapport d\'appels hebdomadaire',
-  'Intégration Google Calendar',
-  'Statistiques détaillées',
-  "Jusqu'à 3 utilisateurs",
-  'Support prioritaire par email',
-  'Numéro de téléphone dédié',
+// Délais et durées de flottement différents par carte pour éviter le sync
+const FLOAT_PARAMS = [
+  { delay: '0s',    duration: '3.8s' },
+  { delay: '0.6s',  duration: '4.2s' },
+  { delay: '1.2s',  duration: '3.5s' },
 ];
 
-const teamFeatures = [
-  'Tout ce qui est inclus dans Pro',
-  'Appels illimités sur plusieurs lignes',
-  'Utilisateurs illimités',
-  'Multi-numéros',
-  'Tableau de bord équipe',
-  'Reporting hebdomadaire',
-  'Support prioritaire dédié',
-];
+function PlanCard({ plan, index }) {
+  const overageLabel = `Au-delà des ${plan.includedMin >= 1000 ? '1 000' : plan.includedMin} min : ${plan.overageRate}€/min`;
+  const float = FLOAT_PARAMS[index];
 
-export default function Pricing() {
-  const [annual, setAnnual] = useState(false);
-  const [teamCount, setTeamCount] = useState(3);
+  if (plan.popular) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        className="relative rounded-2xl flex flex-col overflow-hidden z-10 animate-float"
+        style={{
+          animationDelay: float.delay,
+          animationDuration: float.duration,
+          background: 'linear-gradient(145deg, rgba(59,91,245,0.18) 0%, rgba(59,91,245,0.08) 100%)',
+          border: '2px solid rgba(59,91,245,0.6)',
+          boxShadow: '0 0 40px rgba(59,91,245,0.25), 0 0 80px rgba(59,91,245,0.08)',
+        }}
+      >
+        <div className="bg-brand text-white text-xs font-bold text-center py-2.5 px-4 tracking-widest uppercase">
+          Le plus populaire · 80% des artisans
+        </div>
+        <div className="p-7 flex flex-col flex-1 gap-5">
+          <div>
+            <p className="text-lg font-bold text-white mb-0.5">{plan.name}</p>
+            <div className="flex items-end gap-1.5 mb-1">
+              <span className="text-5xl font-black text-white leading-none">{plan.price}€</span>
+              <span className="text-muted text-sm mb-1.5">/mois HT</span>
+            </div>
+            <p className="text-xs text-brand font-medium">{plan.roi}</p>
+          </div>
 
-  const soloPrice  = annual ? Math.round(79 * 0.8)  : 79;
-  const proPrice   = annual ? Math.round(149 * 0.8) : 149;
-  const teamPrice  = getTeamPrice(teamCount, annual);
-  const discount   = getDiscount(teamCount);
+          <ul className="flex flex-col gap-3 flex-1">
+            {plan.features.map((f, i) => (
+              <li key={i} className="flex items-start gap-2.5 text-sm text-white/80">
+                <Check className="w-4 h-4 flex-shrink-0 mt-0.5 text-brand" />
+                {f}
+              </li>
+            ))}
+          </ul>
+
+          <div className="flex flex-col gap-2">
+            <a href={`${COMMENCER_URL}?plan=${plan.id}`}
+              className="w-full inline-flex items-center justify-center bg-brand hover:bg-brand-dark text-white font-bold text-base py-4 rounded-xl transition-all shadow-brand hover:shadow-none whitespace-nowrap">
+              {plan.cta} →
+            </a>
+            <p className="text-xs text-muted text-center">{overageLabel}</p>
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
 
   return (
-    <section className="bg-dark-2 py-16 md:py-24 px-4 md:px-6 relative overflow-hidden" id="pricing">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-brand/7 rounded-full blur-[150px]" />
-        <div className="absolute top-0 right-1/4 w-[300px] h-[300px] bg-purple-500/4 rounded-full blur-[100px]" />
-      </div>
-      <div className="max-w-6xl mx-auto relative">
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <p className="text-brand text-sm font-semibold uppercase tracking-widest mb-4">Tarifs</p>
-          <h2 className="text-3xl md:text-5xl font-black text-white mb-4 md:mb-5">
-            Tarif fixe. Zéro surprise.
-          </h2>
-          <p className="text-muted-2 text-lg max-w-lg mx-auto mb-8">
-            Un forfait mensuel clair, sans facturation à la minute. Pas de mauvaises surprises en fin de mois.
-          </p>
-
-          {/* Toggle mensuel / annuel */}
-          <div className="inline-flex items-center glass rounded-xl p-1 gap-1">
-            <button
-              onClick={() => setAnnual(false)}
-              className={`px-5 py-2 rounded-lg text-sm font-medium transition-all ${!annual ? 'bg-brand text-white' : 'text-muted-2 hover:text-white'}`}
-            >
-              Mensuel
-            </button>
-            <button
-              onClick={() => setAnnual(true)}
-              className={`px-5 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 ${annual ? 'bg-brand text-white' : 'text-muted-2 hover:text-white'}`}
-            >
-              Annuel
-              <span className="text-xs bg-success/20 text-success px-2 py-0.5 rounded-full font-bold">-20%</span>
-            </button>
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="relative rounded-2xl flex flex-col overflow-hidden animate-float"
+      style={{
+        animationDelay: float.delay,
+        animationDuration: float.duration,
+        background: 'rgba(255,255,255,0.03)',
+        border: '1px solid rgba(255,255,255,0.08)',
+      }}
+    >
+      <div className="p-7 flex flex-col flex-1 gap-5">
+        <div>
+          <p className="text-base font-bold text-white mb-0.5">{plan.name}</p>
+          <div className="flex items-end gap-1.5 mb-1">
+            <span className="text-4xl font-black text-white leading-none">{plan.price}€</span>
+            <span className="text-muted text-sm mb-1.5">/mois HT</span>
           </div>
-        </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-6 items-stretch">
-
-          {/* ── Solo ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-            className="glass rounded-2xl p-7 flex flex-col"
-          >
-            <div className="mb-5">
-              <p className="text-2xl mb-2">🔧</p>
-              <h3 className="text-white font-black text-xl mb-1">Solo</h3>
-              <p className="text-muted text-sm">Idéal pour l'artisan indépendant</p>
-            </div>
-            <div className="mb-6">
-              <div className="flex items-end gap-1">
-                <span className="text-5xl font-black text-white">{soloPrice}</span>
-                <span className="text-muted-2 text-lg mb-2">€/mois</span>
-              </div>
-              {annual && <p className="text-success text-xs font-medium mt-1">Économisez {Math.round(79 * 0.2 * 12)} €/an</p>}
-            </div>
-            <ul className="space-y-3 mb-8 flex-1">
-              {soloFeatures.map(f => (
-                <li key={f} className="flex items-start gap-3 text-sm">
-                  <Check className="w-4 h-4 text-brand shrink-0 mt-0.5" />
-                  <span className="text-muted-2">{f}</span>
-                </li>
-              ))}
-            </ul>
-            <a href={APP_URL} target="_blank" rel="noopener noreferrer"
-              className="w-full text-center py-4 rounded-xl font-bold text-base transition-all bg-dark-4 hover:bg-dark text-white border border-white/10 hover:border-brand/30">
-              Démarrer mon essai gratuit
-            </a>
-            <p className="text-center text-xs text-muted mt-3">✓ Essai gratuit 7 jours · ✓ Sans engagement</p>
-          </motion.div>
-
-          {/* ── Pro ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
-            className="glass-brand shadow-brand rounded-2xl p-7 flex flex-col relative"
-          >
-            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-brand text-white text-xs font-bold px-5 py-1.5 rounded-full flex items-center gap-1.5 whitespace-nowrap">
-              <Zap className="w-3 h-3" /> Recommandé
-            </div>
-            <div className="mb-5">
-              <p className="text-2xl mb-2">⚡</p>
-              <h3 className="text-white font-black text-xl mb-1">Pro</h3>
-              <p className="text-muted text-sm">Pour les artisans avec un bon volume</p>
-            </div>
-            <div className="mb-6">
-              <div className="flex items-end gap-1">
-                <span className="text-5xl font-black text-white">{proPrice}</span>
-                <span className="text-muted-2 text-lg mb-2">€/mois</span>
-              </div>
-              {annual && <p className="text-success text-xs font-medium mt-1">Économisez {Math.round(149 * 0.2 * 12)} €/an</p>}
-            </div>
-            <ul className="space-y-3 mb-8 flex-1">
-              {proFeatures.map(f => (
-                <li key={f} className="flex items-start gap-3 text-sm">
-                  <Check className="w-4 h-4 text-brand shrink-0 mt-0.5" />
-                  <span className="text-muted-2">{f}</span>
-                </li>
-              ))}
-            </ul>
-            <a href={APP_URL} target="_blank" rel="noopener noreferrer"
-              className="w-full text-center py-4 rounded-xl font-bold text-base transition-all bg-brand hover:bg-brand-dark text-white shadow-brand hover:shadow-none">
-              Démarrer mon essai gratuit
-            </a>
-            <p className="text-center text-xs text-muted mt-3">✓ Essai gratuit 7 jours · ✓ Sans engagement</p>
-          </motion.div>
-
-          {/* ── Équipe — prix à la carte ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
-            className="glass rounded-2xl p-7 flex flex-col"
-          >
-            <div className="mb-5">
-              <p className="text-2xl mb-2">👥</p>
-              <h3 className="text-white font-black text-xl mb-1">Équipe</h3>
-              <p className="text-muted text-sm">Pour les TPE et petites équipes</p>
-            </div>
-
-            {/* Sélecteur d'utilisateurs */}
-            <div className="mb-6 glass rounded-xl p-4">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-white text-sm font-semibold flex items-center gap-2">
-                  <Users className="w-4 h-4 text-brand" /> Utilisateurs
-                </span>
-                <span className="text-brand font-black text-xl">{teamCount}</span>
-              </div>
-              <input
-                type="range" min="2" max="30" value={teamCount}
-                onChange={e => setTeamCount(Number(e.target.value))}
-                className="w-full accent-brand h-1.5 rounded-full"
-              />
-              <div className="flex justify-between text-[10px] text-muted mt-1.5">
-                <span>2</span><span>10</span><span>20</span><span>30+</span>
-              </div>
-            </div>
-
-            {/* Prix calculé */}
-            <div className="mb-4">
-              <div className="flex items-end gap-1">
-                <span className="text-5xl font-black text-white">{teamPrice}</span>
-                <span className="text-muted-2 text-lg mb-2">€/mois</span>
-              </div>
-              <div className="flex items-center gap-2 mt-1 flex-wrap">
-                <span className="text-muted text-xs">{PRICE_PER_USER} €/utilisateur</span>
-                {discount > 0 && (
-                  <span className="text-success text-xs font-bold bg-success/10 px-2 py-0.5 rounded-full">
-                    -{Math.round(discount * 100)}% volume
-                  </span>
-                )}
-              </div>
-              {annual && <p className="text-success text-xs font-medium mt-1">-20% annuel inclus</p>}
-            </div>
-
-            <ul className="space-y-3 mb-8 flex-1">
-              {teamFeatures.map(f => (
-                <li key={f} className="flex items-start gap-3 text-sm">
-                  <Check className="w-4 h-4 text-brand shrink-0 mt-0.5" />
-                  <span className="text-muted-2">{f}</span>
-                </li>
-              ))}
-            </ul>
-            <a href={APP_URL} target="_blank" rel="noopener noreferrer"
-              className="w-full text-center py-4 rounded-xl font-bold text-base transition-all bg-dark-4 hover:bg-dark text-white border border-white/10 hover:border-brand/30">
-              Nous contacter
-            </a>
-          </motion.div>
-
+          <p className="text-xs text-muted-2">{plan.roi}</p>
         </div>
 
-        {/* Garantie */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
-          className="mt-12 bg-dark-3 border border-success/20 rounded-2xl p-6 text-center"
-        >
-          <p className="text-2xl mb-3">🛡️</p>
-          <p className="text-white font-bold text-lg mb-2">Garantie 30 jours satisfait ou remboursé</p>
-          <p className="text-muted-2 text-sm max-w-md mx-auto">
-            Sans engagement, résiliable à tout moment. Si Fixlyy ne répond pas à vos attentes dans les 30 premiers jours, on vous rembourse intégralement. Aucune question posée.
+        <ul className="flex flex-col gap-3 flex-1">
+          {plan.features.map((f, i) => (
+            <li key={i} className="flex items-start gap-2.5 text-sm text-muted-2">
+              <Check className="w-4 h-4 flex-shrink-0 mt-0.5 text-white/30" />
+              {f}
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex flex-col gap-2">
+          <a href={`${COMMENCER_URL}?plan=${plan.id}`}
+            className="w-full inline-flex items-center justify-center bg-white/8 hover:bg-white/14 border border-white/10 text-white font-semibold text-base py-3.5 rounded-xl transition-all whitespace-nowrap">
+            {plan.cta} →
+          </a>
+          <p className="text-xs text-muted text-center">{overageLabel}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+export default function Pricing() {
+  return (
+    <section id="pricing" className="py-20 md:py-28 bg-dark relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-brand/6 rounded-full blur-[120px]" />
+      </div>
+
+      <div className="relative max-w-5xl mx-auto px-4 md:px-6">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.5 }}
+          className="text-center mb-14">
+          <p className="text-brand text-sm font-semibold uppercase tracking-widest mb-3">Tarifs</p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-4">
+            Transparent. Sans surprise.
+          </h2>
+          <p className="text-muted-2 text-lg max-w-xl mx-auto">
+            7 jours d'essai gratuit sur tous les plans.
           </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-3 gap-5 md:gap-6 items-stretch mb-10">
+          {PLANS.map((plan, i) => (
+            <PlanCard key={plan.id} plan={plan} index={i} />
+          ))}
+        </div>
+
+        <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }}
+          className="text-center space-y-2">
+          <p className="text-sm text-muted">
+            Essai gratuit 7 jours · Satisfait ou remboursé 30 jours · Résiliable à tout moment · Aucun engagement
+          </p>
+          <p className="text-xs text-muted/60">Prix HT · TVA 20% applicable · Facturation mensuelle</p>
         </motion.div>
       </div>
     </section>
