@@ -61,7 +61,6 @@ const PLANS = [
       "Jusqu'à 20 motifs d'appel",
       'Multi-numéros',
       "Jusqu'à 10 utilisateurs",
-      'Rapports mensuels avancés',
       'Support dédié',
     ],
     cta: 'Démarrer Max',
