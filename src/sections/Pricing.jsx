@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 
@@ -205,7 +206,9 @@ export default function Pricing() {
           viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }}
           className="text-center space-y-2">
           <p className="text-sm text-muted">
-            Essai gratuit 7 jours · Satisfait ou remboursé 30 jours · Résiliable à tout moment · Aucun engagement
+            Essai gratuit 7 jours · Satisfait ou remboursé 30 jours ·{' '}
+            <Link to="/cgv" className="underline underline-offset-2 hover:text-white transition-colors">Engagement 3 mois</Link>
+            {' '}· puis résiliable à tout moment
           </p>
           <p className="text-xs text-muted/60">Prix HT · TVA 20% applicable · Facturation mensuelle</p>
         </motion.div>

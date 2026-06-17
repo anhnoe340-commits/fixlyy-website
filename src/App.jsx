@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import MentionsLegales from './pages/MentionsLegales';
 import Confidentialite from './pages/Confidentialite';
 import CGU from './pages/CGU';
+import CGV from './pages/CGV';
 import { trackEvent } from './utils/pixel';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/confidentialite" element={<Confidentialite />} />
         <Route path="/cgu" element={<CGU />} />
+        <Route path="/cgv" element={<CGV />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>
