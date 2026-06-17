@@ -10,6 +10,8 @@ const PLANS = [
     id: 'solo',
     name: 'Solo',
     price: 97,
+    launchPrice: null,
+    launchBadge: null,
     includedMin: 300,
     overageRate: '0,25',
     roi: 'Amorti dès 1 client récupéré / mois',
@@ -29,6 +31,8 @@ const PLANS = [
     id: 'pro',
     name: 'Pro',
     price: 197,
+    launchPrice: 98.50,
+    launchBadge: 'OFFRE LANCEMENT -50%',
     includedMin: 500,
     overageRate: '0,25',
     roi: 'Rentabilisé à 2 clients récupérés / mois',
@@ -51,6 +55,8 @@ const PLANS = [
     id: 'max',
     name: 'Max',
     price: 347,
+    launchPrice: 242.90,
+    launchBadge: 'OFFRE LANCEMENT -30%',
     includedMin: 1000,
     overageRate: '0,20',
     roi: 'Pour les artisans multi-équipes',
@@ -96,16 +102,29 @@ function PlanCard({ plan, index }) {
           boxShadow: '0 0 40px rgba(59,91,245,0.25), 0 0 80px rgba(59,91,245,0.08)',
         }}
       >
-        <div className="bg-brand text-white text-xs font-bold text-center py-2.5 px-4 tracking-widest uppercase">
-          Le plus populaire · 80% des artisans
+        <div
+          className="text-white text-xs font-bold text-center py-2.5 px-4 tracking-widest uppercase"
+          style={{ background: plan.launchBadge ? '#059669' : 'var(--color-brand, #3B5BF5)' }}
+        >
+          {plan.launchBadge ? plan.launchBadge : 'Le plus populaire · 80% des artisans'}
         </div>
         <div className="p-7 flex flex-col flex-1 gap-5">
           <div>
             <p className="text-lg font-bold text-white mb-0.5">{plan.name}</p>
-            <div className="flex items-end gap-1.5 mb-1">
-              <span className="text-5xl font-black text-white leading-none">{plan.price}€</span>
-              <span className="text-muted text-sm mb-1.5">/mois HT</span>
-            </div>
+            {plan.launchPrice ? (
+              <div className="mb-1">
+                <div className="flex items-end gap-2">
+                  <span className="text-5xl font-black text-emerald-400 leading-none">{plan.launchPrice.toFixed(2).replace('.', ',')}€</span>
+                  <span className="text-muted text-sm mb-1.5">1er mois HT</span>
+                </div>
+                <p className="text-xs text-white/50 mt-0.5">Puis <span className="line-through">{plan.price}€</span> {plan.price}€/mois</p>
+              </div>
+            ) : (
+              <div className="flex items-end gap-1.5 mb-1">
+                <span className="text-5xl font-black text-white leading-none">{plan.price}€</span>
+                <span className="text-muted text-sm mb-1.5">/mois HT</span>
+              </div>
+            )}
             <p className="text-xs text-brand font-medium">{plan.roi}</p>
           </div>
 
@@ -141,16 +160,32 @@ function PlanCard({ plan, index }) {
         animationDelay: float.delay,
         animationDuration: float.duration,
         background: 'rgba(255,255,255,0.03)',
-        border: '1px solid rgba(255,255,255,0.08)',
+        border: plan.launchBadge ? '1px solid rgba(5,150,105,0.4)' : '1px solid rgba(255,255,255,0.08)',
       }}
     >
+      {plan.launchBadge && (
+        <div className="text-white text-xs font-bold text-center py-2 px-4 tracking-widest uppercase"
+          style={{ background: '#059669' }}>
+          {plan.launchBadge}
+        </div>
+      )}
       <div className="p-7 flex flex-col flex-1 gap-5">
         <div>
           <p className="text-base font-bold text-white mb-0.5">{plan.name}</p>
-          <div className="flex items-end gap-1.5 mb-1">
-            <span className="text-4xl font-black text-white leading-none">{plan.price}€</span>
-            <span className="text-muted text-sm mb-1.5">/mois HT</span>
-          </div>
+          {plan.launchPrice ? (
+            <div className="mb-1">
+              <div className="flex items-end gap-2">
+                <span className="text-4xl font-black text-emerald-400 leading-none">{plan.launchPrice.toFixed(2).replace('.', ',')}€</span>
+                <span className="text-muted text-sm mb-1.5">1er mois HT</span>
+              </div>
+              <p className="text-xs text-white/40 mt-0.5">Puis <span className="line-through">{plan.price}€</span> {plan.price}€/mois</p>
+            </div>
+          ) : (
+            <div className="flex items-end gap-1.5 mb-1">
+              <span className="text-4xl font-black text-white leading-none">{plan.price}€</span>
+              <span className="text-muted text-sm mb-1.5">/mois HT</span>
+            </div>
+          )}
           <p className="text-xs text-muted-2">{plan.roi}</p>
         </div>
 
