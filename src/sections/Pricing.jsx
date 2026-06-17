@@ -62,7 +62,6 @@ const PLANS = [
       "Jusqu'à 20 motifs d'appel",
       'Transfert appel urgent vers l\'artisan',
       'Appels simultanés illimités',
-      '1 numéro dédié',
       "Jusqu'à 10 utilisateurs",
       'Réponse sous 4h (manager@fixlyy.fr)',
     ],
