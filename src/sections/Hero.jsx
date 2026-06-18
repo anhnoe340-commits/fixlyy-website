@@ -119,6 +119,10 @@ export default function Hero() {
               <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)}
                 className="text-muted-2 hover:text-white text-sm transition-colors py-1">{l.label}</a>
             ))}
+            <a href={`${APP_URL}/connexion`} onClick={() => setMenuOpen(false)}
+              className="text-muted-2 hover:text-white text-sm transition-colors py-1 border-t border-white/5 pt-3 mt-1">
+              Se connecter
+            </a>
           </div>
         )}
       </nav>
