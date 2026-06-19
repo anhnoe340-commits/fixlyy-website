@@ -55,6 +55,16 @@ const SCENARIOS = [
     border: 'rgba(236,72,153,0.15)',
   },
   {
+    emoji: '🚗',
+    trade: 'Garagiste / Mécanicien',
+    situation: 'Vous êtes sous un véhicule en pleine vidange',
+    mia: 'Mia décroche : "Bonjour, Garage Dupont. Que puis-je faire pour vous ?"',
+    sms: 'Marc L. · 06 45 XX XX · Voiture ne démarre plus · URGENT · 12 rue de la Forge',
+    color: '#F97316',
+    bg: 'rgba(249,115,22,0.07)',
+    border: 'rgba(249,115,22,0.15)',
+  },
+  {
     emoji: '🏗️',
     trade: 'Autres artisans',
     situation: 'Vous êtes en intervention, en réunion, ou simplement occupé',
