@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Phone, Check } from 'lucide-react';
 
 const COMMENCER_URL = 'https://app.fixlyy.fr/commencer';
 const DEMO_TEL = 'tel:+33939247081';
@@ -45,7 +46,7 @@ export default function FinalCTA() {
           </a>
           <a href={DEMO_TEL}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/8 hover:bg-white/12 border border-white/10 text-white font-semibold text-base px-8 py-4 rounded-xl transition-all">
-            📞 Entendre Mia · {DEMO_NUMBER}
+            <Phone className="w-4 h-4" /> Entendre Mia · {DEMO_NUMBER}
           </a>
         </motion.div>
 
@@ -61,7 +62,7 @@ export default function FinalCTA() {
             'Conforme RGPD',
           ].map(b => (
             <span key={b} className="flex items-center gap-1.5">
-              <span className="text-success">✓</span> {b}
+              <Check className="w-3.5 h-3.5 text-success flex-shrink-0" /> {b}
             </span>
           ))}
         </motion.div>

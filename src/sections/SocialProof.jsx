@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Phone, Rocket } from 'lucide-react';
 
 const SUPABASE_URL = 'https://hxkpmmekaotwmzgqxafp.supabase.co';
 const DEMO_FN_URL  = `${SUPABASE_URL}/functions/v1/demo-call`;
@@ -92,8 +93,8 @@ export default function SocialProof() {
               <motion.div key="success"
                 initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
                 className="text-center py-8 flex flex-col items-center gap-5">
-                <div className="w-20 h-20 rounded-full bg-success/15 border border-success/30 flex items-center justify-center text-4xl">
-                  📞
+                <div className="w-20 h-20 rounded-full bg-success/15 border border-success/30 flex items-center justify-center">
+                  <Phone className="w-9 h-9 text-success" />
                 </div>
                 <div>
                   <p className="text-2xl font-black text-white mb-2">Mia vous appelle !</p>
@@ -174,7 +175,8 @@ export default function SocialProof() {
                       Connexion en cours...
                     </>
                   ) : (
-                    <>📞 Recevoir l'appel de Mia →</>
+                    <><Phone className="w-4 h-4" /> Recevoir l'appel de Mia →</>
+
                   )}
                 </button>
 

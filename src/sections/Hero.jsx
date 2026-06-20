@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X as XIcon } from 'lucide-react';
+import { Menu, X as XIcon, MessageSquare } from 'lucide-react';
 
 const APP_URL = 'https://app.fixlyy.fr';
 const COMMENCER_URL = `${APP_URL}/commencer`;
@@ -151,7 +151,10 @@ function HeroVisual() {
               className="mt-1 rounded-xl p-3"
               style={{ background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.22)' }}
             >
-              <p className="text-xs text-emerald-400 font-semibold mb-0.5">📩 SMS envoyé à l'artisan</p>
+              <div className="flex items-center gap-1.5 mb-0.5">
+                <MessageSquare className="w-3 h-3 text-emerald-400" />
+                <p className="text-xs text-emerald-400 font-semibold">SMS envoyé à l'artisan</p>
+              </div>
               <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.65)' }}>
                 Jean-Luc · Fuite eau · <span className="text-red-400 font-semibold">URGENT</span> · 14 rue de Rivoli
               </p>

@@ -1,9 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { TrendingDown, Banknote, PhoneMissed } from 'lucide-react';
 
 const STATS = [
   {
-    emoji: '📉',
+    Icon: TrendingDown,
     number: '1 sur 3',
     label: 'artisans rate plus de 10 appels par semaine',
     color: '#EF4444',
@@ -11,7 +12,7 @@ const STATS = [
     border: 'rgba(239,68,68,0.15)',
   },
   {
-    emoji: '💸',
+    Icon: Banknote,
     number: '180 €',
     label: 'en moyenne par intervention manquée',
     color: '#F59E0B',
@@ -19,9 +20,9 @@ const STATS = [
     border: 'rgba(245,158,11,0.15)',
   },
   {
-    emoji: '📵',
+    Icon: PhoneMissed,
     number: '70 %',
-    label: 'des clients qui tombent sur messagerie n\'attendent pas',
+    label: "des clients qui tombent sur messagerie n'attendent pas",
     color: '#EF4444',
     bg: 'rgba(239,68,68,0.07)',
     border: 'rgba(239,68,68,0.15)',
@@ -53,7 +54,9 @@ export default function ProblemStats() {
               className="rounded-2xl p-7 text-center"
               style={{ background: s.bg, border: `1px solid ${s.border}` }}
             >
-              <div className="text-4xl mb-4">{s.emoji}</div>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4" style={{ background: s.color + '18', border: `1px solid ${s.color}30` }}>
+                <s.Icon className="w-6 h-6" style={{ color: s.color }} />
+              </div>
               <p className="text-4xl md:text-5xl font-black mb-2" style={{ color: s.color }}>{s.number}</p>
               <p className="text-muted-2 text-sm leading-relaxed">{s.label}</p>
             </motion.div>

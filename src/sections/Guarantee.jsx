@@ -28,7 +28,7 @@ export default function Guarantee() {
             <div className="flex-1 text-white">
               <h2 className="text-3xl font-extrabold mb-2 tracking-tight">Notre garantie simple</h2>
               <div className="inline-block bg-accent text-secondary font-black text-sm uppercase tracking-widest px-4 py-1 rounded-full mb-6 shadow-sm">
-                🛡️ 30 JOURS SATISFAIT OU REMBOURSÉ
+                30 JOURS SATISFAIT OU REMBOURSÉ
               </div>
               
               <div className="text-lg text-gray-300 font-medium space-y-4 mb-6 leading-relaxed">

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
 export default function Transformation() {
   const [callsPerWeek, setCallsPerWeek] = useState(8);
@@ -77,10 +77,12 @@ export default function Transformation() {
           className="flex-1 bg-success/5 border border-success/30 rounded-3xl p-8 relative overflow-hidden shadow-lg shadow-success/10"
         >
           <div className="absolute top-0 right-0 p-4 opacity-10">
-            <span className="text-6xl font-black text-success">✅</span>
+            <CheckCircle2 className="w-14 h-14 text-success" />
           </div>
           <h3 className="text-2xl font-bold text-success mb-8 flex items-center">
-            <span className="bg-success/20 p-2 rounded-xl mr-3">✅</span> AVEC FIXLYY
+            <span className="bg-success/20 p-2 rounded-xl mr-3">
+              <CheckCircle2 className="w-5 h-5 text-success" />
+            </span> AVEC FIXLYY
           </h3>
           <ul className="space-y-4 font-medium text-secondary">
             <li className="flex items-center"><span className="text-success mr-3 font-bold">✓</span> <strong className="mr-1">0h</strong> admin</li>

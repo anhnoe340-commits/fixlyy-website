@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, PhoneOff, Loader } from 'lucide-react';
+import { Phone, PhoneOff, Loader, Zap, Moon, Globe, Flag } from 'lucide-react';
 import Vapi from '@vapi-ai/web';
 
 const VAPI_PUBLIC_KEY = '261b2bc5-839e-4830-969d-fa940d83b0d7';
@@ -327,18 +327,20 @@ export default function AudioDemo() {
             className="flex flex-col gap-6"
           >
             {[
-              { emoji: '🇫🇷', title: 'Parle français comme vous', body: 'Vocabulaire plomberie, électricité, chauffage — Mia comprend les vraies demandes terrain.' },
-              { emoji: '⚡', title: 'SMS récap en 30 secondes', body: 'Après chaque appel, vous recevez un résumé complet — nom, numéro, urgence, motif.' },
-              { emoji: '🌙', title: 'Disponible 24h/24, 7j/7', body: 'Même la nuit, même le week-end, même pendant vos interventions. Mia ne décroche jamais.' },
-              { emoji: '🌍', title: 'Répond en 10+ langues', body: 'Anglais, arabe, espagnol, portugais — Mia détecte la langue du client automatiquement.' },
-            ].map(({ emoji, title, body }, i) => (
+              { Icon: Flag,  color: '#3B5BF5', title: 'Parle français comme vous', body: 'Vocabulaire plomberie, électricité, chauffage — Mia comprend les vraies demandes terrain.' },
+              { Icon: Zap,   color: '#F59E0B', title: 'SMS récap en 30 secondes', body: 'Après chaque appel, vous recevez un résumé complet — nom, numéro, urgence, motif.' },
+              { Icon: Moon,  color: '#8B5CF6', title: 'Disponible 24h/24, 7j/7', body: 'Même la nuit, même le week-end, même pendant vos interventions. Mia ne décroche jamais.' },
+              { Icon: Globe, color: '#10B981', title: 'Répond en 10+ langues', body: 'Anglais, arabe, espagnol, portugais — Mia détecte la langue du client automatiquement.' },
+            ].map(({ Icon, color, title, body }, i) => (
               <motion.div
                 key={title}
                 initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }}
                 className="glass rounded-xl p-5 flex gap-4"
               >
-                <span className="text-2xl flex-shrink-0">{emoji}</span>
+                <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: color + '18', border: `1px solid ${color}30` }}>
+                  <Icon className="w-4 h-4" style={{ color }} />
+                </div>
                 <div>
                   <p className="text-white font-semibold text-sm mb-1">{title}</p>
                   <p className="text-muted-2 text-xs leading-relaxed">{body}</p>

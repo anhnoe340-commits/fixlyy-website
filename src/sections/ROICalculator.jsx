@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
+import { TrendingDown, TrendingUp, Rocket } from 'lucide-react';
 
 const APP_URL = 'https://app.fixlyy.fr';
 const COMMENCER_URL = `${APP_URL}/commencer`;
@@ -39,7 +40,9 @@ function Slider({ label, value, min, max, step = 1, unit = '', onChange }) {
 function ResultCard({ icon, label, value, color, bg, border }) {
   return (
     <div className="rounded-2xl p-5 flex items-center gap-4" style={{ background: bg, border: `1px solid ${border}` }}>
-      <div className="text-3xl flex-shrink-0">{icon}</div>
+      <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: color + '18', border: `1px solid ${color}30` }}>
+        <div style={{ color }}>{icon}</div>
+      </div>
       <div className="min-w-0">
         <p className="text-sm text-muted-2 mb-0.5">{label}</p>
         <p className="text-2xl font-black" style={{ color }}>{value}</p>
@@ -125,17 +128,20 @@ export default function ROICalculator() {
             className="flex flex-col gap-4 justify-center">
 
             <ResultCard
-              icon="📉" label="Vous perdez environ / mois en appels manqués"
+              icon={<TrendingDown className="w-5 h-5" />}
+              label="Vous perdez environ / mois en appels manqués"
               value={fmt(results.caPerduMois)}
               color="#EF4444" bg="rgba(239,68,68,0.07)" border="rgba(239,68,68,0.2)"
             />
             <ResultCard
-              icon="✅" label="Mia vous en récupère environ / mois"
+              icon={<TrendingUp className="w-5 h-5" />}
+              label="Mia vous en récupère environ / mois"
               value={fmt(results.caRecupere)}
               color="#10B981" bg="rgba(16,185,129,0.07)" border="rgba(16,185,129,0.2)"
             />
             <ResultCard
-              icon="🚀" label={`Gain net / mois (après 197 €/mois Fixlyy) · ROI ×${results.roiX}`}
+              icon={<Rocket className="w-5 h-5" />}
+              label={`Gain net / mois (après 197 €/mois Fixlyy) · ROI ×${results.roiX}`}
               value={fmt(results.gainNet)}
               color="#3B5BF5" bg="rgba(59,91,245,0.08)" border="rgba(59,91,245,0.2)"
             />

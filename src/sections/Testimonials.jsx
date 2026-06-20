@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Phone } from 'lucide-react';
 
 // Numéro de démo Fixlyy — TODO: remplacer par le numéro dédié en prod
 const DEMO_NUMBER = '09 39 24 70 81';
@@ -25,7 +26,9 @@ export default function SocialProof() {
             viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
             className="glass rounded-2xl p-8 flex flex-col gap-5">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-2xl bg-brand/10 flex items-center justify-center text-2xl">🚀</div>
+              <div className="w-11 h-11 rounded-2xl bg-brand/10 flex items-center justify-center">
+                <Phone className="w-5 h-5 text-brand" />
+              </div>
               <div>
                 <p className="text-sm font-bold text-white">Accès anticipé actif</p>
                 <p className="text-xs text-muted">Île-de-France · Depuis 2025</p>
@@ -47,7 +50,9 @@ export default function SocialProof() {
             viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
             className="rounded-2xl p-8 flex flex-col gap-5 bg-brand/8 border border-brand/20">
             <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-2xl bg-brand/20 flex items-center justify-center text-2xl">📞</div>
+              <div className="w-11 h-11 rounded-2xl bg-brand/20 flex items-center justify-center">
+                <Phone className="w-5 h-5 text-brand" />
+              </div>
               <div>
                 <p className="text-sm font-bold text-white">Entendez Mia en direct</p>
                 <p className="text-xs text-brand">Démo disponible maintenant</p>
@@ -59,7 +64,7 @@ export default function SocialProof() {
             </p>
             <a href={DEMO_TEL}
               className="inline-flex items-center justify-center gap-3 bg-brand hover:bg-brand-dark text-white font-bold text-base px-6 py-3.5 rounded-xl transition-all shadow-brand hover:shadow-none">
-              <span className="text-xl">📞</span>
+              <Phone className="w-5 h-5" />
               Entendre Mia maintenant · {DEMO_NUMBER}
             </a>
             <p className="text-xs text-muted text-center">Appel gratuit · Durée ~60 secondes</p>
