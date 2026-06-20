@@ -64,16 +64,6 @@ const SCENARIOS = [
     bg: 'rgba(249,115,22,0.07)',
     border: 'rgba(249,115,22,0.15)',
   },
-  {
-    emoji: '🏗️',
-    trade: 'Autres artisans',
-    situation: 'Vous êtes en intervention, en réunion, ou simplement occupé',
-    mia: 'Mia décroche avec le nom de votre entreprise et qualifie la demande',
-    sms: 'Nom · Numéro · Motif · Urgence · Adresse — en 30 secondes dans votre poche',
-    color: '#3B5BF5',
-    bg: 'rgba(59,91,245,0.07)',
-    border: 'rgba(59,91,245,0.15)',
-  },
 ];
 
 function ScenarioCard({ s, i }) {
