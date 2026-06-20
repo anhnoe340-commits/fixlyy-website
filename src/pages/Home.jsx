@@ -1,29 +1,33 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { ThemeProvider } from '../contexts/ThemeContext';
 import Hero from '../sections/Hero';
-import ProblemStats from '../sections/ProblemStats';
-import ROICalculator from '../sections/ROICalculator';
-import HowItWorks from '../sections/HowItWorks';
-import ForWho from '../sections/ForWho';
-import SocialProof from '../sections/SocialProof';
-import Pricing from '../sections/Pricing';
-import FAQ from '../sections/FAQ';
-import FinalCTA from '../sections/FinalCTA';
-import Footer from '../components/Footer';
+
+const ProblemStats  = React.lazy(() => import('../sections/ProblemStats'));
+const ROICalculator = React.lazy(() => import('../sections/ROICalculator'));
+const HowItWorks    = React.lazy(() => import('../sections/HowItWorks'));
+const ForWho        = React.lazy(() => import('../sections/ForWho'));
+const SocialProof   = React.lazy(() => import('../sections/SocialProof'));
+const Pricing       = React.lazy(() => import('../sections/Pricing'));
+const FAQ           = React.lazy(() => import('../sections/FAQ'));
+const FinalCTA      = React.lazy(() => import('../sections/FinalCTA'));
+const Footer        = React.lazy(() => import('../components/Footer'));
+
 export default function Home() {
   return (
     <ThemeProvider>
       <main className="min-h-screen bg-dark">
         <Hero />
-        <ProblemStats />
-        <ROICalculator />
-        <HowItWorks />
-        <ForWho />
-        <SocialProof />
-        <Pricing />
-        <FAQ />
-        <FinalCTA />
-        <Footer />
+        <Suspense fallback={null}>
+          <ProblemStats />
+          <ROICalculator />
+          <HowItWorks />
+          <ForWho />
+          <SocialProof />
+          <Pricing />
+          <FAQ />
+          <FinalCTA />
+          <Footer />
+        </Suspense>
       </main>
     </ThemeProvider>
   );
