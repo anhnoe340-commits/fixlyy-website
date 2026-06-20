@@ -19,157 +19,151 @@ const BADGES = [
   'Conforme RGPD',
 ];
 
-const DEMO_MSGS = [
-  { name: 'Jean-Luc B.', detail: 'Fuite salle de bain', urgency: true,  phone: '07 82 ×× ×× ××', time: "à l'instant" },
-  { name: 'Sarah M.',    detail: 'Devis peinture salon', urgency: false, phone: '06 14 ×× ×× ××', time: 'il y a 8 min' },
-  { name: 'Marc D.',     detail: 'Voiture ne démarre plus', urgency: true, phone: '06 77 ×× ×× ××', time: 'il y a 23 min' },
+const CONVO = [
+  { from: 'caller', text: "Bonjour, j'ai une fuite d'eau, c'est urgent !" },
+  { from: 'mia',   text: "D'accord. Votre nom et votre adresse ?" },
+  { from: 'caller', text: "Jean-Luc, 14 rue de Rivoli Paris 4e." },
+  { from: 'mia',   text: "Noté. L'artisan vous rappelle sous 30 min." },
 ];
 
+function TypingDots() {
+  return (
+    <div className="flex items-center gap-[5px] px-1 py-1">
+      {[0, 1, 2].map(i => (
+        <motion.div
+          key={i}
+          className="w-[6px] h-[6px] rounded-full bg-white/50"
+          animate={{ opacity: [0.3, 1, 0.3], y: [0, -3, 0] }}
+          transition={{ duration: 0.7, repeat: Infinity, delay: i * 0.18, ease: 'easeInOut' }}
+        />
+      ))}
+    </div>
+  );
+}
+
 function HeroVisual() {
-  const [phase, setPhase] = useState('call');
+  const [step, setStep]     = useState(0);
+  const [typing, setTyping] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setPhase('done'), 2000);
-    return () => clearTimeout(t);
+    const schedule = [
+      { at: 500,  fn: () => setStep(1) },
+      { at: 950,  fn: () => setTyping(true) },
+      { at: 2000, fn: () => { setTyping(false); setStep(2); } },
+      { at: 2800, fn: () => setStep(3) },
+      { at: 3250, fn: () => setTyping(true) },
+      { at: 4300, fn: () => { setTyping(false); setStep(4); } },
+      { at: 5100, fn: () => setStep(5) },
+    ];
+    const timers = schedule.map(({ at, fn }) => setTimeout(fn, at));
+    return () => timers.forEach(clearTimeout);
   }, []);
 
-  const msgs = phase === 'done' ? DEMO_MSGS : DEMO_MSGS.slice(1);
+  const callerBubble = 'rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm leading-snug max-w-[85%]';
+  const miaBubble    = 'rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm leading-snug max-w-[85%]';
 
   return (
-    <div className="relative w-full max-w-[340px] mx-auto select-none">
-      <div className="absolute inset-4 rounded-3xl blur-3xl bg-brand/25 -z-10" />
+    <div className="relative w-full max-w-xs mx-auto select-none" aria-hidden>
+      {/* Ambient glow behind */}
+      <div className="absolute inset-0 rounded-3xl blur-[80px] bg-brand/20 -z-10 scale-75" />
 
-      <div
-        className="relative rounded-2xl overflow-hidden"
-        style={{
-          background: 'rgba(11,15,34,0.98)',
-          border: '1px solid rgba(255,255,255,0.09)',
-          boxShadow: '0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04)',
-        }}
-      >
-        {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-white/6">
-          <div className="flex items-center gap-2">
-            <div
-              className="w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-black"
-              style={{ background: 'linear-gradient(135deg,#5B7FFF,#3B5BF5)' }}
-            >
-              M
-            </div>
-            <span className="text-sm font-semibold text-white">Mia</span>
-            <span className="text-[10px] text-muted px-2 py-0.5 rounded-full" style={{ background: 'rgba(255,255,255,0.06)' }}>
-              Fixlyy
-            </span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[11px] text-emerald-400 font-semibold">En direct</span>
-          </div>
-        </div>
+      {/* Top label */}
+      <div className="flex items-center gap-2 mb-4 px-1">
+        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
+        <span className="text-xs text-emerald-400 font-semibold tracking-wide">Appel en direct</span>
+        <span className="ml-auto text-xs font-mono" style={{ color: 'rgba(107,114,128,0.7)' }}>0:47</span>
+      </div>
 
-        {/* Live call / resolved */}
-        <AnimatePresence mode="wait">
-          {phase === 'call' ? (
-            <motion.div
-              key="calling"
-              exit={{ opacity: 0, height: 0, paddingTop: 0, paddingBottom: 0 }}
-              transition={{ duration: 0.3 }}
-              className="px-4 py-4 flex items-center gap-3 border-b border-white/6"
-            >
-              <div
-                className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 animate-pulse"
-                style={{ background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.3)' }}
-              >
-                <span className="text-lg">📞</span>
+      {/* Chat bubbles */}
+      <div className="flex flex-col gap-2.5">
+
+        {/* Caller #1 */}
+        <AnimatePresence>
+          {step >= 1 && (
+            <motion.div key="c1" initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.35 }}
+              className="flex justify-start">
+              <div className={callerBubble} style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.88)' }}>
+                {CONVO[0].text}
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-[10px] text-emerald-400 font-semibold uppercase tracking-widest mb-0.5">Appel entrant</p>
-                <p className="text-xs text-white font-medium">Mia décroche...</p>
-              </div>
-              <div className="flex items-end gap-[3px] h-4 flex-shrink-0">
-                {[0, 1, 2, 1, 0].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="w-[3px] rounded-full bg-emerald-400"
-                    animate={{ height: ['4px', '14px', '4px'] }}
-                    transition={{ duration: 0.7, repeat: Infinity, delay: i * 0.12, ease: 'easeInOut' }}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="done"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4 }}
-              className="px-4 py-3 border-b border-white/6"
-              style={{ background: 'rgba(16,185,129,0.05)' }}
-            >
-              <div className="flex items-center gap-1.5 mb-1">
-                <span className="text-emerald-400 text-xs font-bold">✓</span>
-                <p className="text-[10px] text-emerald-400 font-semibold uppercase tracking-widest">Appel traité · SMS envoyé</p>
-              </div>
-              <p className="text-xs text-white/90">
-                Jean-Luc B. · Fuite salle de bain ·{' '}
-                <span className="text-red-400 font-bold">URGENT</span>
-              </p>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* SMS list */}
-        <div className="divide-y divide-white/5">
-          {msgs.map((m, i) => (
-            <motion.div
-              key={m.name}
-              initial={i === 0 && phase === 'done' ? { opacity: 0, y: -6 } : false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35 }}
-              className="px-4 py-3 flex items-start gap-3"
-            >
-              <span className="text-base mt-0.5 flex-shrink-0">📩</span>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-0.5">
-                  <span className="text-xs font-semibold text-white">{m.name}</span>
-                  {m.urgency && (
-                    <span
-                      className="text-[9px] font-bold text-red-400 rounded-full px-1.5 py-0.5 flex-shrink-0"
-                      style={{ background: 'rgba(239,68,68,0.12)' }}
-                    >
-                      URGENT
-                    </span>
-                  )}
-                </div>
-                <p className="text-[11px]" style={{ color: 'rgba(156,163,175,0.85)' }}>{m.detail}</p>
-                <p className="text-[10px] mt-0.5" style={{ color: 'rgba(107,114,128,0.8)' }}>
-                  {m.phone} · {m.time}
-                </p>
+        {/* Mia typing / bubble #1 */}
+        <AnimatePresence mode="wait">
+          {typing && step < 2 && (
+            <motion.div key="t1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="flex justify-end">
+              <div className={miaBubble} style={{ background: 'rgba(59,91,245,0.35)', border: '1px solid rgba(59,91,245,0.4)' }}>
+                <TypingDots />
               </div>
             </motion.div>
-          ))}
-        </div>
+          )}
+          {step >= 2 && (
+            <motion.div key="m1" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.35 }}
+              className="flex justify-end">
+              <div className={miaBubble} style={{ background: 'linear-gradient(135deg,#4A6EFF,#3B5BF5)', color: '#fff' }}>
+                {CONVO[1].text}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        {/* Stat footer */}
-        <div
-          className="px-4 py-3 border-t border-white/6 flex items-center justify-between"
-          style={{ background: 'rgba(255,255,255,0.02)' }}
-        >
-          <span className="text-[11px]" style={{ color: 'rgba(107,114,128,0.9)' }}>Ce mois-ci</span>
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-2xl font-black text-white">0</span>
-            <span className="text-[11px]" style={{ color: 'rgba(156,163,175,0.85)' }}>appel manqué</span>
-            <span>🎯</span>
-          </div>
-        </div>
+        {/* Caller #2 */}
+        <AnimatePresence>
+          {step >= 3 && (
+            <motion.div key="c2" initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.35 }}
+              className="flex justify-start">
+              <div className={callerBubble} style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.88)' }}>
+                {CONVO[2].text}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Mia typing / bubble #2 */}
+        <AnimatePresence mode="wait">
+          {typing && step >= 3 && step < 4 && (
+            <motion.div key="t2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              className="flex justify-end">
+              <div className={miaBubble} style={{ background: 'rgba(59,91,245,0.35)', border: '1px solid rgba(59,91,245,0.4)' }}>
+                <TypingDots />
+              </div>
+            </motion.div>
+          )}
+          {step >= 4 && (
+            <motion.div key="m2" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.35 }}
+              className="flex justify-end">
+              <div className={miaBubble} style={{ background: 'linear-gradient(135deg,#4A6EFF,#3B5BF5)', color: '#fff' }}>
+                {CONVO[3].text}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* SMS sent confirmation */}
+        <AnimatePresence>
+          {step >= 5 && (
+            <motion.div key="sms"
+              initial={{ opacity: 0, y: 10, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-1 rounded-xl p-3"
+              style={{ background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.22)' }}
+            >
+              <p className="text-xs text-emerald-400 font-semibold mb-0.5">📩 SMS envoyé à l'artisan</p>
+              <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.65)' }}>
+                Jean-Luc · Fuite eau · <span className="text-red-400 font-semibold">URGENT</span> · 14 rue de Rivoli
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
-      {/* 24/7 badge */}
-      <div
-        className="absolute -top-3 -right-2 text-white text-[10px] font-bold px-3 py-1.5 rounded-full"
-        style={{ background: '#3B5BF5', boxShadow: '0 4px 16px rgba(59,91,245,0.5)' }}
-      >
-        24h/24 · 7j/7
+      {/* Bottom label */}
+      <div className="flex items-center justify-between mt-5 px-1">
+        <span className="text-[11px]" style={{ color: 'rgba(107,114,128,0.7)' }}>Mia · Fixlyy</span>
+        <span className="text-[11px] text-emerald-400">24h/24 · 7j/7</span>
       </div>
     </div>
   );
