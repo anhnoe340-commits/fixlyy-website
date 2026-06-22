@@ -33,7 +33,7 @@ export default function FinalCTA() {
           initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg text-muted-2 leading-relaxed mb-10 max-w-xl mx-auto">
-          Mia est active en 3 minutes. 7 jours d'essai gratuit. Satisfait ou remboursé 30 jours.
+          Mia est active en 3 minutes. 7 jours d'essai gratuit — aucune carte débitée avant le 8ème jour.
         </motion.p>
 
         <motion.div
@@ -56,7 +56,7 @@ export default function FinalCTA() {
           className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm text-muted">
           {[
             'Essai 7 jours gratuit',
-            'Satisfait ou remboursé 30j',
+            'Aucune CB débitée avant le 8ème jour',
             'Résiliable à tout moment',
             'Mise en service 3 min',
             'Conforme RGPD',

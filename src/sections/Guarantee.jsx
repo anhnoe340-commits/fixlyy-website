@@ -24,26 +24,26 @@ export default function Guarantee() {
                 </div>
               </div>
             </div>
-            
+
             <div className="flex-1 text-white">
-              <h2 className="text-3xl font-extrabold mb-2 tracking-tight">Notre garantie simple</h2>
+              <h2 className="text-3xl font-extrabold mb-2 tracking-tight">7 jours pour tester sans risque</h2>
               <div className="inline-block bg-accent text-secondary font-black text-sm uppercase tracking-widest px-4 py-1 rounded-full mb-6 shadow-sm">
-                30 JOURS SATISFAIT OU REMBOURSÉ
+                AUCUNE CARTE DÉBITÉE AVANT LE 8ÈME JOUR
               </div>
-              
+
               <div className="text-lg text-gray-300 font-medium space-y-4 mb-6 leading-relaxed">
                 <p>
-                  Essayez Fixlyy pendant 30 jours.<br/>
-                  Si vous ne récupérez pas AU MOINS le prix de l'abonnement en clients sauvés, <strong className="text-white">on vous rembourse intégralement.</strong>
+                  Essayez Fixlyy gratuitement pendant 7 jours.<br/>
+                  Votre carte n'est enregistrée qu'à titre de vérification — <strong className="text-white">aucun prélèvement avant le 8ème jour.</strong>
                 </p>
                 <p className="text-sm opacity-80 italic">
-                  Pas de question. Pas de friction.<br/>
-                  Juste un email à support@fixlyy.fr
+                  Annulez avant le 8ème jour et vous ne payez rien.<br/>
+                  Pas de question. Pas de friction.
                 </p>
               </div>
 
               <blockquote className="bg-white/5 border-l-4 border-accent p-4 rounded-xl rounded-l-none text-sm text-blue-100 font-medium italic">
-                "Pourquoi cette garantie ? Parce qu'on sait que ça marche. 50+ artisans utilisent Fixlyy. 0 remboursements demandés à ce jour."
+                "Pourquoi un essai gratuit ? Parce qu'on sait que ça marche. 50+ artisans utilisent Fixlyy. Testez par vous-même."
               </blockquote>
             </div>
           </div>

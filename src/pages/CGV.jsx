@@ -36,7 +36,7 @@ export default function CGV() {
           <strong>Formule mensuelle :</strong> les mensualités restantes jusqu'à la fin des 3 mois sont exigibles et feront l'objet d'une facturation, sauf accord contraire écrit de Fixlyy
         </li>
         <li>
-          <strong>Formule annuelle :</strong> aucun remboursement prorata n'est effectué sur la période annuelle en cours, sauf activation de la garantie satisfait ou remboursé (art. 4)
+          <strong>Formule annuelle :</strong> aucun remboursement prorata n'est effectué sur la période annuelle en cours, sauf résiliation intervenue pendant la période d'essai gratuit (art. 4)
         </li>
         <li>L'accès au Service est maintenu jusqu'à la date d'effet de la résiliation</li>
       </ul>
@@ -52,20 +52,23 @@ export default function CGV() {
         <strong>Formule annuelle :</strong> la résiliation doit être notifiée au moins 30 jours avant la date de renouvellement annuel. Sans notification dans ce délai, l'abonnement est automatiquement reconduit pour une nouvelle période de 12 mois.
       </p>
       <p>
-        Aucun remboursement prorata temporis n'est effectué au-delà de la garantie satisfait ou remboursé 30 jours (voir art. 4).
+        Aucun remboursement prorata temporis n'est effectué au-delà de la période d'essai gratuit (voir art. 4).
       </p>
 
-      <h2>4. Garantie satisfait ou remboursé</h2>
+      <h2>4. Période d'essai gratuit</h2>
       <p>
-        La garantie satisfait ou remboursé de 30 jours s'applique au premier paiement de l'abonnement, toutes formules confondues. Si l'Utilisateur active cette garantie dans les 30 premiers jours suivant le premier paiement :
+        Tout nouvel abonnement bénéficie d'une période d'essai gratuit de <strong>7 jours</strong> à compter de la souscription. Pendant cette période :
       </p>
       <ul>
-        <li>L'engagement (3 mois ou 12 mois) est automatiquement levé</li>
-        <li>Le montant du premier paiement est intégralement remboursé</li>
-        <li>L'abonnement est résilié sans frais supplémentaires</li>
+        <li>Aucun prélèvement n'est effectué sur le moyen de paiement enregistré</li>
+        <li>L'accès au Service est complet et identique à celui d'un abonnement actif</li>
+        <li>L'Utilisateur peut annuler à tout moment avant le 8ème jour sans aucun frais</li>
       </ul>
       <p>
-        La demande de remboursement s'effectue par email à <a href="mailto:support@fixlyy.fr">support@fixlyy.fr</a> en précisant le motif.
+        À l'issue des 7 jours d'essai, le premier prélèvement est automatiquement déclenché selon la formule choisie. Si l'Utilisateur annule avant le 8ème jour, aucune somme n'est due et l'accès est immédiatement révoqué.
+      </p>
+      <p>
+        L'annulation pendant la période d'essai s'effectue depuis le portail client Stripe accessible via le tableau de bord, ou sur demande à <a href="mailto:support@fixlyy.fr">support@fixlyy.fr</a>.
       </p>
 
       <h2>5. Tarifs</h2>
@@ -106,7 +109,7 @@ export default function CGV() {
         Conformément à l'article L.221-28 du Code de la consommation, le droit de rétractation de 14 jours ne s'applique pas aux services d'abonnement dont l'exécution a commencé avant l'expiration du délai de rétractation, avec l'accord exprès du consommateur.
       </p>
       <p>
-        L'accès au Service étant fourni immédiatement à la souscription (ou à l'issue de l'essai gratuit), l'Utilisateur renonce expressément à son droit de rétractation. La garantie satisfait ou remboursé 30 jours (art. 4) offre une protection équivalente et plus favorable.
+        L'accès au Service étant fourni immédiatement à la souscription (dès le début de la période d'essai gratuit), l'Utilisateur renonce expressément à son droit de rétractation légal de 14 jours. La période d'essai gratuit de 7 jours (art. 4), pendant laquelle aucun prélèvement n'est effectué, offre une protection équivalente et plus favorable.
       </p>
 
       <h2>8. Droit applicable et litiges</h2>

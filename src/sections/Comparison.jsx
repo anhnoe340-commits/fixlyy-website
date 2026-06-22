@@ -14,7 +14,7 @@ const rows = [
   { feature: 'Support en français', fixlyy: true, other: true },
   { feature: 'Équipe 100% française', fixlyy: true, other: false },
   { feature: 'Sans engagement', fixlyy: true, other: false },
-  { feature: 'Garantie 30 jours remboursé', fixlyy: true, other: false },
+  { feature: 'Essai gratuit 7 jours sans engagement', fixlyy: true, other: false },
 ];
 
 export default function Comparison() {

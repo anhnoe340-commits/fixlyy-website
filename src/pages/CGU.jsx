@@ -77,12 +77,12 @@ export default function CGU() {
         L'abonnement se renouvelle automatiquement à son échéance mensuelle. L'Utilisateur peut résilier à tout moment depuis son espace client ou en nous contactant, avec effet à la fin de la période en cours.
       </p>
 
-      <h2>6. Garantie satisfait ou remboursé</h2>
+      <h2>6. Période d'essai gratuit</h2>
       <p>
-        Si l'Utilisateur n'est pas satisfait du Service dans les <strong>30 premiers jours suivant son premier paiement</strong>, Fixlyy s'engage à le rembourser intégralement, sur simple demande à <a href="mailto:support@fixlyy.fr">support@fixlyy.fr</a>, sans question posée.
+        Tout nouvel abonnement bénéficie d'une période d'essai gratuit de <strong>7 jours</strong>. Pendant cette période, aucun prélèvement n'est effectué. L'Utilisateur peut annuler à tout moment avant le 8ème jour sans aucun frais, sur simple demande à <a href="mailto:support@fixlyy.fr">support@fixlyy.fr</a> ou depuis son portail client Stripe.
       </p>
       <p>
-        Cette garantie est valable une seule fois par compte utilisateur et ne s'applique pas aux renouvellements ultérieurs.
+        À l'issue des 7 jours d'essai, le premier paiement est automatiquement déclenché. Cette période d'essai est accordée une seule fois par compte utilisateur.
       </p>
 
       <h2>7. Obligations de l'utilisateur</h2>
@@ -123,7 +123,7 @@ export default function CGU() {
       <h2>11. Résiliation</h2>
       <h3>11.1 Par l'Utilisateur</h3>
       <p>
-        L'Utilisateur peut résilier son abonnement à tout moment depuis son espace client. La résiliation prend effet à la fin de la période d'abonnement en cours. Aucun remboursement prorata temporis n'est effectué (sauf garantie 30 jours, art. 6).
+        L'Utilisateur peut résilier son abonnement à tout moment depuis son espace client. La résiliation prend effet à la fin de la période d'abonnement en cours. Aucun remboursement prorata temporis n'est effectué (hors période d'essai gratuit, voir art. 6).
       </p>
 
       <h3>11.2 Par Fixlyy</h3>

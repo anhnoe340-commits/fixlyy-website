@@ -14,7 +14,7 @@ const NAV_LINKS = [
 
 const BADGES = [
   'Essai gratuit 7 jours',
-  'Satisfait ou remboursé 30 jours',
+  '7 jours d\'essai gratuit — aucune carte débitée avant le 8ème jour',
   'Mise en service en 3 minutes',
   'Conforme RGPD',
 ];
