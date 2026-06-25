@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
-import { Phone, Check, ArrowRight } from 'lucide-react';
+import { Phone, Check, ArrowRight, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const COMMENCER_URL = 'https://app.fixlyy.fr/commencer';
@@ -53,6 +53,149 @@ const TESTIMONIALS = [
   },
 ];
 
+const METIERS = [
+  { label: 'Plombier',      emoji: '🔧', appels: 7,  manques: 35, conversion: 15, panier: 280  },
+  { label: 'Électricien',   emoji: '⚡', appels: 6,  manques: 35, conversion: 12, panier: 350  },
+  { label: 'Serrurier',     emoji: '🔑', appels: 10, manques: 40, conversion: 22, panier: 150  },
+  { label: 'Chauffagiste',  emoji: '🔥', appels: 6,  manques: 35, conversion: 15, panier: 380  },
+  { label: 'Peintre',       emoji: '🎨', appels: 4,  manques: 30, conversion: 12, panier: 1200 },
+  { label: 'Maçon',         emoji: '🧱', appels: 4,  manques: 30, conversion: 10, panier: 2500 },
+  { label: 'Menuisier',     emoji: '🪵', appels: 4,  manques: 30, conversion: 10, panier: 850  },
+  { label: 'Carreleur',     emoji: '🪟', appels: 3,  manques: 25, conversion: 10, panier: 750  },
+];
+
+const PRIX_MIA = 497;
+const TAUX_RECUPERATION = 0.70; // Mia récupère 70% des appels manqués
+
+/* ─── Simulateur de ROI ─── */
+function ROICalculator() {
+  const [metierIdx, setMetierIdx] = useState(0);
+  const m = METIERS[metierIdx];
+  const [appels, setAppels] = useState(m.appels);
+  const [panier, setPanier] = useState(m.panier);
+
+  useEffect(() => {
+    setAppels(METIERS[metierIdx].appels);
+    setPanier(METIERS[metierIdx].panier);
+  }, [metierIdx]);
+
+  const joursOuvres     = 20;
+  const appelsManques   = Math.round(appels * joursOuvres * (m.manques / 100));
+  const chantiersPerdus = Math.round(appelsManques * (m.conversion / 100) * 10) / 10;
+  const perteMensuelle  = Math.round(chantiersPerdus * panier);
+  const gainAvecMia     = Math.round(perteMensuelle * TAUX_RECUPERATION);
+  const benéficeNet     = gainAvecMia - PRIX_MIA;
+  const roiX            = Math.round(gainAvecMia / PRIX_MIA * 10) / 10;
+
+  const fmt = n => n >= 1000 ? `${(n / 1000).toFixed(1)}k€` : `${n}€`;
+
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-60px' });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5 }}
+      className="rounded-2xl overflow-hidden"
+      style={{
+        background: '#FFFFFF',
+        border: '1px solid #E0E7FF',
+        boxShadow: '0 4px 24px rgba(59,91,245,0.08)',
+      }}
+    >
+      {/* Titre compact */}
+      <div className="px-5 pt-5 pb-3" style={{ borderBottom: '1px solid #EEF2FF' }}>
+        <p className="text-xs font-black uppercase tracking-widest mb-0.5" style={{ color: '#F87171' }}>
+          💸 Simulateur de pertes
+        </p>
+        <p className="font-black text-[#0D1117] text-base">
+          Combien tu perds <span style={{ color: '#F87171' }}>sans Mia</span> ?
+        </p>
+      </div>
+
+      <div className="p-5 space-y-4">
+        {/* Sélecteur métier */}
+        <div className="flex flex-wrap gap-1.5">
+          {METIERS.map((met, i) => (
+            <button
+              key={met.label}
+              onClick={() => setMetierIdx(i)}
+              className="px-2.5 py-1 rounded-lg text-xs font-semibold transition-all duration-150"
+              style={i === metierIdx ? {
+                background: '#3B5BFA', color: '#fff', border: '1px solid #3B5BFA',
+              } : {
+                background: '#EEF2FF', color: '#4B5563',
+                border: '1px solid #C7D2FE',
+              }}
+            >
+              {met.emoji} {met.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Sliders */}
+        <div className="space-y-3">
+          <div>
+            <div className="flex justify-between items-center mb-1">
+              <span className="text-xs" style={{ color: '#6B7280' }}>Appels / jour</span>
+              <span className="font-black text-sm text-[#0D1117]">{appels}</span>
+            </div>
+            <input type="range" min={5} max={20} value={appels}
+              onChange={e => setAppels(Number(e.target.value))}
+              className="w-full appearance-none cursor-pointer roi-slider" />
+          </div>
+          <div>
+            <div className="flex justify-between items-center mb-1">
+              <span className="text-xs" style={{ color: '#6B7280' }}>Panier moyen</span>
+              <span className="font-black text-sm text-[#0D1117]">{fmt(panier)}</span>
+            </div>
+            <input type="range" min={100} max={5000} step={50} value={panier}
+              onChange={e => setPanier(Number(e.target.value))}
+              className="w-full appearance-none cursor-pointer roi-slider" />
+          </div>
+        </div>
+
+        {/* Résultats — 3 blocs compacts */}
+        <div className="grid grid-cols-3 gap-2">
+          <div className="rounded-xl p-3 text-center"
+            style={{ background: 'rgba(239,68,68,0.07)', border: '1px solid rgba(239,68,68,0.15)' }}>
+            <p className="text-[10px] font-semibold uppercase mb-1" style={{ color: 'rgba(248,113,113,0.6)' }}>Pertes</p>
+            <p className="font-black text-lg leading-none" style={{ color: '#F87171' }}>{fmt(perteMensuelle)}</p>
+            <p className="text-[10px] mt-0.5" style={{ color: '#9CA3AF' }}>/mois</p>
+          </div>
+          <div className="rounded-xl p-3 text-center"
+            style={{ background: 'rgba(16,185,129,0.07)', border: '1px solid rgba(16,185,129,0.15)' }}>
+            <p className="text-[10px] font-semibold uppercase mb-1" style={{ color: 'rgba(52,211,153,0.6)' }}>Avec Mia</p>
+            <p className="font-black text-lg leading-none" style={{ color: '#34D399' }}>+{fmt(gainAvecMia)}</p>
+            <p className="text-[10px] mt-0.5" style={{ color: '#9CA3AF' }}>/mois</p>
+          </div>
+          <div className="rounded-xl p-3 text-center"
+            style={{ background: 'rgba(59,91,245,0.08)', border: '1px solid rgba(59,91,245,0.18)' }}>
+            <p className="text-[10px] font-semibold uppercase mb-1" style={{ color: 'rgba(124,159,255,0.6)' }}>ROI</p>
+            <p className="font-black text-lg leading-none" style={{ color: '#7C9FFF' }}>{roiX}×</p>
+            <p className="text-[10px] mt-0.5" style={{ color: 'rgba(255,255,255,0.25)' }}>invest.</p>
+          </div>
+        </div>
+
+        {/* CTA */}
+        <motion.a
+          href={COMMENCER_URL}
+          whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
+          className="flex items-center justify-center gap-2 text-white font-black text-sm px-5 py-3 rounded-xl w-full"
+          style={{ background: 'linear-gradient(135deg,#4A6EFF,#3B5BF5)', boxShadow: '0 0 24px rgba(59,91,245,0.35)' }}
+        >
+          Récupérer mes chantiers perdus <ArrowRight className="w-4 h-4" />
+        </motion.a>
+        <p className="text-center text-[10px]" style={{ color: '#9CA3AF' }}>
+          7 jours gratuits · Aucune CB avant le 8ème jour
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
 const STATS = [
   { value: 47,    suffix: '',    label: 'artisans actifs' },
   { value: 1200,  suffix: '+',   label: 'appels traités' },
@@ -100,9 +243,9 @@ function DemoWidget() {
   }
 
   const glassCard = {
-    background: 'rgba(255,255,255,0.04)',
-    border: '1px solid rgba(255,255,255,0.10)',
-    boxShadow: '0 0 80px rgba(59,91,245,0.14)',
+    background: '#FFFFFF',
+    border: '1px solid #E0E7FF',
+    boxShadow: '0 4px 40px rgba(59,91,245,0.10)',
   };
 
   if (step === 'success') return (
@@ -118,8 +261,8 @@ function DemoWidget() {
           style={{ background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)' }}>
           <Check className="w-7 h-7 text-emerald-400" />
         </div>
-        <p className="text-white font-black text-xl mb-1">C'est noté !</p>
-        <p className="text-sm mb-6" style={{ color: 'rgba(255,255,255,0.45)' }}>
+        <p className="font-black text-xl mb-1 text-[#0D1117]">C'est noté !</p>
+        <p className="text-sm mb-6" style={{ color: '#6B7280' }}>
           Appelez maintenant — Mia va répondre comme pour un vrai client.
         </p>
         <a
@@ -130,7 +273,7 @@ function DemoWidget() {
           <Phone className="w-5 h-5" />
           {DEMO_NUMBER}
         </a>
-        <p className="text-xs mt-4" style={{ color: 'rgba(255,255,255,0.25)' }}>
+        <p className="text-xs mt-4" style={{ color: '#9CA3AF' }}>
           Durée ~2 min · Mia parle comme avec un vrai artisan
         </p>
       </div>
@@ -143,7 +286,7 @@ function DemoWidget() {
       style={{ ...glassCard, maxWidth: 420 }}
     >
       {/* Header widget */}
-      <div className="px-6 pt-6 pb-4" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+      <div className="px-6 pt-6 pb-4" style={{ borderBottom: '1px solid #EEF2FF' }}>
         <div className="flex items-center gap-3">
           <div className="relative flex-shrink-0">
             <div className="w-10 h-10 rounded-full flex items-center justify-center font-black text-white"
@@ -151,18 +294,18 @@ function DemoWidget() {
               M
             </div>
             <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 animate-pulse"
-              style={{ borderColor: '#0A0B0F' }} />
+              style={{ borderColor: '#FFFFFF' }} />
           </div>
           <div>
-            <p className="text-white font-bold text-sm">Testez Mia en direct</p>
-            <p className="text-xs text-emerald-400">Disponible maintenant · Gratuit</p>
+            <p className="font-bold text-sm text-[#0D1117]">Testez Mia en direct</p>
+            <p className="text-xs text-emerald-600">Disponible maintenant · Gratuit</p>
           </div>
         </div>
       </div>
 
       {/* Form */}
       <form onSubmit={submit} className="px-6 py-5 flex flex-col gap-3">
-        <p className="text-sm mb-1" style={{ color: 'rgba(255,255,255,0.5)' }}>
+        <p className="text-sm mb-1" style={{ color: '#6B7280' }}>
           Laissez vos coordonnées pour lancer un vrai appel de démo.
         </p>
 
@@ -172,13 +315,13 @@ function DemoWidget() {
           value={email}
           onChange={e => setEmail(e.target.value)}
           required
-          className="w-full px-4 py-3 rounded-xl text-sm text-white outline-none transition-all"
+          className="w-full px-4 py-3 rounded-xl text-sm text-[#0D1117] outline-none transition-all"
           style={{
-            background: 'rgba(255,255,255,0.06)',
-            border: '1px solid rgba(255,255,255,0.10)',
+            background: '#F5F7FF',
+            border: '1px solid #D1D9FF',
           }}
-          onFocus={e => e.target.style.border = '1px solid rgba(59,91,245,0.6)'}
-          onBlur={e => e.target.style.border = '1px solid rgba(255,255,255,0.10)'}
+          onFocus={e => e.target.style.border = '1px solid #3B5BFA'}
+          onBlur={e => e.target.style.border = '1px solid #D1D9FF'}
         />
 
         <input
@@ -187,13 +330,13 @@ function DemoWidget() {
           value={phone}
           onChange={e => setPhone(e.target.value)}
           required
-          className="w-full px-4 py-3 rounded-xl text-sm text-white outline-none transition-all"
+          className="w-full px-4 py-3 rounded-xl text-sm text-[#0D1117] outline-none transition-all"
           style={{
-            background: 'rgba(255,255,255,0.06)',
-            border: '1px solid rgba(255,255,255,0.10)',
+            background: '#F5F7FF',
+            border: '1px solid #D1D9FF',
           }}
-          onFocus={e => e.target.style.border = '1px solid rgba(59,91,245,0.6)'}
-          onBlur={e => e.target.style.border = '1px solid rgba(255,255,255,0.10)'}
+          onFocus={e => e.target.style.border = '1px solid #3B5BFA'}
+          onBlur={e => e.target.style.border = '1px solid #D1D9FF'}
         />
 
         {err && <p className="text-red-400 text-xs">{err}</p>}
@@ -214,7 +357,7 @@ function DemoWidget() {
           )}
         </button>
 
-        <p className="text-center text-xs" style={{ color: 'rgba(255,255,255,0.22)' }}>
+        <p className="text-center text-xs" style={{ color: '#9CA3AF' }}>
           100% gratuit · ~2 min · Sans engagement
         </p>
       </form>
@@ -233,17 +376,18 @@ function TestimonialCard({ t, delay = 0 }) {
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className="rounded-2xl p-5 flex flex-col gap-4 h-full cursor-default"
       style={{
-        background: 'rgba(255,255,255,0.035)',
-        border: '1px solid rgba(255,255,255,0.08)',
+        background: '#FFFFFF',
+        border: '1px solid #E0E7FF',
         transition: 'border-color 0.2s, box-shadow 0.2s',
+        boxShadow: '0 2px 12px rgba(59,91,245,0.05)',
       }}
       onMouseEnter={e => {
-        e.currentTarget.style.borderColor = `${t.color}40`;
-        e.currentTarget.style.boxShadow = `0 0 30px ${t.color}12`;
+        e.currentTarget.style.borderColor = `${t.color}50`;
+        e.currentTarget.style.boxShadow = `0 4px 24px ${t.color}18`;
       }}
       onMouseLeave={e => {
-        e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
-        e.currentTarget.style.boxShadow = 'none';
+        e.currentTarget.style.borderColor = '#E0E7FF';
+        e.currentTarget.style.boxShadow = '0 2px 12px rgba(59,91,245,0.05)';
       }}
     >
       {/* Header */}
@@ -251,18 +395,20 @@ function TestimonialCard({ t, delay = 0 }) {
         <img
           src={t.photo}
           alt={t.name}
+          loading="lazy"
+          decoding="async"
           className="w-11 h-11 rounded-full object-cover flex-shrink-0"
           style={{ border: `2px solid ${t.color}40` }}
         />
         <div className="min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <p className="text-white font-bold text-sm">{t.name}</p>
+            <p className="font-bold text-sm text-[#0D1117]">{t.name}</p>
             <span className="text-[11px] px-2 py-0.5 rounded-full font-semibold"
               style={{ background: `${t.color}18`, color: t.color }}>
               {t.job}
             </span>
           </div>
-          <p className="text-[11px]" style={{ color: 'rgba(255,255,255,0.30)' }}>{t.city}</p>
+          <p className="text-[11px]" style={{ color: '#9CA3AF' }}>{t.city}</p>
         </div>
       </div>
 
@@ -274,7 +420,7 @@ function TestimonialCard({ t, delay = 0 }) {
       </div>
 
       {/* Quote */}
-      <p className="text-sm leading-relaxed flex-1" style={{ color: 'rgba(255,255,255,0.60)' }}>
+      <p className="text-sm leading-relaxed flex-1" style={{ color: '#374151' }}>
         "{t.quote}"
       </p>
     </motion.div>
@@ -284,24 +430,12 @@ function TestimonialCard({ t, delay = 0 }) {
 /* ─── Page principale ─── */
 export default function Home() {
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ background: '#080910', fontFamily: 'Inter, system-ui, sans-serif' }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ background: '#F5F7FF', fontFamily: 'Inter, system-ui, sans-serif' }}>
 
-      {/* ── Ambient background ── */}
+      {/* ── Ambient background — léger sur fond clair ── */}
       <div className="fixed inset-0 pointer-events-none" aria-hidden>
-        {/* Grille */}
-        <div className="absolute inset-0 opacity-[0.025]" style={{
-          backgroundImage: 'linear-gradient(rgba(59,91,245,1) 1px, transparent 1px), linear-gradient(90deg, rgba(59,91,245,1) 1px, transparent 1px)',
-          backgroundSize: '50px 50px',
-        }} />
-        {/* Glows */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full blur-[200px]"
-          style={{ background: 'radial-gradient(ellipse, rgba(59,91,245,0.10) 0%, transparent 70%)' }} />
-        <motion.div
-          animate={{ scale: [1, 1.08, 1], opacity: [0.4, 0.6, 0.4] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-1/3 right-0 w-[500px] h-[500px] rounded-full blur-[150px]"
-          style={{ background: 'rgba(59,91,245,0.05)' }}
-        />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full blur-[200px]"
+          style={{ background: 'radial-gradient(ellipse, rgba(59,91,245,0.06) 0%, transparent 70%)' }} />
       </div>
 
       {/* ── Logo ── */}
@@ -310,43 +444,33 @@ export default function Home() {
       </div>
 
       {/* ── HERO ── */}
-      <section className="relative max-w-xl mx-auto px-5 text-center pt-10 pb-16">
+      <section className="relative max-w-4xl mx-auto px-5 text-center pt-10 pb-16">
 
-        {/* Badge animé */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest"
-          style={{ background: 'rgba(59,91,245,0.12)', border: '1px solid rgba(59,91,245,0.25)', color: '#7C9FFF' }}
-        >
-          <motion.span
-            animate={{ scale: [1, 1.4, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-1.5 h-1.5 bg-emerald-400 rounded-full"
-          />
-          47 artisans actifs en ce moment
-        </motion.div>
-
-        {/* H1 */}
+        {/* H1 — VSL — ligne fluide sans <br> forcé */}
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.06 }}
-          className="font-black text-white leading-[1.05] mb-5"
-          style={{ fontSize: 'clamp(2.2rem, 7vw, 4rem)' }}
+          className="font-black mb-6"
+          style={{ fontSize: 'clamp(1.1rem, 1.58vw, 1.38rem)', lineHeight: 1.5 }}
         >
-          Ne perdez plus jamais<br />
           <span style={{
-            background: 'linear-gradient(90deg, #4A6EFF, #818CF8, #4A6EFF)',
-            backgroundSize: '200% auto',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            animation: 'gradientShift 3s linear infinite',
+            background: '#EEF2FF',
+            color: '#3B5BFA',
+            borderRadius: '6px',
+            padding: '2px 10px',
+            display: 'inline',
+            marginRight: '6px',
           }}>
-            un client
+            [VIDÉO EXCLUSIVE]
           </span>
-          {' '}à cause<br />d'un appel raté.
+          <span style={{ color: '#0D1117' }}>Pourquoi Ton Téléphone Te Coûte </span>
+          <span style={{
+            color: '#3B5BFA',
+            fontSize: '1.2em',
+            fontWeight: 900,
+          }}>12 000€ / Mois</span>
+          <span style={{ color: '#0D1117' }}> Sans Que Tu T'en Rendes Compte</span>
         </motion.h1>
 
         {/* Sous-titre */}
@@ -354,20 +478,46 @@ export default function Home() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.14 }}
-          className="text-lg leading-relaxed mb-4 max-w-md mx-auto"
-          style={{ color: 'rgba(255,255,255,0.48)' }}
+          className="text-lg leading-relaxed mb-8 max-w-lg mx-auto"
+          style={{ color: '#6B7280' }}
         >
-          Mia répond à vos appels 24h/24, qualifie les urgences et vous envoie un SMS récap en 30 secondes. Passez-lui un vrai appel.
+          Regarde cette courte vidéo maintenant :
         </motion.p>
 
-        {/* Widget démo */}
+        {/* Player vidéo placeholder */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.22 }}
-          className="mb-10"
+          className="mx-auto mb-10"
+          style={{ maxWidth: '800px' }}
         >
-          <DemoWidget />
+          <div
+            className="relative w-full flex flex-col items-center justify-center cursor-pointer"
+            style={{
+              aspectRatio: '16 / 9',
+              background: '#000000',
+              borderRadius: '12px',
+              boxShadow: '0 0 60px rgba(59,91,250,0.30), 0 0 120px rgba(59,91,250,0.12)',
+              border: '1px solid rgba(59,91,250,0.20)',
+            }}
+          >
+            <div
+              className="flex items-center justify-center rounded-full"
+              style={{
+                width: 72,
+                height: 72,
+                background: 'rgba(255,255,255,0.12)',
+                border: '2px solid rgba(255,255,255,0.30)',
+                marginBottom: '12px',
+              }}
+            >
+              <Play className="w-8 h-8 text-white" fill="white" />
+            </div>
+            <p className="text-sm" style={{ color: 'rgba(255,255,255,0.35)' }}>
+              La vidéo arrive bientôt
+            </p>
+          </div>
         </motion.div>
 
         {/* CTA principal */}
@@ -378,42 +528,83 @@ export default function Home() {
           className="flex flex-col items-center gap-4"
         >
           <motion.a
-            href={COMMENCER_URL}
+            href="/commencer"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="inline-flex items-center justify-center gap-2 text-white font-black text-base px-10 py-4 rounded-xl w-full"
             style={{
-              background: 'linear-gradient(135deg,#4A6EFF,#3B5BF5)',
-              boxShadow: '0 0 40px rgba(59,91,245,0.40)',
-              maxWidth: 380,
+              background: 'linear-gradient(135deg,#4A6EFF,#3B5BFA)',
+              boxShadow: '0 0 40px rgba(59,91,250,0.45)',
+              maxWidth: 420,
             }}
           >
-            Démarrer mon essai gratuit <ArrowRight className="w-4 h-4" />
+            Essayer Mia 7 jours gratuits <ArrowRight className="w-4 h-4" />
           </motion.a>
-          <div className="flex items-center gap-5 text-xs" style={{ color: 'rgba(255,255,255,0.28)' }}>
-            {['7 jours gratuit', 'Actif en 3 min', '497€/mois'].map(l => (
-              <span key={l} className="flex items-center gap-1.5">
-                <Check className="w-3 h-3 text-emerald-400" /> {l}
-              </span>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs" style={{ color: '#9CA3AF' }}>
+            {[
+              '✓ 7 jours gratuits',
+              '✓ Aucune carte débitée avant le 8ème jour',
+              '✓ Engagement 3 mois après l\'essai',
+            ].map(l => (
+              <span key={l}>{l}</span>
             ))}
           </div>
         </motion.div>
       </section>
 
+      {/* ── DEMO + ROI CÔTE À CÔTE ── */}
+      <section className="relative max-w-6xl mx-auto px-5 pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
+          {/* Colonne gauche — Demo widget */}
+          <div>
+            <div className="flex justify-center mb-6">
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest"
+                style={{ background: '#EEF2FF', border: '1px solid #C7D2FE', color: '#3B5BFA' }}
+              >
+                <motion.span
+                  animate={{ scale: [1, 1.4, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="w-1.5 h-1.5 bg-emerald-400 rounded-full"
+                />
+                47 artisans actifs en ce moment
+              </motion.div>
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <DemoWidget />
+            </motion.div>
+          </div>
+
+          {/* Colonne droite — Simulateur ROI */}
+          <div>
+            <ROICalculator />
+          </div>
+
+        </div>
+      </section>
+
       {/* ── STATS BAR ── */}
       <section className="relative py-8" style={{
-        borderTop: '1px solid rgba(255,255,255,0.05)',
-        borderBottom: '1px solid rgba(255,255,255,0.05)',
-        background: 'rgba(255,255,255,0.018)',
+        borderTop: '1px solid #E0E7FF',
+        borderBottom: '1px solid #E0E7FF',
+        background: '#EEF2FF',
       }}>
         <div className="max-w-2xl mx-auto px-5">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {STATS.map(s => (
               <div key={s.label}>
-                <p className="font-black text-white mb-0.5" style={{ fontSize: '1.85rem' }}>
+                <p className="font-black mb-0.5 text-[#0D1117]" style={{ fontSize: '1.85rem' }}>
                   <Counter value={s.value} suffix={s.suffix} />
                 </p>
-                <p className="text-xs" style={{ color: 'rgba(255,255,255,0.30)' }}>{s.label}</p>
+                <p className="text-xs" style={{ color: '#6B7280' }}>{s.label}</p>
               </div>
             ))}
           </div>
@@ -431,8 +622,8 @@ export default function Home() {
           <p className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: '#3B5BF5' }}>
             Résultats réels
           </p>
-          <h2 className="font-black text-white" style={{ fontSize: 'clamp(1.8rem, 5vw, 2.8rem)' }}>
-            Ce que disent <span style={{ color: '#5B78FF' }}>nos artisans</span>
+          <h2 className="font-black text-[#0D1117]" style={{ fontSize: 'clamp(1.8rem, 5vw, 2.8rem)' }}>
+            Ce que disent <span style={{ color: '#3B5BFA' }}>nos artisans</span>
           </h2>
         </motion.div>
 
@@ -455,15 +646,15 @@ export default function Home() {
           viewport={{ once: true }}
           className="rounded-2xl px-8 py-12"
           style={{
-            background: 'linear-gradient(145deg, rgba(59,91,245,0.10) 0%, rgba(59,91,245,0.04) 100%)',
-            border: '1px solid rgba(59,91,245,0.22)',
+            background: '#EEF2FF',
+            border: '1px solid #C7D2FE',
           }}
         >
-          <h2 className="font-black text-white mb-3" style={{ fontSize: 'clamp(1.8rem, 5vw, 2.6rem)' }}>
+          <h2 className="font-black text-[#0D1117] mb-3" style={{ fontSize: 'clamp(1.8rem, 5vw, 2.6rem)' }}>
             Prêt à ne plus rater<br />
-            <span style={{ color: '#5B78FF' }}>un seul appel ?</span>
+            <span style={{ color: '#3B5BFA' }}>un seul appel ?</span>
           </h2>
-          <p className="mb-8 text-sm" style={{ color: 'rgba(255,255,255,0.40)' }}>
+          <p className="mb-8 text-sm" style={{ color: '#6B7280' }}>
             7 jours d'essai gratuit — aucune CB débitée avant le 8ème jour.
           </p>
           <motion.a
@@ -479,7 +670,7 @@ export default function Home() {
           >
             Démarrer mon essai gratuit <ArrowRight className="w-5 h-5" />
           </motion.a>
-          <div className="flex items-center justify-center gap-6 mt-5 text-xs" style={{ color: 'rgba(255,255,255,0.25)' }}>
+          <div className="flex items-center justify-center gap-6 mt-5 text-xs" style={{ color: '#9CA3AF' }}>
             <span>Engagement 3 mois</span>
             <span>·</span>
             <span>RGPD conforme</span>
@@ -490,9 +681,9 @@ export default function Home() {
       </section>
 
       {/* ── FOOTER MINIMAL ── */}
-      <footer className="py-8 text-center" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+      <footer className="py-8 text-center" style={{ borderTop: '1px solid #E0E7FF' }}>
         <img src="/logo-full-clean.svg" alt="Fixlyy" className="h-10 w-auto mx-auto mb-5 opacity-80" />
-        <div className="flex items-center justify-center gap-4 text-xs mb-4" style={{ color: 'rgba(255,255,255,0.22)' }}>
+        <div className="flex items-center justify-center gap-4 text-xs mb-4" style={{ color: '#9CA3AF' }}>
           {[
             { to: '/cgv', label: 'CGV' },
             { to: '/cgu', label: 'CGU' },
@@ -500,12 +691,12 @@ export default function Home() {
             { to: '/mentions-legales', label: 'Mentions légales' },
           ].map((l, i, arr) => (
             <React.Fragment key={l.to}>
-              <Link to={l.to} className="hover:text-white transition-colors">{l.label}</Link>
+              <Link to={l.to} className="hover:text-[#3B5BFA] transition-colors">{l.label}</Link>
               {i < arr.length - 1 && <span>·</span>}
             </React.Fragment>
           ))}
         </div>
-        <p className="text-xs" style={{ color: 'rgba(255,255,255,0.10)' }}>
+        <p className="text-xs" style={{ color: '#C7D2FE' }}>
           © 2026 Fixlyy · Secrétaire IA pour artisans
         </p>
       </footer>
@@ -516,7 +707,49 @@ export default function Home() {
           0%   { background-position: 0% center; }
           100% { background-position: 200% center; }
         }
-        input::placeholder { color: rgba(255,255,255,0.25); }
+        input::placeholder { color: #9CA3AF; }
+
+        /* Sliders ROI */
+        .roi-slider {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          width: 100%;
+          height: 20px;
+          background: transparent;
+          outline: none;
+          cursor: pointer;
+        }
+        .roi-slider::-webkit-slider-runnable-track {
+          height: 6px;
+          border-radius: 4px;
+          background: #C7D2FE;
+        }
+        .roi-slider::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          margin-top: -7px;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: #3B5BFA;
+          cursor: pointer;
+          box-shadow: 0 2px 8px rgba(59,91,245,0.35), 0 0 0 3px rgba(59,91,245,0.15);
+          border: 2px solid #fff;
+        }
+        .roi-slider::-moz-range-track {
+          height: 6px;
+          border-radius: 4px;
+          background: #C7D2FE;
+        }
+        .roi-slider::-moz-range-thumb {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: #3B5BFA;
+          cursor: pointer;
+          box-shadow: 0 2px 8px rgba(59,91,245,0.35);
+          border: 2px solid #fff;
+        }
       `}</style>
     </div>
   );
