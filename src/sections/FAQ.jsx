@@ -25,11 +25,11 @@ const FAQS = [
   },
   {
     q: "Que se passe-t-il si je dépasse mon quota de minutes ?",
-    a: "Les minutes supplémentaires sont facturées à 0,25€/min (0,20€/min sur Max). Vous êtes notifié à 80% de votre quota. Pas de coupure brutale — Mia continue de décrocher.",
+    a: "Les minutes supplémentaires sont facturées à 0,20€/min. Vous êtes notifié à 80% de votre quota. Pas de coupure brutale — Mia continue de décrocher.",
   },
   {
     q: "Puis-je résilier à tout moment ?",
-    a: "Oui, sans frais ni délai. Pas d'engagement minimum. Vous résiliez depuis votre compte en quelques clics et la facturation s'arrête à la fin de la période en cours.",
+    a: "Après la période d'engagement initiale de 3 mois, vous pouvez résilier à tout moment sans frais ni délai. Vous résiliez depuis votre compte en quelques clics et la facturation s'arrête à la fin de la période en cours.",
   },
   {
     q: "Mes données clients sont-elles sécurisées ?",

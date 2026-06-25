@@ -12,16 +12,8 @@ export default function CGV() {
 
       <h2>1. Durée d'engagement</h2>
       <p>
-        Fixlyy propose deux formules de facturation, chacune assortie d'une durée d'engagement initiale :
+        L'abonnement Fixlyy est soumis à une durée d'engagement initiale de <strong>3 mois</strong> à compter de la date de premier paiement (hors période d'essai gratuite). À l'issue de ces 3 mois, l'abonnement devient résiliable à tout moment avec un préavis d'un mois.
       </p>
-      <ul>
-        <li>
-          <strong>Facturation mensuelle :</strong> durée initiale de <strong>3 mois</strong> à compter de la date de premier paiement (hors période d'essai gratuite). À l'issue de ces 3 mois, l'abonnement devient résiliable à tout moment avec un préavis d'un mois.
-        </li>
-        <li>
-          <strong>Facturation annuelle :</strong> durée initiale de <strong>12 mois</strong>, facturés en une seule fois à la souscription. Aucune résiliation partielle n'est possible avant l'échéance annuelle ; à l'issue des 12 mois, l'abonnement est reconduit tacitement pour une nouvelle période annuelle, sauf résiliation notifiée au moins 30 jours avant l'échéance.
-        </li>
-      </ul>
       <p>
         La durée d'engagement constitue la contrepartie de la mise à disposition du numéro dédié, de la configuration personnalisée de l'assistante et du support à l'onboarding fournis par Fixlyy.
       </p>
@@ -32,12 +24,7 @@ export default function CGV() {
       </p>
       <ul>
         <li>Les sommes déjà réglées restent acquises à Fixlyy</li>
-        <li>
-          <strong>Formule mensuelle :</strong> les mensualités restantes jusqu'à la fin des 3 mois sont exigibles et feront l'objet d'une facturation, sauf accord contraire écrit de Fixlyy
-        </li>
-        <li>
-          <strong>Formule annuelle :</strong> aucun remboursement prorata n'est effectué sur la période annuelle en cours, sauf résiliation intervenue pendant la période d'essai gratuit (art. 4)
-        </li>
+        <li>Les mensualités restantes jusqu'à la fin des 3 mois sont exigibles et feront l'objet d'une facturation, sauf accord contraire écrit de Fixlyy</li>
         <li>L'accès au Service est maintenu jusqu'à la date d'effet de la résiliation</li>
       </ul>
       <p>
@@ -46,10 +33,7 @@ export default function CGV() {
 
       <h2>3. Résiliation après la période d'engagement</h2>
       <p>
-        <strong>Formule mensuelle :</strong> après la période initiale de 3 mois, l'Utilisateur peut résilier à tout moment depuis son espace client. La résiliation prend effet à la fin de la période mensuelle en cours.
-      </p>
-      <p>
-        <strong>Formule annuelle :</strong> la résiliation doit être notifiée au moins 30 jours avant la date de renouvellement annuel. Sans notification dans ce délai, l'abonnement est automatiquement reconduit pour une nouvelle période de 12 mois.
+        Après la période initiale de 3 mois, l'Utilisateur peut résilier à tout moment depuis son espace client. La résiliation prend effet à la fin de la période mensuelle en cours.
       </p>
       <p>
         Aucun remboursement prorata temporis n'est effectué au-delà de la période d'essai gratuit (voir art. 4).
@@ -72,21 +56,12 @@ export default function CGV() {
       </p>
 
       <h2>5. Tarifs</h2>
-      <p>Les tarifs en vigueur au moment de la souscription sont :</p>
-      <p><strong>Facturation mensuelle</strong></p>
+      <p>Le tarif en vigueur au moment de la souscription est :</p>
       <ul>
-        <li><strong>Solo — 97 €/mois HT :</strong> 300 minutes incluses — engagement 3 mois</li>
-        <li><strong>Pro — 197 €/mois HT :</strong> 500 minutes incluses — engagement 3 mois</li>
-        <li><strong>Max — 347 €/mois HT :</strong> 1 000 minutes incluses — engagement 3 mois</li>
-      </ul>
-      <p><strong>Facturation annuelle</strong> (−20%, facturé en une fois)</p>
-      <ul>
-        <li><strong>Solo — 931,20 €/an HT</strong> (soit 77,60 €/mois) — engagement 12 mois</li>
-        <li><strong>Pro — 1 891,20 €/an HT</strong> (soit 157,60 €/mois) — engagement 12 mois</li>
-        <li><strong>Max — 3 331,20 €/an HT</strong> (soit 277,60 €/mois) — engagement 12 mois</li>
+        <li><strong>Fixlyy — 497 €/mois HT :</strong> 1 500 minutes incluses — engagement 3 mois — toutes fonctionnalités incluses</li>
       </ul>
       <p>
-        Les minutes au-delà du forfait sont facturées <strong>0,25 €/min (Solo, Pro) / 0,20 €/min (Max)</strong>, apparaissant sur la facture mensuelle (ou annuelle) suivante.
+        Les minutes au-delà du forfait de 1 500 minutes sont facturées <strong>0,20 €/min</strong>, apparaissant sur la facture mensuelle suivante.
       </p>
       <p>
         Fixlyy se réserve le droit de modifier ses tarifs avec un préavis de 30 jours par email. En cas d'augmentation tarifaire pendant une période d'engagement, l'Utilisateur peut résilier sans frais dans les 30 jours suivant la notification.
@@ -94,12 +69,8 @@ export default function CGV() {
 
       <h2>6. Facturation et paiement</h2>
       <p>
-        La facturation est effectuée par avance via Stripe (certifié PCI-DSS), selon la périodicité choisie :
+        La facturation est effectuée par avance via Stripe (certifié PCI-DSS) : prélèvement automatique chaque mois à la date anniversaire de souscription.
       </p>
-      <ul>
-        <li><strong>Mensuelle :</strong> prélèvement automatique chaque mois à la date anniversaire de souscription</li>
-        <li><strong>Annuelle :</strong> prélèvement unique au moment de la souscription, renouvelé automatiquement chaque année</li>
-      </ul>
       <p>
         Les factures sont disponibles dans le portail client Stripe accessible depuis le tableau de bord Fixlyy. En cas d'échec de prélèvement, Fixlyy se réserve le droit de suspendre l'accès au Service jusqu'à régularisation. Un second échec dans les 7 jours suivants peut entraîner la résiliation de l'abonnement.
       </p>

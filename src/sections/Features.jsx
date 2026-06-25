@@ -161,7 +161,7 @@ export default function Features() {
           >
             Essayer gratuitement 7 jours →
           </a>
-          <p className="text-muted text-sm mt-3">Sans engagement · Configuration en 10 min · Support français</p>
+          <p className="text-muted text-sm mt-3">Engagement 3 mois · Configuration en 10 min · Support français</p>
         </motion.div>
 
       </div>

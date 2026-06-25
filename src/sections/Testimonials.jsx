@@ -16,7 +16,7 @@ export default function SocialProof() {
           className="text-center mb-14">
           <p className="text-brand text-sm font-semibold uppercase tracking-widest mb-3">Accès anticipé</p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-4">
-            Construit avec des artisans<br className="hidden md:block" /> d'Île-de-France
+            Construit avec des artisans<br className="hidden md:block" /> d'France
           </h2>
         </motion.div>
 
@@ -31,11 +31,11 @@ export default function SocialProof() {
               </div>
               <div>
                 <p className="text-sm font-bold text-white">Accès anticipé actif</p>
-                <p className="text-xs text-muted">Île-de-France · Depuis 2025</p>
+                <p className="text-xs text-muted">France · Depuis 2025</p>
               </div>
             </div>
             <p className="text-muted-2 text-sm leading-relaxed">
-              Fixlyy est actuellement en accès anticipé avec des artisans indépendants d'Île-de-France.
+              Fixlyy est actuellement en accès anticipé avec des artisans indépendants d'France.
               Nous construisons le produit avec eux, au plus près du terrain.
             </p>
             <div className="flex flex-wrap gap-2 pt-2 border-t border-white/5">

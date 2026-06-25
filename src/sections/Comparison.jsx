@@ -13,8 +13,8 @@ const rows = [
   { feature: 'Vocabulaire métier artisan FR', fixlyy: true, other: true },
   { feature: 'Support en français', fixlyy: true, other: true },
   { feature: 'Équipe 100% française', fixlyy: true, other: false },
-  { feature: 'Sans engagement', fixlyy: true, other: false },
-  { feature: 'Essai gratuit 7 jours sans engagement', fixlyy: true, other: false },
+  { feature: 'Engagement court · résiliable après 3 mois', fixlyy: true, other: false },
+  { feature: 'Essai gratuit 7 jours', fixlyy: true, other: false },
 ];
 
 export default function Comparison() {
@@ -97,8 +97,8 @@ export default function Comparison() {
               <div className="grid grid-cols-3 bg-dark-4 border-t border-white/10">
                 <div className="p-4 md:p-5 text-white font-semibold text-xs md:text-sm flex items-center">Prix mensuel</div>
                 <div className="p-4 md:p-5 border-l border-white/8 text-center">
-                  <p className="text-xl md:text-2xl font-black text-white">79 €<span className="text-muted text-xs md:text-sm font-normal">/mois</span></p>
-                  <p className="text-brand text-[10px] md:text-xs font-medium mt-0.5">Tarif fixe · Appels illimités dès Pro</p>
+                  <p className="text-xl md:text-2xl font-black text-white">497 €<span className="text-muted text-xs md:text-sm font-normal">/mois</span></p>
+                  <p className="text-brand text-[10px] md:text-xs font-medium mt-0.5">Tarif fixe · 1 500 min/mois incluses</p>
                 </div>
                 <div className="p-4 md:p-5 border-l border-white/8 text-center">
                   <p className="text-xl md:text-2xl font-black text-muted-2">0,50 €<span className="text-muted text-xs md:text-sm font-normal">/min</span></p>

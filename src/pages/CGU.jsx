@@ -18,7 +18,7 @@ export default function CGU() {
         <li><strong>« Service » :</strong> la plateforme SaaS de secrétariat téléphonique IA accessible sur app.fixlyy.fr</li>
         <li><strong>« Utilisateur » / « vous » :</strong> tout artisan ou professionnel ayant créé un compte sur le Service</li>
         <li><strong>« Caller » :</strong> personne physique appelant le numéro de téléphone configuré par l'Utilisateur</li>
-        <li><strong>« Abonnement » :</strong> formule tarifaire choisie par l'Utilisateur (Solo, Pro ou Max)</li>
+        <li><strong>« Abonnement » :</strong> l'offre d'abonnement souscrite par l'Utilisateur sur le Service</li>
         <li><strong>« Minutes incluses » :</strong> volume de minutes d'appel compris dans l'Abonnement mensuel</li>
       </ul>
 
@@ -56,15 +56,13 @@ export default function CGU() {
       </p>
 
       <h2>5. Abonnements et facturation</h2>
-      <h3>5.1 Formules disponibles</h3>
-      <p>Les tarifs s'entendent hors taxes (TVA non applicable — franchise en base, art. 293 B du CGI).</p>
+      <h3>5.1 Offre disponible</h3>
+      <p>Les tarifs s'entendent hors taxes (TVA 20% applicable).</p>
       <ul>
-        <li><strong>Solo — 97 €/mois :</strong> 300 minutes incluses, 1 numéro dédié, 1 utilisateur, SMS récap, qualification des urgences, support par email</li>
-        <li><strong>Pro — 197 €/mois :</strong> 500 minutes incluses, tout Solo inclus + SMS confirmation client, CRM clients, rapports hebdomadaires, statistiques détaillées, jusqu'à 3 utilisateurs, support prioritaire</li>
-        <li><strong>Max — 347 €/mois :</strong> 1 000 minutes incluses, tout Pro inclus + multilingue (FR, EN, AR, ES, PT), multi-numéros, rapports mensuels avancés, jusqu'à 10 utilisateurs, support dédié</li>
+        <li><strong>Fixlyy — 497 €/mois HT :</strong> 1 500 minutes incluses, toutes fonctionnalités incluses, jusqu'à 10 utilisateurs, support prioritaire — engagement 3 mois</li>
       </ul>
       <p>
-        Au-delà du volume de minutes incluses dans l'Abonnement, un tarif de dépassement s'applique : <strong>0,25 €/min (Solo et Pro) / 0,20 €/min (Max)</strong>. Ce tarif est indiqué sur la page de tarification et sur chaque facture.
+        Au-delà du volume de 1 500 minutes incluses, un tarif de dépassement s'applique : <strong>0,20 €/min</strong>. Ce tarif est indiqué sur la page de tarification et sur chaque facture.
       </p>
 
       <h3>5.2 Paiement</h3>

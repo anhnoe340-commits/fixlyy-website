@@ -69,7 +69,7 @@ export default function ROICalculator() {
     const appelsManquesMois = Math.round(appelsJour * (appelsRatesParDix / 10) * 22);
     const caPerduMois       = Math.round(appelsManquesMois * valeurIntervention * 0.5);
     const caRecupere        = Math.round(caPerduMois * 0.8);
-    const prixPro           = 197;
+    const prixPro           = 497;
     const gainNet           = caRecupere - prixPro;
     const roiX              = caRecupere > 0 ? (caRecupere / prixPro).toFixed(1) : '0';
     return { appelsManquesMois, caPerduMois, caRecupere, gainNet, roiX };
@@ -141,14 +141,14 @@ export default function ROICalculator() {
             />
             <ResultCard
               icon={<Rocket className="w-5 h-5" />}
-              label={`Gain net / mois (après 197 €/mois Fixlyy) · ROI ×${results.roiX}`}
+              label={`Gain net / mois (après 497 €/mois Fixlyy) · ROI ×${results.roiX}`}
               value={fmt(results.gainNet)}
               color="#3B5BF5" bg="rgba(59,91,245,0.08)" border="rgba(59,91,245,0.2)"
             />
 
             <div className="rounded-2xl p-5 bg-brand/8 border border-brand/20 mt-2">
               <p className="text-sm text-white leading-relaxed">
-                Pour <span className="font-bold text-brand">197 €/mois</span>, vous récupérez environ{' '}
+                Pour <span className="font-bold text-brand">497 €/mois</span>, vous récupérez environ{' '}
                 <span className="font-bold text-success">{fmt(results.caRecupere)}</span> — soit un gain net de{' '}
                 <span className="font-bold text-white">{fmt(results.gainNet)}/mois</span>.
               </p>
