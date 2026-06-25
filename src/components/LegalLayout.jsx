@@ -10,7 +10,7 @@ function NavBar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-dark/90 backdrop-blur-md border-b border-white/5">
       <div className="max-w-4xl mx-auto px-6 py-3 flex items-center justify-between">
         <Link to="/" className="flex items-center">
-          <img src="/logo-full-clean.svg" alt="Fixlyy" className="h-10 w-auto" />
+          <img src="/logo-full-clean.svg" alt="Fixlyy" className="h-14 w-auto" />
         </Link>
         <div className="flex items-center gap-3">
           <ThemeToggle />

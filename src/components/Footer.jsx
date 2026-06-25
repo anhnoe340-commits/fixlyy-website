@@ -12,10 +12,10 @@ export default function Footer() {
           {/* Brand */}
           <div className="md:col-span-2">
             <a href="/" className="flex items-center mb-4">
-              <img src="/logo-full-clean.svg" alt="Fixlyy" className="h-10 w-auto" />
+              <img src="/logo-full-clean.svg" alt="Fixlyy" className="h-14 w-auto" />
             </a>
             <p className="text-muted-2 text-sm leading-relaxed max-w-xs mb-5">
-              Secrétaire IA 24/7 pour plombiers et électriciens indépendants en Île-de-France. Ne ratez plus jamais un appel client.
+              Secrétaire IA 24/7 pour plombiers et électriciens indépendants en France. Ne ratez plus jamais un appel client.
             </p>
             <a
               href={APP_URL}
@@ -55,7 +55,7 @@ export default function Footer() {
                 </span>
               </li>
               <li className="text-xs text-muted pt-2">
-                Île-de-France, France
+                France
               </li>
             </ul>
           </div>
