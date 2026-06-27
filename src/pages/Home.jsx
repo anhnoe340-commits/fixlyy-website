@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
 import { Phone, Check, ArrowRight, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -7,6 +7,134 @@ const COMMENCER_URL = 'https://app.fixlyy.fr/commencer';
 const DEMO_NUMBER   = '09 39 24 70 81';
 const DEMO_TEL      = 'tel:+33939247081';
 const SUPABASE_URL  = 'https://hxkpmmekaotwmzgqxafp.supabase.co';
+
+/* ─── Scarcity system ─── */
+const FAKE_SIGNUPS = [
+  { name: 'Martin',  trade: 'Plombier',     city: 'Lyon' },
+  { name: 'Thomas',  trade: 'Électricien',  city: 'Marseille' },
+  { name: 'Léa',     trade: 'Peintre',      city: 'Bordeaux' },
+  { name: 'Kevin',   trade: 'Serrurier',    city: 'Toulouse' },
+  { name: 'David',   trade: 'Chauffagiste', city: 'Nantes' },
+  { name: 'Sophie',  trade: 'Maçon',        city: 'Lille' },
+  { name: 'Julien',  trade: 'Garagiste',    city: 'Strasbourg' },
+  { name: 'Ahmed',   trade: 'Menuisier',    city: 'Nice' },
+  { name: 'Pierre',  trade: 'Plombier',     city: 'Rennes' },
+  { name: 'Marie',   trade: 'Électricienne',city: 'Montpellier' },
+  { name: 'Karim',   trade: 'Serrurier',    city: 'Paris' },
+  { name: 'Lucas',   trade: 'Chauffagiste', city: 'Grenoble' },
+]
+
+function useSocialProof() {
+  const [remaining, setRemaining] = useState(10)
+  const [loaded, setLoaded]       = useState(false)
+
+  useEffect(() => {
+    fetch(`${SUPABASE_URL}/functions/v1/get-slots-remaining`)
+      .then(r => r.json())
+      .then(d => { setRemaining(d.remaining ?? 10); setLoaded(true) })
+      .catch(() => { setRemaining(10); setLoaded(true) })
+  }, [])
+
+  const decrement = useCallback(() => setRemaining(p => Math.max(1, p - 1)), [])
+  return { remaining, loaded, decrement }
+}
+
+function ScarcityBadge({ remaining, loaded }) {
+  const [display, setDisplay] = useState(remaining)
+  const [flash, setFlash]     = useState(false)
+  const prevRef               = useRef(remaining)
+
+  useEffect(() => {
+    if (remaining !== prevRef.current) {
+      setFlash(true)
+      const t = setTimeout(() => { setDisplay(remaining); setFlash(false) }, 200)
+      prevRef.current = remaining
+      return () => clearTimeout(t)
+    } else {
+      setDisplay(remaining)
+    }
+  }, [remaining])
+
+  if (!loaded) return null
+
+  return (
+    <div style={{
+      display: 'inline-flex', alignItems: 'center', gap: 8,
+      padding: '9px 16px', borderRadius: 10,
+      background: 'rgba(251,146,60,0.10)', border: '1px solid rgba(251,146,60,0.38)',
+      animation: 'scarcityPulse 2.5s ease-in-out infinite',
+    }}>
+      <span style={{ fontSize: 15 }}>⚠️</span>
+      <span style={{ fontSize: 13, fontWeight: 700, color: '#FB923C' }}>
+        Il ne reste que{' '}
+        <span style={{ animation: flash ? 'scarcityFlash 0.4s ease' : 'none', display: 'inline-block' }}>
+          {display}
+        </span>
+        {' '}place{display > 1 ? 's' : ''} ce mois-ci — Prix fondateurs{' '}
+        <strong style={{ color: '#0D1117' }}>197€</strong>
+      </span>
+    </div>
+  )
+}
+
+function SocialProofToast({ onDecrement }) {
+  const [visible, setVisible] = useState(false)
+  const [current, setCurrent] = useState(null)
+  const lastIdx  = useRef(-1)
+  const timerRef = useRef(null)
+  const aliveRef = useRef(true)
+
+  const scheduleNext = useCallback(() => {
+    const delay = 25_000 + Math.random() * 20_000
+    timerRef.current = setTimeout(() => {
+      if (!aliveRef.current) return
+      let idx
+      do { idx = Math.floor(Math.random() * FAKE_SIGNUPS.length) }
+      while (idx === lastIdx.current)
+      lastIdx.current = idx
+      setCurrent(FAKE_SIGNUPS[idx])
+      setVisible(true)
+      setTimeout(() => { if (aliveRef.current) onDecrement() }, 2_000)
+      setTimeout(() => { if (!aliveRef.current) return; setVisible(false); scheduleNext() }, 4_000)
+    }, delay)
+  }, [onDecrement])
+
+  useEffect(() => {
+    aliveRef.current = true
+    scheduleNext()
+    return () => { aliveRef.current = false; if (timerRef.current) clearTimeout(timerRef.current) }
+  }, [scheduleNext])
+
+  if (!visible || !current) return null
+
+  return (
+    <div style={{
+      position: 'fixed', bottom: 24, left: 24, zIndex: 9999,
+      display: 'flex', alignItems: 'center', gap: 12,
+      padding: '12px 16px', borderRadius: 12,
+      background: '#1A1A2E', border: '1px solid #3B5BFA',
+      color: '#fff', boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+      animation: 'spSlideIn 0.35s ease', maxWidth: 320,
+    }}>
+      <div style={{
+        width: 36, height: 36, borderRadius: '50%', flexShrink: 0,
+        background: 'linear-gradient(135deg,#4A6EFF,#3B5BF5)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        fontWeight: 900, fontSize: 14,
+      }}>
+        {current.name.charAt(0)}
+      </div>
+      <div>
+        <p style={{ fontSize: 13, fontWeight: 600, margin: 0, lineHeight: 1.3 }}>
+          ✅ {current.name} ({current.trade}, {current.city})
+        </p>
+        <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)', margin: 0 }}>
+          vient de rejoindre Fixlyy
+        </p>
+      </div>
+    </div>
+  )
+}
 
 const TESTIMONIALS = [
   {
@@ -429,6 +557,8 @@ function TestimonialCard({ t, delay = 0 }) {
 
 /* ─── Page principale ─── */
 export default function Home() {
+  const { remaining, loaded, decrement } = useSocialProof()
+
   return (
     <div className="min-h-screen overflow-x-hidden" style={{ background: '#F5F7FF', fontFamily: 'Inter, system-ui, sans-serif' }}>
 
@@ -540,6 +670,9 @@ export default function Home() {
           >
             Essayer Mia 7 jours gratuits <ArrowRight className="w-4 h-4" />
           </motion.a>
+
+          <ScarcityBadge remaining={remaining} loaded={loaded} />
+
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs" style={{ color: '#9CA3AF' }}>
             {[
               '✓ 7 jours gratuits',
@@ -701,11 +834,26 @@ export default function Home() {
         </p>
       </footer>
 
+      <SocialProofToast onDecrement={decrement} />
+
       {/* ── Gradient animation keyframes ── */}
       <style>{`
         @keyframes gradientShift {
           0%   { background-position: 0% center; }
           100% { background-position: 200% center; }
+        }
+        @keyframes scarcityPulse {
+          0%, 100% { opacity: 1; }
+          50%       { opacity: 0.65; }
+        }
+        @keyframes scarcityFlash {
+          0%   { opacity: 1; }
+          40%  { opacity: 0.2; }
+          100% { opacity: 1; }
+        }
+        @keyframes spSlideIn {
+          from { transform: translateX(-110%); opacity: 0; }
+          to   { transform: translateX(0);     opacity: 1; }
         }
         input::placeholder { color: #9CA3AF; }
 
