@@ -83,15 +83,18 @@ function SocialProofToast({ onDecrement }) {
   const lastIdx  = useRef(-1)
   const timerRef = useRef(null)
   const aliveRef = useRef(true)
+  const countRef = useRef(0)
 
   const scheduleNext = useCallback(() => {
+    if (countRef.current >= 5) return
     const delay = 25_000 + Math.random() * 20_000
     timerRef.current = setTimeout(() => {
-      if (!aliveRef.current) return
+      if (!aliveRef.current || countRef.current >= 5) return
       let idx
       do { idx = Math.floor(Math.random() * FAKE_SIGNUPS.length) }
       while (idx === lastIdx.current)
       lastIdx.current = idx
+      countRef.current += 1
       setCurrent(FAKE_SIGNUPS[idx])
       setVisible(true)
       setTimeout(() => { if (aliveRef.current) onDecrement() }, 2_000)

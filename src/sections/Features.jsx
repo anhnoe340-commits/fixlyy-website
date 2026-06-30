@@ -4,6 +4,7 @@ import { PhoneCall, MessageSquare, Zap, Globe, Clock, Shield } from 'lucide-reac
 import Phone3D from '../components/Phone3D';
 
 const APP_URL = 'https://app.fixlyy.fr';
+const COMMENCER_URL = `${APP_URL}/commencer`;
 
 const features = [
   {
@@ -154,7 +155,7 @@ export default function Features() {
           className="mt-16 text-center"
         >
           <a
-            href={APP_URL}
+            href={COMMENCER_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-bold text-base px-8 py-4 rounded-xl transition-all shadow-brand hover:shadow-none"
