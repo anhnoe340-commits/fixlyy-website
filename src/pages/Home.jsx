@@ -201,13 +201,14 @@ function ROICalculator() {
   const m = METIERS[metierIdx];
   const [appels, setAppels] = useState(m.appels);
   const [panier, setPanier] = useState(m.panier);
+  const [joursOuvres, setJoursOuvres] = useState(20);
 
   useEffect(() => {
     setAppels(METIERS[metierIdx].appels);
     setPanier(METIERS[metierIdx].panier);
   }, [metierIdx]);
 
-  const joursOuvres     = 20;
+
   const appelsManques   = Math.round(appels * joursOuvres * (m.manques / 100));
   const chantiersPerdus = Math.round(appelsManques * (m.conversion / 100) * 10) / 10;
   const perteMensuelle  = Math.round(chantiersPerdus * panier);
@@ -270,8 +271,17 @@ function ROICalculator() {
               <span className="text-xs" style={{ color: '#6B7280' }}>Appels ratés / jour</span>
               <span className="font-black text-sm text-[#0D1117]">{appels}</span>
             </div>
-            <input type="range" min={5} max={20} value={appels}
+            <input type="range" min={3} max={20} value={appels}
               onChange={e => setAppels(Number(e.target.value))}
+              className="w-full appearance-none cursor-pointer roi-slider" />
+          </div>
+          <div>
+            <div className="flex justify-between items-center mb-1">
+              <span className="text-xs" style={{ color: '#6B7280' }}>Jours ouvrés / mois</span>
+              <span className="font-black text-sm text-[#0D1117]">{joursOuvres}</span>
+            </div>
+            <input type="range" min={15} max={25} value={joursOuvres}
+              onChange={e => setJoursOuvres(Number(e.target.value))}
               className="w-full appearance-none cursor-pointer roi-slider" />
           </div>
           <div>
