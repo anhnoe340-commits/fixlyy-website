@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Check, X } from 'lucide-react';
 
 const APP_URL = 'https://app.fixlyy.fr';
+const COMMENCER_URL = `${APP_URL}/commencer`;
 
 const rows = [
   { feature: 'Réponse 24h/24, 7j/7', fixlyy: true, other: true },
@@ -115,7 +116,7 @@ export default function Comparison() {
           className="mt-8 text-center"
         >
           <a
-            href={APP_URL}
+            href={COMMENCER_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white font-bold text-sm md:text-base px-6 md:px-8 py-3.5 md:py-4 rounded-xl transition-all shadow-brand hover:shadow-none"
