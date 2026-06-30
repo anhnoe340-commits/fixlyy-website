@@ -201,6 +201,7 @@ function ROICalculator() {
   const [appels, setAppels] = useState(3);
   const [panier, setPanier] = useState(200);
   const [joursOuvres, setJoursOuvres] = useState(20);
+  const [tauxSignature, setTauxSignature] = useState(50);
   const isFirstRender = useRef(true);
 
   useEffect(() => {
@@ -209,9 +210,11 @@ function ROICalculator() {
     setPanier(METIERS[metierIdx].panier);
   }, [metierIdx]);
 
-  const perteMensuelle = Math.round(appels * joursOuvres * panier * 0.15);
-  const gainAvecMia    = Math.round(perteMensuelle * 0.70);
-  const roiX           = Math.round(gainAvecMia / PRIX_MIA * 10) / 10;
+  const appelsMois  = appels * joursOuvres;
+  const potentielMax = appelsMois * panier;
+  const gainDirect  = Math.round(potentielMax * (tauxSignature / 100));
+  const nbClients   = Math.round(appelsMois * (tauxSignature / 100));
+  const roiX        = Math.round(gainDirect / PRIX_MIA * 10) / 10;
 
   const fmt = n => n >= 1000 ? `${(n / 1000).toFixed(1)}k€` : `${n}€`;
 
@@ -290,6 +293,19 @@ function ROICalculator() {
               onChange={e => setPanier(Number(e.target.value))}
               className="w-full appearance-none cursor-pointer roi-slider" />
           </div>
+          <div>
+            <div className="mb-1">
+              <p className="text-xs" style={{ color: '#6B7280' }}>
+                Sur ces <span className="font-black" style={{ color: '#0D1117' }}>{appelsMois}</span> appels manqués, combien tu penses pouvoir en signer avec Mia ?
+              </p>
+              <p className="text-xs font-black mt-0.5" style={{ color: '#0D1117' }}>
+                {tauxSignature}% — soit {nbClients} clients/mois
+              </p>
+            </div>
+            <input type="range" min={10} max={100} step={5} value={tauxSignature}
+              onChange={e => setTauxSignature(Number(e.target.value))}
+              className="w-full appearance-none cursor-pointer roi-slider" />
+          </div>
         </div>
 
         {/* Résultats — 3 blocs compacts */}
@@ -297,22 +313,29 @@ function ROICalculator() {
           <div className="rounded-xl p-3 text-center"
             style={{ background: 'rgba(239,68,68,0.07)', border: '1px solid rgba(239,68,68,0.15)' }}>
             <p className="text-[10px] font-semibold uppercase mb-1" style={{ color: 'rgba(248,113,113,0.6)' }}>Pertes</p>
-            <p className="font-black text-lg leading-none" style={{ color: '#F87171' }}>{fmt(perteMensuelle)}</p>
+            <p className="font-black text-lg leading-none" style={{ color: '#F87171' }}>{fmt(potentielMax)}</p>
             <p className="text-[10px] mt-0.5" style={{ color: '#9CA3AF' }}>/mois</p>
           </div>
           <div className="rounded-xl p-3 text-center"
             style={{ background: 'rgba(16,185,129,0.07)', border: '1px solid rgba(16,185,129,0.15)' }}>
-            <p className="text-[10px] font-semibold uppercase mb-1" style={{ color: 'rgba(52,211,153,0.6)' }}>Avec Mia</p>
-            <p className="font-black text-lg leading-none" style={{ color: '#34D399' }}>+{fmt(gainAvecMia)}</p>
-            <p className="text-[10px] mt-0.5" style={{ color: '#9CA3AF' }}>/mois</p>
+            <p className="text-[10px] font-semibold uppercase mb-1" style={{ color: 'rgba(52,211,153,0.6)' }}>Gain direct</p>
+            <p className="font-black text-lg leading-none" style={{ color: '#34D399' }}>+{fmt(gainDirect)}</p>
+            <p className="text-[10px] mt-0.5" style={{ color: '#9CA3AF' }}>1er mois</p>
           </div>
           <div className="rounded-xl p-3 text-center"
             style={{ background: 'rgba(59,91,245,0.08)', border: '1px solid rgba(59,91,245,0.18)' }}>
             <p className="text-[10px] font-semibold uppercase mb-1" style={{ color: 'rgba(124,159,255,0.6)' }}>ROI</p>
             <p className="font-black text-lg leading-none" style={{ color: '#7C9FFF' }}>{roiX}×</p>
-            <p className="text-[10px] mt-0.5" style={{ color: 'rgba(255,255,255,0.25)' }}>invest.</p>
+            <p className="text-[10px] mt-0.5" style={{ color: '#9CA3AF' }}>invest.</p>
           </div>
         </div>
+
+        {/* Phrase dynamique */}
+        <p className="text-xs text-center leading-relaxed" style={{ color: '#6B7280' }}>
+          Sur tes <strong style={{ color: '#0D1117' }}>{appelsMois}</strong> appels manqués par mois, si tu en signes{' '}
+          <strong style={{ color: '#0D1117' }}>{tauxSignature}%</strong> ({nbClients} clients), c'est{' '}
+          <strong style={{ color: '#059669' }}>+{fmt(gainDirect)}</strong> dès le premier mois.
+        </p>
 
         {/* CTA */}
         <motion.a
