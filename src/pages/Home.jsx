@@ -198,23 +198,20 @@ const TAUX_RECUPERATION = 0.70; // Mia récupère 70% des appels manqués
 /* ─── Simulateur de ROI ─── */
 function ROICalculator() {
   const [metierIdx, setMetierIdx] = useState(0);
-  const m = METIERS[metierIdx];
-  const [appels, setAppels] = useState(m.appels);
-  const [panier, setPanier] = useState(m.panier);
+  const [appels, setAppels] = useState(3);
+  const [panier, setPanier] = useState(200);
   const [joursOuvres, setJoursOuvres] = useState(20);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
+    if (isFirstRender.current) { isFirstRender.current = false; return; }
     setAppels(METIERS[metierIdx].appels);
     setPanier(METIERS[metierIdx].panier);
   }, [metierIdx]);
 
-
-  const appelsManques   = Math.round(appels * joursOuvres * (m.manques / 100));
-  const chantiersPerdus = Math.round(appelsManques * (m.conversion / 100) * 10) / 10;
-  const perteMensuelle  = Math.round(chantiersPerdus * panier);
-  const gainAvecMia     = Math.round(perteMensuelle * TAUX_RECUPERATION);
-  const benéficeNet     = gainAvecMia - PRIX_MIA;
-  const roiX            = Math.round(gainAvecMia / PRIX_MIA * 10) / 10;
+  const perteMensuelle = Math.round(appels * joursOuvres * panier * 0.15);
+  const gainAvecMia    = Math.round(perteMensuelle * 0.70);
+  const roiX           = Math.round(gainAvecMia / PRIX_MIA * 10) / 10;
 
   const fmt = n => n >= 1000 ? `${(n / 1000).toFixed(1)}k€` : `${n}€`;
 
