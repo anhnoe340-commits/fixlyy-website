@@ -267,7 +267,7 @@ function ROICalculator() {
         <div className="space-y-3">
           <div>
             <div className="flex justify-between items-center mb-1">
-              <span className="text-xs" style={{ color: '#6B7280' }}>Appels / jour</span>
+              <span className="text-xs" style={{ color: '#6B7280' }}>Appels ratés / jour</span>
               <span className="font-black text-sm text-[#0D1117]">{appels}</span>
             </div>
             <input type="range" min={5} max={20} value={appels}
