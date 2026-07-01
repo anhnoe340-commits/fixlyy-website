@@ -1335,6 +1335,7 @@ export default function Home() {
         <img src="/logo-full-clean.svg" alt="Fixlyy" className="h-10 w-auto mx-auto mb-5 opacity-80" />
         <div className="flex items-center justify-center gap-4 text-xs mb-4" style={{ color: '#9CA3AF' }}>
           {[
+            { to: '/blog',             label: 'Blog' },
             { to: '/cgv',              label: 'CGV' },
             { to: '/cgu',              label: 'CGU' },
             { to: '/confidentialite',  label: 'Confidentialité' },
