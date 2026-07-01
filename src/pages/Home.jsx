@@ -699,8 +699,8 @@ export default function Home() {
           className="font-black text-[#0D1117] mb-5"
           style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)', lineHeight: 1.15 }}
         >
-          Des artisans comme toi gagnent jusqu'à 1 800€<br />
-          <span style={{ color: '#3B5BFA' }}>en plus par mois — sans décrocher leur téléphone.</span>
+          Récupère jusqu'à 1800 € / mois<br />
+          <span style={{ color: '#3B5BFA' }}>sans décrocher ton téléphone.</span>
         </motion.h1>
 
         <motion.p
