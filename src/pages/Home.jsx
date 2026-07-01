@@ -1183,18 +1183,18 @@ export default function Home() {
             <div className="px-8 py-7 bg-white">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 mb-6">
                 {[
-                  '1 numéro dédié professionnel',
                   'Appels entrants 24h/24, 7j/7',
-                  '1 500 minutes incluses/mois',
                   'SMS récap en 30 secondes',
-                  'Qualification automatique',
+                  '100 appels sortants/mois',
+                  'Prise de RDV automatique',
                   'Détection et transfert urgences',
+                  'Qualification automatique',
+                  "Mia apprend ton activité",
+                  '1 500 minutes incluses/mois',
+                  '1 numéro dédié professionnel',
                   '10 langues',
                   'Rapport hebdomadaire',
-                  '100 appels sortants/mois',
-                  "Mia apprend ton activité",
                   'Support prioritaire <4h',
-                  'Prise de RDV automatique',
                 ].map(item => (
                   <div key={item} className="flex items-center gap-2">
                     <span className="w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center text-[10px] font-bold"
