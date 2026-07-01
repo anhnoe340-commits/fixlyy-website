@@ -915,7 +915,108 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── S5: FEATURES ── */}
+      {/* ── S5: APPELS SORTANTS ── */}
+      <section className="py-20 px-5" style={{ background: '#F8F9FF' }}>
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="font-black text-[#0D1117] mb-3" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)' }}>
+              Mia ne se contente pas de répondre.<br />
+              <span style={{ color: '#3B5BFA' }}>Elle relance aussi.</span>
+            </h2>
+            <p className="text-base" style={{ color: '#6B7280' }}>100 appels sortants inclus chaque mois.</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+            {[
+              { icon: '📞', title: 'Rappel client manqué', desc: "Un client a raccroché avant de parler à Mia ? Elle le rappelle automatiquement 5 minutes après. Zéro client perdu." },
+              { icon: '📋', title: 'Suivi devis automatique', desc: "Mia détecte quand un devis a été évoqué pendant l'appel. Elle rappelle le prospect 48h après pour faire le suivi." },
+              { icon: '📅', title: 'Confirmation de RDV', desc: "La veille d'un rendez-vous pris par Mia, elle appelle le client pour confirmer. Moins d'annulations de dernière minute." },
+              { icon: '🔄', title: 'Relance client inactif', desc: "Un client n'a pas rappelé depuis 30 jours ? Mia le contacte pour reprendre le lien. Sans que tu aies à y penser." },
+            ].map((c, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="rounded-2xl p-5"
+                style={{ background: '#FFFFFF', border: '1px solid #E0E7FF', boxShadow: '0 2px 8px rgba(59,91,245,0.04)' }}
+              >
+                <div className="text-2xl mb-3">{c.icon}</div>
+                <p className="font-bold text-[#0D1117] mb-1 text-sm">{c.title}</p>
+                <p className="text-xs leading-relaxed" style={{ color: '#6B7280' }}>{c.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="flex flex-col items-center gap-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold"
+              style={{ background: '#EEF2FF', border: '1px solid #C7D2FE', color: '#3B5BFA' }}>
+              ✓ 100 appels sortants inclus — remis à zéro chaque mois
+            </div>
+            <a href={COMMENCER_URL} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-white font-bold px-8 py-3.5 rounded-xl transition-opacity hover:opacity-90"
+              style={{ background: '#3B5BFA', boxShadow: '0 4px 20px rgba(59,91,250,0.3)' }}>
+              Activer Mia sur mon numéro <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── S6: AGENDA & DISPONIBILITÉS ── */}
+      <section className="py-20 px-5" style={{ background: '#FFFFFF' }}>
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="font-black text-[#0D1117] mb-3" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)' }}>
+              Mia gère ton agenda.<br />
+              <span style={{ color: '#3B5BFA' }}>Même quand t'es pas dispo.</span>
+            </h2>
+            <p className="text-base" style={{ color: '#6B7280' }}>Elle sait quand tu es libre — et quand tu ne l'es pas.</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+            {[
+              { icon: '📅', title: 'Prise de RDV automatique', desc: "Mia prend les rendez-vous directement pendant l'appel, en fonction de tes disponibilités configurées." },
+              { icon: '🚫', title: 'Gestion des indisponibilités', desc: "Tu poses une indisponibilité dans l'app — Mia le sait. Elle propose le prochain créneau libre. Sans jamais donner la raison de ton absence." },
+              { icon: '👥', title: 'Redirection équipe', desc: "Un membre de ton équipe est absent ? Mia le détecte et redirige vers un collègue disponible. Sans friction pour le client." },
+            ].map((c, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="rounded-2xl p-5"
+                style={{ background: '#F8F9FF', border: '1px solid #E0E7FF', boxShadow: '0 2px 8px rgba(59,91,245,0.04)' }}
+              >
+                <div className="text-2xl mb-3">{c.icon}</div>
+                <p className="font-bold text-[#0D1117] mb-1 text-sm">{c.title}</p>
+                <p className="text-xs leading-relaxed" style={{ color: '#6B7280' }}>{c.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="flex justify-center">
+            <a href={COMMENCER_URL} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-white font-bold px-8 py-3.5 rounded-xl transition-opacity hover:opacity-90"
+              style={{ background: '#3B5BFA', boxShadow: '0 4px 20px rgba(59,91,250,0.3)' }}>
+              Essayer Mia 7 jours gratuits <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── S7: FEATURES ── */}
       <section id="features" className="py-20 px-5" style={{ background: '#F8F9FF' }}>
         <div className="max-w-5xl mx-auto">
           <motion.div
@@ -948,7 +1049,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── S6: SIMULATEUR ── */}
+      {/* ── S8: TESTEZ MIA EN DIRECT ── */}
+      <section className="py-20 px-5" style={{ background: '#F8F9FF' }}>
+        <div className="max-w-xl mx-auto flex justify-center">
+          <DemoWidget />
+        </div>
+      </section>
+
+      {/* ── S9: SIMULATEUR ── */}
       <section className="py-20 px-5" style={{ background: '#FFFFFF' }}>
         <div className="max-w-xl mx-auto">
           <motion.div
