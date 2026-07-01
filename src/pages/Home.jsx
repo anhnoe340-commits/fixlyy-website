@@ -1106,76 +1106,147 @@ export default function Home() {
       </section>
 
       {/* ── S8: PRICING ── */}
-      <section id="pricing" className="py-20 px-5" style={{ background: '#FFFFFF' }}>
-        <div className="max-w-xl mx-auto">
+      <section id="pricing" className="relative py-24 px-5 overflow-hidden" style={{ background: '#0D1117' }}>
+        {/* Glow blobs */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden>
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full blur-[160px]"
+            style={{ background: 'radial-gradient(ellipse, rgba(59,91,250,0.22) 0%, transparent 70%)' }} />
+          <div className="absolute bottom-0 right-1/4 w-[300px] h-[300px] rounded-full blur-[120px]"
+            style={{ background: 'rgba(139,92,246,0.12)' }} />
+        </div>
+
+        <div className="relative max-w-xl mx-auto">
+          {/* Title */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-10"
           >
-            <h2 className="font-black text-[#0D1117]" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)' }}>
-              Une seule offre. Transparente. Sans surprise.
+            <h2 className="font-black text-white mb-3" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)' }}>
+              Une seule offre.<br />
+              <span style={{ color: '#818CF8' }}>Transparente. Sans surprise.</span>
             </h2>
           </motion.div>
 
+          {/* Card with gradient border */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 24, scale: 0.98 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
-            className="rounded-2xl overflow-hidden"
-            style={{ border: '2px solid #3B5BFA', boxShadow: '0 8px 40px rgba(59,91,250,0.18)' }}
+            transition={{ duration: 0.5 }}
+            className="rounded-3xl overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, #3B5BFA, #7C3AED)',
+              padding: 2,
+              boxShadow: '0 0 80px rgba(59,91,250,0.35), 0 0 200px rgba(59,91,250,0.15)',
+            }}
           >
-            <div className="px-8 py-6 text-center" style={{ background: '#3B5BFA' }}>
-              <span className="inline-block text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3"
-                style={{ background: 'rgba(255,255,255,0.2)', color: '#fff' }}>
-                PRIX FONDATEURS — offre limitée
-              </span>
-              <div className="flex items-center justify-center gap-3">
-                <span className="text-2xl font-bold line-through" style={{ color: 'rgba(255,255,255,0.5)' }}>497€</span>
-                <span className="font-black text-white" style={{ fontSize: '3.5rem', lineHeight: 1 }}>197€</span>
-              </div>
-              <p className="text-sm mt-1" style={{ color: 'rgba(255,255,255,0.75)' }}>/mois le 1er mois — puis 497€/mois</p>
-            </div>
+            <div className="rounded-3xl overflow-hidden" style={{ background: '#111827' }}>
 
-            <div className="px-8 py-6 bg-white">
-              <ul className="space-y-2 mb-6">
-                {[
-                  '1 numéro dédié professionnel',
-                  'Appels entrants 24h/24, 7j/7',
-                  '1 500 minutes incluses/mois',
-                  'SMS récap en 30 secondes',
-                  'Qualification automatique',
-                  'Détection et transfert urgences',
-                  '10 langues',
-                  'Rapport hebdomadaire',
-                  'Rappel automatique client manqué',
-                  "Mia apprend ton activité",
-                  'Support prioritaire <4h',
-                ].map(item => (
-                  <li key={item} className="flex items-start gap-2 text-sm" style={{ color: '#374151' }}>
-                    <span className="font-bold flex-shrink-0 mt-0.5" style={{ color: '#10B981' }}>✓</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <p className="text-xs mb-5" style={{ color: '#9CA3AF' }}>Au-delà de 1 500 min : 0,20€/min</p>
-              <a href={COMMENCER_URL} target="_blank" rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-4 rounded-xl text-white font-black text-base transition-opacity hover:opacity-90"
-                style={{ background: 'linear-gradient(135deg,#4A6EFF,#3B5BFA)', boxShadow: '0 4px 20px rgba(59,91,250,0.35)' }}>
-                Commencer mon essai gratuit <ArrowRight className="w-4 h-4" />
-              </a>
-              <div className="flex flex-wrap justify-center gap-3 mt-4 text-xs" style={{ color: '#9CA3AF' }}>
-                {['✓ 7 jours gratuits', "✓ Aucune carte débitée avant le 8ème jour", "✓ Engagement 3 mois après l'essai", '✓ Résiliation simple après engagement'].map(b => (
-                  <span key={b}>{b}</span>
-                ))}
-              </div>
-            </div>
+              {/* Header */}
+              <div className="relative px-8 py-8 text-center overflow-hidden"
+                style={{ background: 'linear-gradient(135deg, #3B5BFA 0%, #6D28D9 100%)' }}>
+                {/* Shine overlay */}
+                <div className="absolute inset-0 pointer-events-none"
+                  style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%)' }} />
 
-            <div className="px-8 py-4 text-center text-xs" style={{ background: '#F8F9FF', borderTop: '1px solid #E0E7FF', color: '#6B7280' }}>
-              Une secrétaire classique : <strong style={{ color: '#374151' }}>1 800€/mois</strong>
-              {' '}· Mia : <strong style={{ color: '#374151' }}>197€ le 1er mois, puis 497€/mois</strong>
-              {' '}· Soit <strong style={{ color: '#3B5BFA' }}>3,6× moins cher</strong> pour un service 24h/24.
+                <motion.span
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-5"
+                  style={{ background: 'rgba(255,255,255,0.15)', color: '#fff', border: '1px solid rgba(255,255,255,0.25)', backdropFilter: 'blur(8px)' }}
+                >
+                  <motion.span
+                    animate={{ opacity: [1, 0.4, 1] }}
+                    transition={{ duration: 1.4, repeat: Infinity }}
+                    className="w-1.5 h-1.5 rounded-full bg-yellow-300"
+                  />
+                  Prix fondateurs — offre limitée
+                </motion.span>
+
+                <div className="flex items-center justify-center gap-4 mb-2">
+                  <span className="text-2xl font-bold line-through" style={{ color: 'rgba(255,255,255,0.4)' }}>497€</span>
+                  <motion.span
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
+                    className="font-black text-white"
+                    style={{ fontSize: 'clamp(3.5rem, 10vw, 5rem)', lineHeight: 1, textShadow: '0 0 40px rgba(255,255,255,0.3)' }}
+                  >
+                    197€
+                  </motion.span>
+                </div>
+                <p className="text-sm font-medium" style={{ color: 'rgba(255,255,255,0.7)' }}>
+                  /mois le 1er mois — puis 497€/mois
+                </p>
+
+                {/* Saving badge */}
+                <div className="inline-flex items-center gap-1.5 mt-4 px-3 py-1 rounded-full text-xs font-bold"
+                  style={{ background: 'rgba(52,211,153,0.2)', color: '#34D399', border: '1px solid rgba(52,211,153,0.3)' }}>
+                  ✓ Tu économises 300€ dès le 1er mois
+                </div>
+              </div>
+
+              {/* Features grid */}
+              <div className="px-8 py-7">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 mb-6">
+                  {[
+                    '1 numéro dédié professionnel',
+                    'Appels entrants 24h/24, 7j/7',
+                    '1 500 minutes incluses/mois',
+                    'SMS récap en 30 secondes',
+                    'Qualification automatique',
+                    'Détection et transfert urgences',
+                    '10 langues',
+                    'Rapport hebdomadaire',
+                    '100 appels sortants/mois',
+                    "Mia apprend ton activité",
+                    'Support prioritaire <4h',
+                    'Prise de RDV automatique',
+                  ].map(item => (
+                    <div key={item} className="flex items-center gap-2">
+                      <span className="w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center text-[10px] font-bold"
+                        style={{ background: 'rgba(52,211,153,0.15)', color: '#34D399' }}>✓</span>
+                      <span className="text-xs font-medium" style={{ color: '#D1D5DB' }}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <p className="text-xs mb-6 text-center" style={{ color: '#6B7280' }}>Au-delà de 1 500 min : 0,20€/min</p>
+
+                {/* CTA */}
+                <motion.a
+                  href={COMMENCER_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex items-center justify-center gap-2 w-full py-4 rounded-xl text-white font-black text-base"
+                  style={{
+                    background: 'linear-gradient(135deg, #4A6EFF, #7C3AED)',
+                    boxShadow: '0 0 40px rgba(59,91,250,0.5), inset 0 1px 0 rgba(255,255,255,0.15)',
+                  }}
+                >
+                  Commencer mon essai gratuit <ArrowRight className="w-4 h-4" />
+                </motion.a>
+
+                <div className="grid grid-cols-2 gap-2 mt-4 text-xs text-center" style={{ color: '#6B7280' }}>
+                  {['✓ 7 jours gratuits', "✓ CB débitée au 8ème jour", "✓ Engagement 3 mois", '✓ Résiliation simple'].map(b => (
+                    <span key={b}>{b}</span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Comparison footer */}
+              <div className="px-8 py-4 text-center text-xs" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', color: '#6B7280' }}>
+                Secrétaire classique : <strong style={{ color: '#9CA3AF' }}>1 800€/mois</strong>
+                {' '}· Mia : <strong style={{ color: '#9CA3AF' }}>197€ puis 497€</strong>
+                {' '}· <strong style={{ color: '#818CF8' }}>3,6× moins cher</strong> pour un service 24h/24.
+              </div>
             </div>
           </motion.div>
         </div>
