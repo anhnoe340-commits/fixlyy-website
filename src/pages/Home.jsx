@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, useInView, useMotionValue, useSpring } from 'framer-motion';
-import { Phone, Check, ArrowRight, Play } from 'lucide-react';
+import { Phone, Check, ArrowRight, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const COMMENCER_URL = 'https://app.fixlyy.fr/commencer';
@@ -591,103 +591,133 @@ function TestimonialCard({ t, delay = 0 }) {
 /* ─── Page principale ─── */
 export default function Home() {
   const { remaining, loaded, decrement } = useSocialProof()
+  const [openFaq, setOpenFaq] = useState(null)
+
+  const FAQ_ITEMS = [
+    {
+      q: "Comment fonctionne le renvoi d'appel ?",
+      a: "Tu fais un simple renvoi d'appel depuis ton téléphone vers ton numéro Fixlyy. Ça prend 2 minutes. Si tu n'as qu'un numéro perso, tu peux aussi mettre directement ton numéro Fixlyy sur Google, Pages Jaunes, ou ton site.",
+    },
+    {
+      q: "Est-ce que Mia comprend vraiment mon métier ?",
+      a: "Oui. Lors de l'activation, tu présentes ton activité à Mia — tes tarifs, ton équipe, tes types d'interventions, tes clients réguliers. Plus elle en sait, plus elle travaille comme si elle bossait avec toi depuis des années.",
+    },
+    {
+      q: "Qu'est-ce qui se passe pendant les 7 jours gratuits ?",
+      a: "Mia est active sur ton numéro dès la première heure. Tu reçois les récaps SMS de chaque appel. Aucune carte n'est débitée avant le 8ème jour. Tu peux annuler à tout moment pendant cette période.",
+    },
+    {
+      q: "Est-ce que je peux garder mon numéro habituel ?",
+      a: "Oui. Tu n'as pas besoin de changer de numéro. Tu fais juste un renvoi d'appel vers ton numéro Fixlyy. Tes clients continuent d'appeler le même numéro qu'avant.",
+    },
+    {
+      q: "Que se passe-t-il si c'est une urgence ?",
+      a: "Mia détecte automatiquement les urgences. Elle te transfère l'appel directement sur ton mobile — et t'envoie une alerte SMS en même temps.",
+    },
+    {
+      q: "Comment résilier ?",
+      a: "L'engagement est de 3 mois minimum. Après cette période, tu peux résilier à tout moment depuis ton dashboard, sans frais ni justification.",
+    },
+  ]
+
+  const FEATURES_GRID = [
+    { icon: '🌙', title: 'Disponible 24h/24', desc: "Même le dimanche à 23h. Tes clients urgences sont toujours pris en charge." },
+    { icon: '🌍', title: '10 langues', desc: "Français, anglais, arabe, espagnol, portugais, allemand, italien, néerlandais, polonais, russe." },
+    { icon: '📱', title: 'SMS récap en 30 secondes', desc: "Après chaque appel — nom, numéro, problème, adresse, urgence, disponibilité." },
+    { icon: '🚨', title: 'Transfert urgences', desc: "Mia détecte les urgences et te transfère l'appel direct sur ton mobile." },
+    { icon: '📊', title: 'Rapport hebdomadaire', desc: "Chaque lundi matin — stats, appels, récap de la semaine." },
+    { icon: '🔄', title: 'Rappel automatique', desc: "Client qui a raccroché ? Mia le rappelle automatiquement 5 minutes après." },
+    { icon: '🧠', title: "Mia apprend ton activité", desc: "Elle connaît ton équipe, tes tarifs, tes clients réguliers, ta façon de travailler." },
+    { icon: '📅', title: 'Prise de RDV', desc: "Mia prend les rendez-vous directement en fonction de tes disponibilités." },
+    { icon: '🌐', title: 'Numéro dédié professionnel', desc: "Un numéro pro rien que pour toi. Tu le mets partout — Google, Pages Jaunes, site." },
+  ]
+
+  const NAV_LINKS = [
+    { href: '#how-it-works', label: 'Comment ça marche' },
+    { href: '#features',     label: 'Features' },
+    { href: '#testimonials', label: 'Témoignages' },
+    { href: '#pricing',      label: 'Tarifs' },
+    { href: '#faq',          label: 'FAQ' },
+  ]
+
+  const fmt = n => new Intl.NumberFormat('fr-FR').format(n)
 
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ background: '#F5F7FF', fontFamily: 'Inter, system-ui, sans-serif' }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ background: '#F8F9FF', fontFamily: 'Inter, system-ui, sans-serif' }}>
 
-      {/* ── Ambient background — léger sur fond clair ── */}
+      {/* Ambient bg */}
       <div className="fixed inset-0 pointer-events-none" aria-hidden>
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[500px] rounded-full blur-[200px]"
-          style={{ background: 'radial-gradient(ellipse, rgba(59,91,245,0.06) 0%, transparent 70%)' }} />
+          style={{ background: 'radial-gradient(ellipse, rgba(59,91,245,0.05) 0%, transparent 70%)' }} />
       </div>
 
-      {/* ── Logo ── */}
-      <div className="relative pt-8 pb-2 text-center">
-        <a href="/"><img src="/logo-full-clean.svg" alt="Fixlyy" className="h-14 w-auto mx-auto" /></a>
-      </div>
+      {/* ── NAVBAR ── */}
+      <nav className="sticky top-0 z-50 backdrop-blur-md" style={{ background: 'rgba(248,249,255,0.93)', borderBottom: '1px solid #E0E7FF' }}>
+        <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+          <a href="/"><img src="/logo-full-clean.svg" alt="Fixlyy" className="h-8 w-auto" /></a>
+          <div className="hidden md:flex items-center gap-6">
+            {NAV_LINKS.map(l => (
+              <a key={l.href} href={l.href}
+                className="text-sm font-medium transition-colors"
+                style={{ color: '#6B7280' }}
+                onMouseEnter={e => e.target.style.color = '#3B5BFA'}
+                onMouseLeave={e => e.target.style.color = '#6B7280'}>
+                {l.label}
+              </a>
+            ))}
+          </div>
+          <a href={COMMENCER_URL} target="_blank" rel="noopener noreferrer"
+            className="text-sm font-bold px-5 py-2 rounded-lg text-white transition-opacity hover:opacity-90"
+            style={{ background: '#3B5BFA' }}>
+            Essai gratuit →
+          </a>
+        </div>
+      </nav>
 
-      {/* ── HERO ── */}
-      <section className="relative max-w-4xl mx-auto px-5 text-center pt-10 pb-16">
+      {/* ── S1: HERO ── */}
+      <section className="max-w-3xl mx-auto px-5 text-center pt-20 pb-16">
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold mb-8"
+          style={{ background: '#EEF2FF', border: '1px solid #C7D2FE', color: '#3B5BFA' }}
+        >
+          <motion.span
+            animate={{ scale: [1, 1.4, 1] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="w-2 h-2 rounded-full"
+            style={{ background: '#34D399' }}
+          />
+          47 artisans actifs en ce moment
+        </motion.div>
 
-        {/* H1 — VSL — ligne fluide sans <br> forcé */}
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.06 }}
-          className="font-black mb-6"
-          style={{ fontSize: 'clamp(1.1rem, 1.58vw, 1.38rem)', lineHeight: 1.5 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="font-black text-[#0D1117] mb-5"
+          style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)', lineHeight: 1.15 }}
         >
-          <span style={{
-            background: '#EEF2FF',
-            color: '#3B5BFA',
-            borderRadius: '6px',
-            padding: '2px 10px',
-            display: 'inline',
-            marginRight: '6px',
-          }}>
-            [VIDÉO EXCLUSIVE]
-          </span>
-          <span style={{ color: '#0D1117' }}>Pourquoi Ton Téléphone Te Coûte </span>
-          <span style={{
-            color: '#3B5BFA',
-            fontSize: '1.2em',
-            fontWeight: 900,
-          }}>12 000€ / Mois</span>
-          <span style={{ color: '#0D1117' }}> Sans Que Tu T'en Rendes Compte</span>
+          Ne perds plus jamais un client<br />
+          <span style={{ color: '#3B5BFA' }}>à cause d'un appel raté.</span>
         </motion.h1>
 
-        {/* Sous-titre */}
         <motion.p
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.14 }}
-          className="text-lg leading-relaxed mb-8 max-w-lg mx-auto"
+          transition={{ duration: 0.45, delay: 0.18 }}
+          className="text-lg leading-relaxed mb-10 max-w-lg mx-auto"
           style={{ color: '#6B7280' }}
         >
-          Regarde cette courte vidéo maintenant :
+          Mia répond à ta place en 3 secondes.<br />
+          24h/24, 7j/7. Tu reçois le récap SMS en 30 secondes.
         </motion.p>
 
-        {/* Player vidéo placeholder */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.22 }}
-          className="mx-auto mb-10"
-          style={{ maxWidth: '800px' }}
-        >
-          <div
-            className="relative w-full flex flex-col items-center justify-center cursor-pointer"
-            style={{
-              aspectRatio: '16 / 9',
-              background: '#000000',
-              borderRadius: '12px',
-              boxShadow: '0 0 60px rgba(59,91,250,0.30), 0 0 120px rgba(59,91,250,0.12)',
-              border: '1px solid rgba(59,91,250,0.20)',
-            }}
-          >
-            <div
-              className="flex items-center justify-center rounded-full"
-              style={{
-                width: 72,
-                height: 72,
-                background: 'rgba(255,255,255,0.12)',
-                border: '2px solid rgba(255,255,255,0.30)',
-                marginBottom: '12px',
-              }}
-            >
-              <Play className="w-8 h-8 text-white" fill="white" />
-            </div>
-            <p className="text-sm" style={{ color: 'rgba(255,255,255,0.35)' }}>
-              La vidéo arrive bientôt
-            </p>
-          </div>
-        </motion.div>
-
-        {/* CTA principal */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.32 }}
+          transition={{ duration: 0.4, delay: 0.26 }}
           className="flex flex-col items-center gap-4"
         >
           <motion.a
@@ -696,75 +726,25 @@ export default function Home() {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center justify-center gap-2 text-white font-black text-base px-10 py-4 rounded-xl w-full"
+            className="inline-flex items-center justify-center gap-2 text-white font-black text-base px-10 py-4 rounded-xl"
             style={{
               background: 'linear-gradient(135deg,#4A6EFF,#3B5BFA)',
-              boxShadow: '0 0 40px rgba(59,91,250,0.45)',
-              maxWidth: 420,
+              boxShadow: '0 0 40px rgba(59,91,250,0.4)',
+              minWidth: 300,
             }}
           >
             Essayer Mia 7 jours gratuits <ArrowRight className="w-4 h-4" />
           </motion.a>
-
-          <ScarcityBadge remaining={remaining} loaded={loaded} />
-
-          <div className="flex flex-wrap items-center justify-center gap-4 text-xs" style={{ color: '#9CA3AF' }}>
-            {[
-              '✓ 7 jours gratuits',
-              '✓ Aucune carte débitée avant le 8ème jour',
-              '✓ Engagement 3 mois après l\'essai',
-            ].map(l => (
-              <span key={l}>{l}</span>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-medium" style={{ color: '#6B7280' }}>
+            {['✓ 7 jours gratuits', "✓ Aucune carte débitée avant le 8ème jour", '✓ Prix fondateurs 197€ le 1er mois'].map(b => (
+              <span key={b}>{b}</span>
             ))}
           </div>
         </motion.div>
       </section>
 
-      {/* ── DEMO + ROI CÔTE À CÔTE ── */}
-      <section className="relative max-w-6xl mx-auto px-5 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-
-          {/* Colonne gauche — Demo widget */}
-          <div>
-            <div className="flex justify-center mb-6">
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest"
-                style={{ background: '#EEF2FF', border: '1px solid #C7D2FE', color: '#3B5BFA' }}
-              >
-                <motion.span
-                  animate={{ scale: [1, 1.4, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  className="w-1.5 h-1.5 bg-emerald-400 rounded-full"
-                />
-                47 artisans actifs en ce moment
-              </motion.div>
-            </div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <DemoWidget />
-            </motion.div>
-          </div>
-
-          {/* Colonne droite — Simulateur ROI */}
-          <div>
-            <ROICalculator />
-          </div>
-
-        </div>
-      </section>
-
-      {/* ── STATS BAR ── */}
-      <section className="relative py-8" style={{
-        borderTop: '1px solid #E0E7FF',
-        borderBottom: '1px solid #E0E7FF',
-        background: '#EEF2FF',
-      }}>
+      {/* ── S2: STATS ── */}
+      <section className="py-8" style={{ borderTop: '1px solid #E0E7FF', borderBottom: '1px solid #E0E7FF', background: '#EEF2FF' }}>
         <div className="max-w-2xl mx-auto px-5">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {STATS.map(s => (
@@ -779,83 +759,420 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── TÉMOIGNAGES BENTO ── */}
-      <section className="relative max-w-6xl mx-auto px-5 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <p className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: '#3B5BF5' }}>
-            Résultats réels
-          </p>
-          <h2 className="font-black text-[#0D1117]" style={{ fontSize: 'clamp(1.8rem, 5vw, 2.8rem)' }}>
-            Ce que disent <span style={{ color: '#3B5BFA' }}>nos artisans</span>
-          </h2>
-        </motion.div>
+      {/* ── S3: PROBLÈME ── */}
+      <section className="py-20 px-5" style={{ background: '#F8F9FF' }}>
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="font-black text-[#0D1117] mb-4" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)' }}>
+              Combien d'appels tu rates chaque jour ?
+            </h2>
+          </motion.div>
 
-        {/* Grille paysage — 3 colonnes égales sur desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <TestimonialCard t={TESTIMONIALS[0]} delay={0} />
-          <TestimonialCard t={TESTIMONIALS[1]} delay={0.06} />
-          <TestimonialCard t={TESTIMONIALS[2]} delay={0.12} />
-          <TestimonialCard t={TESTIMONIALS[3]} delay={0.18} />
-          <TestimonialCard t={TESTIMONIALS[4]} delay={0.24} />
-          <TestimonialCard t={TESTIMONIALS[5]} delay={0.30} />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+            {[
+              { bg: 'rgba(239,68,68,0.06)', border: 'rgba(239,68,68,0.15)', icon: '📞', num: '3 appels manqués/jour', desc: 'Certains jours plus, certains jours moins. Mais en moyenne — 3.' },
+              { bg: 'rgba(251,146,60,0.06)', border: 'rgba(251,146,60,0.15)', icon: '📅', num: '60 appels manqués/mois', desc: "Sur 20 jours ouvrés — c'est 60 clients qui sont tombés sur personne." },
+              { bg: 'rgba(239,68,68,0.10)', border: 'rgba(239,68,68,0.25)', icon: '💸', num: '12 000€ perdus/mois', desc: "À 200€ le dépannage moyen — c'est le chiffre qui part chez ton concurrent. Chaque mois." },
+            ].map((c, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="rounded-2xl p-6"
+                style={{ background: c.bg, border: `1px solid ${c.border}` }}
+              >
+                <div className="text-3xl mb-3">{c.icon}</div>
+                <p className="font-black text-[#0D1117] mb-2" style={{ fontSize: '1.1rem' }}>{c.num}</p>
+                <p className="text-sm leading-relaxed" style={{ color: '#6B7280' }}>{c.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center font-semibold mb-8"
+            style={{ color: '#374151', fontSize: '1rem' }}
+          >
+            Et le pire — tu le vois même pas.<br />
+            <span style={{ color: '#6B7280', fontWeight: 400 }}>Personne ne t'envoie une facture pour les appels manqués.</span>
+          </motion.p>
+
+          <div className="flex justify-center">
+            <a href={COMMENCER_URL} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-white font-bold px-8 py-3.5 rounded-xl transition-opacity hover:opacity-90"
+              style={{ background: '#3B5BFA', boxShadow: '0 4px 20px rgba(59,91,250,0.3)' }}>
+              Récupérer mes clients perdus <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* ── FINAL CTA ── */}
-      <section className="relative max-w-xl mx-auto px-5 pb-24 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="rounded-2xl px-8 py-12"
-          style={{
-            background: '#EEF2FF',
-            border: '1px solid #C7D2FE',
-          }}
-        >
-          <h2 className="font-black text-[#0D1117] mb-3" style={{ fontSize: 'clamp(1.8rem, 5vw, 2.6rem)' }}>
-            Prêt à ne plus rater<br />
-            <span style={{ color: '#3B5BFA' }}>un seul appel ?</span>
-          </h2>
-          <p className="mb-8 text-sm" style={{ color: '#6B7280' }}>
-            7 jours d'essai gratuit — aucune CB débitée avant le 8ème jour.
-          </p>
-          <motion.a
-            href={COMMENCER_URL}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center justify-center gap-2 text-white font-black text-lg px-10 py-4 rounded-xl w-full transition-all"
-            style={{
-              background: 'linear-gradient(135deg,#4A6EFF,#3B5BF5)',
-              boxShadow: '0 0 50px rgba(59,91,245,0.45)',
-              maxWidth: 380,
-            }}
+      {/* ── S4: COMMENT ÇA MARCHE ── */}
+      <section id="how-it-works" className="py-20 px-5" style={{ background: '#FFFFFF' }}>
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-14"
           >
-            Démarrer mon essai gratuit <ArrowRight className="w-5 h-5" />
-          </motion.a>
-          <div className="flex items-center justify-center gap-6 mt-5 text-xs" style={{ color: '#9CA3AF' }}>
-            <span>Engagement 3 mois</span>
-            <span>·</span>
-            <span>RGPD conforme</span>
-            <span>·</span>
-            <span>Hébergé en France</span>
+            <h2 className="font-black text-[#0D1117] mb-3" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)' }}>
+              Comment Mia récupère tes clients
+            </h2>
+            <p style={{ color: '#6B7280' }}>3 piliers. Zéro changement dans ta façon de travailler.</p>
+          </motion.div>
+
+          <div className="flex flex-col gap-10">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col md:flex-row gap-6 items-start"
+            >
+              <div className="flex-shrink-0 flex items-center gap-4">
+                <span className="font-black text-3xl" style={{ color: '#3B5BFA' }}>01</span>
+                <span className="text-3xl">📞</span>
+              </div>
+              <div className="rounded-2xl p-6 flex-1" style={{ background: '#F8F9FF', border: '1px solid #E0E7FF' }}>
+                <h3 className="font-black text-[#0D1117] mb-2" style={{ fontSize: '1.15rem' }}>Elle décroche en 3 secondes</h3>
+                <p className="text-sm leading-relaxed" style={{ color: '#6B7280' }}>
+                  Mia répond à ta place, 24h/24, 7j/7. Même quand t'es sous un évier, sur un toit, ou en pleine intervention. Elle parle comme une vraie secrétaire — pas comme un robot.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="flex flex-col md:flex-row gap-6 items-start"
+            >
+              <div className="flex-shrink-0 flex items-center gap-4">
+                <span className="font-black text-3xl" style={{ color: '#3B5BFA' }}>02</span>
+                <span className="text-3xl">💬</span>
+              </div>
+              <div className="flex-1">
+                <div className="rounded-2xl p-6 mb-4" style={{ background: '#F8F9FF', border: '1px solid #E0E7FF' }}>
+                  <h3 className="font-black text-[#0D1117] mb-2" style={{ fontSize: '1.15rem' }}>Elle qualifie et te résume l'appel</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: '#6B7280' }}>
+                    Mia pose les bonnes questions : c'est quoi le problème, c'est où, c'est urgent, et il est libre quand. 30 secondes après — tu reçois le récap SMS complet sur ton téléphone.
+                  </p>
+                </div>
+                <div className="rounded-2xl p-4" style={{ background: '#1A1A2E', border: '1px solid rgba(59,91,250,0.3)', maxWidth: 360 }}>
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-7 h-7 rounded-full flex items-center justify-center font-black text-white text-xs"
+                      style={{ background: '#3B5BFA' }}>M</div>
+                    <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.06em' }}>MIA — 14h32</span>
+                  </div>
+                  <div className="rounded-xl p-3" style={{ background: '#252547', fontSize: 12, lineHeight: 1.8, color: '#fff' }}>
+                    <p>👤 <strong>Jean-Luc Moreau</strong> — 06 XX XX XX XX</p>
+                    <p>🔧 Fuite sous évier cuisine</p>
+                    <p>📍 12 rue des Lilas, Paris 15e</p>
+                    <p>🚨 Urgence : <strong>OUI</strong> — eau qui coule</p>
+                    <p>📅 Dispo : ce soir après 18h ou demain matin</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-col md:flex-row gap-6 items-start"
+            >
+              <div className="flex-shrink-0 flex items-center gap-4">
+                <span className="font-black text-3xl" style={{ color: '#3B5BFA' }}>03</span>
+                <span className="text-3xl">🔄</span>
+              </div>
+              <div className="rounded-2xl p-6 flex-1" style={{ background: '#F8F9FF', border: '1px solid #E0E7FF' }}>
+                <h3 className="font-black text-[#0D1117] mb-2" style={{ fontSize: '1.15rem' }}>Elle relance automatiquement</h3>
+                <p className="text-sm leading-relaxed" style={{ color: '#6B7280' }}>
+                  Si un client raccroche avant de parler à Mia — elle le rappelle 5 minutes après. Si c'est une urgence — elle te transfère l'appel direct. Si quelqu'un est impoli — elle reste pro et prend les coordonnées.
+                </p>
+              </div>
+            </motion.div>
           </div>
-        </motion.div>
+
+          <div className="flex justify-center mt-12">
+            <a href={COMMENCER_URL} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-white font-bold px-8 py-3.5 rounded-xl transition-opacity hover:opacity-90"
+              style={{ background: '#3B5BFA', boxShadow: '0 4px 20px rgba(59,91,250,0.3)' }}>
+              Activer Mia sur mon numéro <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
       </section>
 
-      {/* ── FOOTER MINIMAL ── */}
+      {/* ── S5: FEATURES ── */}
+      <section id="features" className="py-20 px-5" style={{ background: '#F8F9FF' }}>
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="font-black text-[#0D1117] mb-3" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)' }}>
+              Tout ce que Mia fait pour toi
+            </h2>
+          </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {FEATURES_GRID.map((f, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06 }}
+                className="rounded-2xl p-5"
+                style={{ background: '#FFFFFF', border: '1px solid #E0E7FF', boxShadow: '0 2px 8px rgba(59,91,245,0.04)' }}
+              >
+                <div className="text-2xl mb-3">{f.icon}</div>
+                <p className="font-bold text-[#0D1117] mb-1 text-sm">{f.title}</p>
+                <p className="text-xs leading-relaxed" style={{ color: '#6B7280' }}>{f.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── S6: SIMULATEUR ── */}
+      <section className="py-20 px-5" style={{ background: '#FFFFFF' }}>
+        <div className="max-w-xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-8"
+          >
+            <h2 className="font-black text-[#0D1117] mb-3" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)' }}>
+              Calcule ce que tu perds sans Mia
+            </h2>
+            <p style={{ color: '#6B7280', fontSize: '0.95rem' }}>
+              Entre tes chiffres — vois en temps réel ce que Mia peut te rapporter.
+            </p>
+          </motion.div>
+          <ROICalculator />
+        </div>
+      </section>
+
+      {/* ── S7: TÉMOIGNAGES ── */}
+      <section id="testimonials" className="py-20 px-5" style={{ background: '#F8F9FF' }}>
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <p className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: '#3B5BFA' }}>Résultats réels</p>
+            <h2 className="font-black text-[#0D1117]" style={{ fontSize: 'clamp(1.8rem, 5vw, 2.8rem)' }}>
+              Ce que disent <span style={{ color: '#3B5BFA' }}>nos artisans</span>
+            </h2>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+            {TESTIMONIALS.map((t, i) => (
+              <TestimonialCard key={i} t={t} delay={i * 0.06} />
+            ))}
+          </div>
+          <div className="flex justify-center">
+            <a href={COMMENCER_URL} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-white font-bold px-8 py-3.5 rounded-xl transition-opacity hover:opacity-90"
+              style={{ background: '#3B5BFA', boxShadow: '0 4px 20px rgba(59,91,250,0.3)' }}>
+              Rejoins les 47 artisans qui ne ratent plus un seul appel <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── S8: PRICING ── */}
+      <section id="pricing" className="py-20 px-5" style={{ background: '#FFFFFF' }}>
+        <div className="max-w-xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <h2 className="font-black text-[#0D1117]" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)' }}>
+              Une seule offre. Transparente. Sans surprise.
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="rounded-2xl overflow-hidden"
+            style={{ border: '2px solid #3B5BFA', boxShadow: '0 8px 40px rgba(59,91,250,0.18)' }}
+          >
+            <div className="px-8 py-6 text-center" style={{ background: '#3B5BFA' }}>
+              <span className="inline-block text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full mb-3"
+                style={{ background: 'rgba(255,255,255,0.2)', color: '#fff' }}>
+                PRIX FONDATEURS — offre limitée
+              </span>
+              <div className="flex items-center justify-center gap-3">
+                <span className="text-2xl font-bold line-through" style={{ color: 'rgba(255,255,255,0.5)' }}>497€</span>
+                <span className="font-black text-white" style={{ fontSize: '3.5rem', lineHeight: 1 }}>197€</span>
+              </div>
+              <p className="text-sm mt-1" style={{ color: 'rgba(255,255,255,0.75)' }}>/mois le 1er mois — puis 497€/mois</p>
+            </div>
+
+            <div className="px-8 py-6 bg-white">
+              <ul className="space-y-2 mb-6">
+                {[
+                  '1 numéro dédié professionnel',
+                  'Appels entrants 24h/24, 7j/7',
+                  '1 500 minutes incluses/mois',
+                  'SMS récap en 30 secondes',
+                  'Qualification automatique',
+                  'Détection et transfert urgences',
+                  '10 langues',
+                  'Rapport hebdomadaire',
+                  'Rappel automatique client manqué',
+                  "Mia apprend ton activité",
+                  'Support prioritaire <4h',
+                ].map(item => (
+                  <li key={item} className="flex items-start gap-2 text-sm" style={{ color: '#374151' }}>
+                    <span className="font-bold flex-shrink-0 mt-0.5" style={{ color: '#10B981' }}>✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-xs mb-5" style={{ color: '#9CA3AF' }}>Au-delà de 1 500 min : 0,20€/min</p>
+              <a href={COMMENCER_URL} target="_blank" rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full py-4 rounded-xl text-white font-black text-base transition-opacity hover:opacity-90"
+                style={{ background: 'linear-gradient(135deg,#4A6EFF,#3B5BFA)', boxShadow: '0 4px 20px rgba(59,91,250,0.35)' }}>
+                Commencer mon essai gratuit <ArrowRight className="w-4 h-4" />
+              </a>
+              <div className="flex flex-wrap justify-center gap-3 mt-4 text-xs" style={{ color: '#9CA3AF' }}>
+                {['✓ 7 jours gratuits', "✓ Aucune carte débitée avant le 8ème jour", "✓ Engagement 3 mois après l'essai", '✓ Résiliation simple après engagement'].map(b => (
+                  <span key={b}>{b}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className="px-8 py-4 text-center text-xs" style={{ background: '#F8F9FF', borderTop: '1px solid #E0E7FF', color: '#6B7280' }}>
+              Une secrétaire classique : <strong style={{ color: '#374151' }}>1 800€/mois</strong>
+              {' '}· Mia : <strong style={{ color: '#374151' }}>197€ le 1er mois, puis 497€/mois</strong>
+              {' '}· Soit <strong style={{ color: '#3B5BFA' }}>3,6× moins cher</strong> pour un service 24h/24.
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── S9: FAQ ── */}
+      <section id="faq" className="py-20 px-5" style={{ background: '#F8F9FF' }}>
+        <div className="max-w-2xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <h2 className="font-black text-[#0D1117]" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)' }}>
+              Questions fréquentes
+            </h2>
+          </motion.div>
+          <div className="flex flex-col gap-2">
+            {FAQ_ITEMS.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="rounded-xl overflow-hidden"
+                style={{ background: '#FFFFFF', border: '1px solid #E0E7FF' }}
+              >
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="w-full flex items-center justify-between text-left px-5 py-4 gap-3"
+                  style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+                >
+                  <span className="font-semibold text-sm text-[#0D1117]">{item.q}</span>
+                  <ChevronDown
+                    className="w-4 h-4 flex-shrink-0 transition-transform duration-200"
+                    style={{ color: '#3B5BFA', transform: openFaq === i ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                  />
+                </button>
+                {openFaq === i && (
+                  <div className="px-5 pb-4 text-sm leading-relaxed" style={{ color: '#6B7280', borderTop: '1px solid #EEF2FF' }}>
+                    <p className="pt-3">{item.a}</p>
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── S10: FINAL CTA ── */}
+      <section className="py-20 px-5 text-center">
+        <div className="max-w-xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="rounded-2xl px-8 py-12"
+            style={{ background: '#EEF2FF', border: '1px solid #C7D2FE' }}
+          >
+            <h2 className="font-black text-[#0D1117] mb-3" style={{ fontSize: 'clamp(1.8rem, 5vw, 2.6rem)' }}>
+              Prêt à ne plus rater<br />
+              <span style={{ color: '#3B5BFA' }}>un seul appel ?</span>
+            </h2>
+            <p className="mb-8 text-sm" style={{ color: '#6B7280' }}>
+              7 jours d'essai gratuit — aucune CB débitée avant le 8ème jour.
+            </p>
+            <motion.a
+              href={COMMENCER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center justify-center gap-2 text-white font-black text-lg px-10 py-4 rounded-xl w-full mb-4"
+              style={{
+                background: 'linear-gradient(135deg,#4A6EFF,#3B5BF5)',
+                boxShadow: '0 0 50px rgba(59,91,245,0.45)',
+                maxWidth: 380,
+              }}
+            >
+              Démarrer mon essai gratuit <ArrowRight className="w-5 h-5" />
+            </motion.a>
+            <div className="flex justify-center">
+              <ScarcityBadge remaining={remaining} loaded={loaded} />
+            </div>
+            <div className="flex items-center justify-center gap-6 mt-5 text-xs" style={{ color: '#9CA3AF' }}>
+              <span>Engagement 3 mois</span>
+              <span>·</span>
+              <span>RGPD conforme</span>
+              <span>·</span>
+              <span>Hébergé en France</span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── FOOTER ── */}
       <footer className="py-8 text-center" style={{ borderTop: '1px solid #E0E7FF' }}>
         <img src="/logo-full-clean.svg" alt="Fixlyy" className="h-10 w-auto mx-auto mb-5 opacity-80" />
         <div className="flex items-center justify-center gap-4 text-xs mb-4" style={{ color: '#9CA3AF' }}>
           {[
-            { to: '/cgv', label: 'CGV' },
-            { to: '/cgu', label: 'CGU' },
-            { to: '/confidentialite', label: 'Confidentialité' },
+            { to: '/cgv',              label: 'CGV' },
+            { to: '/cgu',              label: 'CGU' },
+            { to: '/confidentialite',  label: 'Confidentialité' },
             { to: '/mentions-legales', label: 'Mentions légales' },
           ].map((l, i, arr) => (
             <React.Fragment key={l.to}>
@@ -871,69 +1188,17 @@ export default function Home() {
 
       <SocialProofToast onDecrement={decrement} />
 
-      {/* ── Gradient animation keyframes ── */}
       <style>{`
-        @keyframes gradientShift {
-          0%   { background-position: 0% center; }
-          100% { background-position: 200% center; }
-        }
-        @keyframes scarcityPulse {
-          0%, 100% { opacity: 1; }
-          50%       { opacity: 0.65; }
-        }
-        @keyframes scarcityFlash {
-          0%   { opacity: 1; }
-          40%  { opacity: 0.2; }
-          100% { opacity: 1; }
-        }
-        @keyframes spSlideIn {
-          from { transform: translateX(-110%); opacity: 0; }
-          to   { transform: translateX(0);     opacity: 1; }
-        }
+        @keyframes scarcityPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.65; } }
+        @keyframes scarcityFlash { 0% { opacity: 1; } 40% { opacity: 0.2; } 100% { opacity: 1; } }
+        @keyframes spSlideIn { from { transform: translateX(-110%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         input::placeholder { color: #9CA3AF; }
-
-        /* Sliders ROI */
-        .roi-slider {
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          appearance: none;
-          width: 100%;
-          height: 20px;
-          background: transparent;
-          outline: none;
-          cursor: pointer;
-        }
-        .roi-slider::-webkit-slider-runnable-track {
-          height: 6px;
-          border-radius: 4px;
-          background: #C7D2FE;
-        }
-        .roi-slider::-webkit-slider-thumb {
-          -webkit-appearance: none;
-          margin-top: -7px;
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          background: #3B5BFA;
-          cursor: pointer;
-          box-shadow: 0 2px 8px rgba(59,91,245,0.35), 0 0 0 3px rgba(59,91,245,0.15);
-          border: 2px solid #fff;
-        }
-        .roi-slider::-moz-range-track {
-          height: 6px;
-          border-radius: 4px;
-          background: #C7D2FE;
-        }
-        .roi-slider::-moz-range-thumb {
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          background: #3B5BFA;
-          cursor: pointer;
-          box-shadow: 0 2px 8px rgba(59,91,245,0.35);
-          border: 2px solid #fff;
-        }
+        .roi-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 20px; background: transparent; outline: none; cursor: pointer; }
+        .roi-slider::-webkit-slider-runnable-track { height: 6px; border-radius: 4px; background: #C7D2FE; }
+        .roi-slider::-webkit-slider-thumb { -webkit-appearance: none; margin-top: -7px; width: 20px; height: 20px; border-radius: 50%; background: #3B5BFA; cursor: pointer; box-shadow: 0 2px 8px rgba(59,91,245,0.35), 0 0 0 3px rgba(59,91,245,0.15); border: 2px solid #fff; }
+        .roi-slider::-moz-range-track { height: 6px; border-radius: 4px; background: #C7D2FE; }
+        .roi-slider::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: #3B5BFA; cursor: pointer; box-shadow: 0 2px 8px rgba(59,91,245,0.35); border: 2px solid #fff; }
       `}</style>
     </div>
-  );
+  )
 }
