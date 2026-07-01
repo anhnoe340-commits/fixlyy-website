@@ -626,7 +626,7 @@ export default function Home() {
     { icon: '📱', title: 'SMS récap en 30 secondes', desc: "Après chaque appel — nom, numéro, problème, adresse, urgence, disponibilité." },
     { icon: '🚨', title: 'Transfert urgences', desc: "Mia détecte les urgences et te transfère l'appel direct sur ton mobile." },
     { icon: '📊', title: 'Rapport hebdomadaire', desc: "Chaque lundi matin — stats, appels, récap de la semaine." },
-    { icon: '🔄', title: 'Rappel automatique', desc: "Client qui a raccroché ? Mia le rappelle automatiquement 5 minutes après." },
+    { icon: '🔄', title: 'Rappel automatique', desc: "Client qui a raccroché ? Mia le rappelle automatiquement 2 minutes après." },
     { icon: '🧠', title: "Mia apprend ton activité", desc: "Elle connaît ton équipe, tes tarifs, tes clients réguliers, ta façon de travailler." },
     { icon: '📅', title: 'Prise de RDV', desc: "Mia prend les rendez-vous directement en fonction de tes disponibilités." },
     { icon: '🌐', title: 'Numéro dédié professionnel', desc: "Un numéro pro rien que pour toi. Tu le mets partout — Google, Pages Jaunes, site." },
@@ -899,7 +899,7 @@ export default function Home() {
               <div className="rounded-2xl p-6 flex-1" style={{ background: '#F8F9FF', border: '1px solid #E0E7FF' }}>
                 <h3 className="font-black text-[#0D1117] mb-2" style={{ fontSize: '1.15rem' }}>Elle relance automatiquement</h3>
                 <p className="text-sm leading-relaxed" style={{ color: '#6B7280' }}>
-                  Si un client raccroche avant de parler à Mia — elle le rappelle 5 minutes après. Si c'est une urgence — elle te transfère l'appel direct. Si quelqu'un est impoli — elle reste pro et prend les coordonnées.
+                  Si un client raccroche avant de parler à Mia — elle le rappelle 2 minutes après. Si c'est une urgence — elle te transfère l'appel direct. Si quelqu'un est impoli — elle reste pro et prend les coordonnées.
                 </p>
               </div>
             </motion.div>
@@ -933,7 +933,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
             {[
-              { icon: '📞', title: 'Rappel client manqué', desc: "Un client a raccroché avant de parler à Mia ? Elle le rappelle automatiquement 5 minutes après. Zéro client perdu." },
+              { icon: '📞', title: 'Rappel client manqué', desc: "Un client a raccroché avant de parler à Mia ? Elle le rappelle automatiquement 2 minutes après. Zéro client perdu." },
               { icon: '📋', title: 'Suivi devis automatique', desc: "Mia détecte quand un devis a été évoqué pendant l'appel. Elle rappelle le prospect 48h après pour faire le suivi." },
               { icon: '📅', title: 'Confirmation de RDV', desc: "La veille d'un rendez-vous pris par Mia, elle appelle le client pour confirmer. Moins d'annulations de dernière minute." },
               { icon: '🔄', title: 'Relance client inactif', desc: "Un client n'a pas rappelé depuis 30 jours ? Mia le contacte pour reprendre le lien. Sans que tu aies à y penser." },
