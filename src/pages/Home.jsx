@@ -1106,147 +1106,133 @@ export default function Home() {
       </section>
 
       {/* ── S8: PRICING ── */}
-      <section id="pricing" className="relative py-24 px-5 overflow-hidden" style={{ background: '#0D1117' }}>
-        {/* Glow blobs */}
+      <section id="pricing" className="relative py-24 px-5 overflow-hidden" style={{ background: '#F0F4FF' }}>
+        {/* Blob décoratif léger */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden>
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full blur-[160px]"
-            style={{ background: 'radial-gradient(ellipse, rgba(59,91,250,0.22) 0%, transparent 70%)' }} />
-          <div className="absolute bottom-0 right-1/4 w-[300px] h-[300px] rounded-full blur-[120px]"
-            style={{ background: 'rgba(139,92,246,0.12)' }} />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full blur-[180px]"
+            style={{ background: 'radial-gradient(ellipse, rgba(59,91,250,0.10) 0%, transparent 70%)' }} />
         </div>
 
         <div className="relative max-w-xl mx-auto">
-          {/* Title */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-10"
           >
-            <h2 className="font-black text-white mb-3" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)' }}>
+            <h2 className="font-black text-[#0D1117] mb-3" style={{ fontSize: 'clamp(1.8rem, 4vw, 2.4rem)' }}>
               Une seule offre.<br />
-              <span style={{ color: '#818CF8' }}>Transparente. Sans surprise.</span>
+              <span style={{ color: '#3B5BFA' }}>Transparente. Sans surprise.</span>
             </h2>
           </motion.div>
 
-          {/* Card with gradient border */}
           <motion.div
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.45 }}
             className="rounded-3xl overflow-hidden"
-            style={{
-              background: 'linear-gradient(135deg, #3B5BFA, #7C3AED)',
-              padding: 2,
-              boxShadow: '0 0 80px rgba(59,91,250,0.35), 0 0 200px rgba(59,91,250,0.15)',
-            }}
+            style={{ boxShadow: '0 20px 80px rgba(59,91,250,0.22), 0 4px 24px rgba(59,91,250,0.12)', border: '1.5px solid #C7D2FE' }}
           >
-            <div className="rounded-3xl overflow-hidden" style={{ background: '#111827' }}>
+            {/* Header gradient vif */}
+            <div className="relative px-8 py-10 text-center overflow-hidden"
+              style={{ background: 'linear-gradient(135deg, #3B5BFA 0%, #4F46E5 100%)' }}>
+              <div className="absolute inset-0 pointer-events-none"
+                style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.14) 0%, transparent 55%)' }} />
 
-              {/* Header */}
-              <div className="relative px-8 py-8 text-center overflow-hidden"
-                style={{ background: 'linear-gradient(135deg, #3B5BFA 0%, #6D28D9 100%)' }}>
-                {/* Shine overlay */}
-                <div className="absolute inset-0 pointer-events-none"
-                  style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%)' }} />
-
+              <motion.span
+                initial={{ opacity: 0, y: -8 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.15 }}
+                className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-6"
+                style={{ background: 'rgba(255,255,255,0.18)', color: '#fff', border: '1px solid rgba(255,255,255,0.3)' }}
+              >
                 <motion.span
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  animate={{ opacity: [1, 0.3, 1] }}
+                  transition={{ duration: 1.4, repeat: Infinity }}
+                  className="w-1.5 h-1.5 rounded-full bg-yellow-300"
+                />
+                Prix fondateurs — offre limitée
+              </motion.span>
+
+              <div className="flex items-center justify-center gap-4 mb-2">
+                <span className="text-2xl font-bold line-through" style={{ color: 'rgba(255,255,255,0.45)' }}>497€</span>
+                <motion.span
+                  initial={{ scale: 0.75, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-widest px-4 py-1.5 rounded-full mb-5"
-                  style={{ background: 'rgba(255,255,255,0.15)', color: '#fff', border: '1px solid rgba(255,255,255,0.25)', backdropFilter: 'blur(8px)' }}
+                  transition={{ delay: 0.25, type: 'spring', stiffness: 180, damping: 14 }}
+                  className="font-black text-white"
+                  style={{ fontSize: 'clamp(4rem, 12vw, 5.5rem)', lineHeight: 1 }}
                 >
-                  <motion.span
-                    animate={{ opacity: [1, 0.4, 1] }}
-                    transition={{ duration: 1.4, repeat: Infinity }}
-                    className="w-1.5 h-1.5 rounded-full bg-yellow-300"
-                  />
-                  Prix fondateurs — offre limitée
+                  197€
                 </motion.span>
+              </div>
+              <p className="text-sm font-medium mb-5" style={{ color: 'rgba(255,255,255,0.72)' }}>
+                /mois le 1er mois — puis 497€/mois
+              </p>
 
-                <div className="flex items-center justify-center gap-4 mb-2">
-                  <span className="text-2xl font-bold line-through" style={{ color: 'rgba(255,255,255,0.4)' }}>497€</span>
-                  <motion.span
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
-                    className="font-black text-white"
-                    style={{ fontSize: 'clamp(3.5rem, 10vw, 5rem)', lineHeight: 1, textShadow: '0 0 40px rgba(255,255,255,0.3)' }}
-                  >
-                    197€
-                  </motion.span>
-                </div>
-                <p className="text-sm font-medium" style={{ color: 'rgba(255,255,255,0.7)' }}>
-                  /mois le 1er mois — puis 497€/mois
-                </p>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold"
+                style={{ background: 'rgba(52,211,153,0.22)', color: '#6EE7B7', border: '1px solid rgba(52,211,153,0.35)' }}>
+                ✓ Tu économises 300€ dès le 1er mois
+              </div>
+            </div>
 
-                {/* Saving badge */}
-                <div className="inline-flex items-center gap-1.5 mt-4 px-3 py-1 rounded-full text-xs font-bold"
-                  style={{ background: 'rgba(52,211,153,0.2)', color: '#34D399', border: '1px solid rgba(52,211,153,0.3)' }}>
-                  ✓ Tu économises 300€ dès le 1er mois
-                </div>
+            {/* Body blanc */}
+            <div className="px-8 py-7 bg-white">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 mb-6">
+                {[
+                  '1 numéro dédié professionnel',
+                  'Appels entrants 24h/24, 7j/7',
+                  '1 500 minutes incluses/mois',
+                  'SMS récap en 30 secondes',
+                  'Qualification automatique',
+                  'Détection et transfert urgences',
+                  '10 langues',
+                  'Rapport hebdomadaire',
+                  '100 appels sortants/mois',
+                  "Mia apprend ton activité",
+                  'Support prioritaire <4h',
+                  'Prise de RDV automatique',
+                ].map(item => (
+                  <div key={item} className="flex items-center gap-2">
+                    <span className="w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center text-[10px] font-bold"
+                      style={{ background: 'rgba(16,185,129,0.12)', color: '#10B981' }}>✓</span>
+                    <span className="text-xs font-medium" style={{ color: '#374151' }}>{item}</span>
+                  </div>
+                ))}
               </div>
 
-              {/* Features grid */}
-              <div className="px-8 py-7">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 mb-6">
-                  {[
-                    '1 numéro dédié professionnel',
-                    'Appels entrants 24h/24, 7j/7',
-                    '1 500 minutes incluses/mois',
-                    'SMS récap en 30 secondes',
-                    'Qualification automatique',
-                    'Détection et transfert urgences',
-                    '10 langues',
-                    'Rapport hebdomadaire',
-                    '100 appels sortants/mois',
-                    "Mia apprend ton activité",
-                    'Support prioritaire <4h',
-                    'Prise de RDV automatique',
-                  ].map(item => (
-                    <div key={item} className="flex items-center gap-2">
-                      <span className="w-4 h-4 rounded-full flex-shrink-0 flex items-center justify-center text-[10px] font-bold"
-                        style={{ background: 'rgba(52,211,153,0.15)', color: '#34D399' }}>✓</span>
-                      <span className="text-xs font-medium" style={{ color: '#D1D5DB' }}>{item}</span>
-                    </div>
-                  ))}
-                </div>
+              <p className="text-xs mb-6 text-center" style={{ color: '#9CA3AF' }}>Au-delà de 1 500 min : 0,20€/min</p>
 
-                <p className="text-xs mb-6 text-center" style={{ color: '#6B7280' }}>Au-delà de 1 500 min : 0,20€/min</p>
+              <motion.a
+                href={COMMENCER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="flex items-center justify-center gap-2 w-full py-4 rounded-xl text-white font-black text-base"
+                style={{
+                  background: 'linear-gradient(135deg, #4A6EFF, #3B5BFA)',
+                  boxShadow: '0 8px 30px rgba(59,91,250,0.45)',
+                }}
+              >
+                Commencer mon essai gratuit <ArrowRight className="w-4 h-4" />
+              </motion.a>
 
-                {/* CTA */}
-                <motion.a
-                  href={COMMENCER_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="flex items-center justify-center gap-2 w-full py-4 rounded-xl text-white font-black text-base"
-                  style={{
-                    background: 'linear-gradient(135deg, #4A6EFF, #7C3AED)',
-                    boxShadow: '0 0 40px rgba(59,91,250,0.5), inset 0 1px 0 rgba(255,255,255,0.15)',
-                  }}
-                >
-                  Commencer mon essai gratuit <ArrowRight className="w-4 h-4" />
-                </motion.a>
-
-                <div className="grid grid-cols-2 gap-2 mt-4 text-xs text-center" style={{ color: '#6B7280' }}>
-                  {['✓ 7 jours gratuits', "✓ CB débitée au 8ème jour", "✓ Engagement 3 mois", '✓ Résiliation simple'].map(b => (
-                    <span key={b}>{b}</span>
-                  ))}
-                </div>
+              <div className="grid grid-cols-2 gap-2 mt-4 text-xs text-center" style={{ color: '#9CA3AF' }}>
+                {['✓ 7 jours gratuits', "✓ CB débitée au 8ème jour", "✓ Engagement 3 mois", '✓ Résiliation simple'].map(b => (
+                  <span key={b}>{b}</span>
+                ))}
               </div>
+            </div>
 
-              {/* Comparison footer */}
-              <div className="px-8 py-4 text-center text-xs" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', color: '#6B7280' }}>
-                Secrétaire classique : <strong style={{ color: '#9CA3AF' }}>1 800€/mois</strong>
-                {' '}· Mia : <strong style={{ color: '#9CA3AF' }}>197€ puis 497€</strong>
-                {' '}· <strong style={{ color: '#818CF8' }}>3,6× moins cher</strong> pour un service 24h/24.
-              </div>
+            {/* Comparison footer */}
+            <div className="px-8 py-4 text-center text-xs" style={{ background: '#F8F9FF', borderTop: '1px solid #E0E7FF', color: '#6B7280' }}>
+              Secrétaire classique : <strong style={{ color: '#374151' }}>1 800€/mois</strong>
+              {' '}· Mia : <strong style={{ color: '#374151' }}>197€ puis 497€</strong>
+              {' '}· <strong style={{ color: '#3B5BFA' }}>3,6× moins cher</strong> pour un service 24h/24.
             </div>
           </motion.div>
         </div>
