@@ -204,7 +204,7 @@ function ROICalculator() {
   const [appels, setAppels] = useState(3);
   const [panier, setPanier] = useState(200);
   const [joursOuvres, setJoursOuvres] = useState(20);
-  const [tauxSignature, setTauxSignature] = useState(50);
+  const [tauxSignature, setTauxSignature] = useState(15);
   const isFirstRender = useRef(true);
 
   useEffect(() => {
@@ -213,11 +213,11 @@ function ROICalculator() {
     setPanier(METIERS[metierIdx].panier);
   }, [metierIdx]);
 
-  const appelsMois          = appels * joursOuvres;
-  const pertesRecouvrables  = Math.round(appelsMois * panier * 0.15);
-  const gainDirect          = Math.round(pertesRecouvrables * (tauxSignature / 100));
-  const nbClients           = Math.round(appelsMois * (tauxSignature / 100));
-  const roiX        = Math.round(gainDirect / PRIX_MIA * 10) / 10;
+  const appelsMois    = appels * joursOuvres;
+  const potentielBrut = appelsMois * panier;
+  const gainDirect    = Math.round(potentielBrut * (tauxSignature / 100));
+  const nbClients     = Math.round(appelsMois * (tauxSignature / 100));
+  const roiX          = Math.round(gainDirect / PRIX_MIA * 10) / 10;
 
   const fmt = n => n >= 1000 ? `${(n / 1000).toFixed(1)}k€` : `${n}€`;
 
@@ -316,7 +316,7 @@ function ROICalculator() {
           <div className="rounded-xl p-3 text-center"
             style={{ background: 'rgba(239,68,68,0.07)', border: '1px solid rgba(239,68,68,0.15)' }}>
             <p className="text-[10px] font-semibold uppercase mb-1" style={{ color: 'rgba(248,113,113,0.6)' }}>Pertes</p>
-            <p className="font-black text-lg leading-none" style={{ color: '#F87171' }}>{fmt(pertesRecouvrables)}</p>
+            <p className="font-black text-lg leading-none" style={{ color: '#F87171' }}>{fmt(potentielBrut)}</p>
             <p className="text-[10px] mt-0.5" style={{ color: '#9CA3AF' }}>/mois</p>
           </div>
           <div className="rounded-xl p-3 text-center"
@@ -335,9 +335,9 @@ function ROICalculator() {
 
         {/* Phrase dynamique */}
         <p className="text-xs text-center leading-relaxed" style={{ color: '#6B7280' }}>
-          Sur <strong style={{ color: '#0D1117' }}>{fmt(pertesRecouvrables)}</strong> de pertes estimées par mois,{' '}
-          à <strong style={{ color: '#0D1117' }}>{tauxSignature}%</strong> de taux de signature ({nbClients} clients), c'est{' '}
-          <strong style={{ color: '#059669' }}>+{fmt(gainDirect)}</strong> récupérés dès le premier mois.
+          Sur tes <strong style={{ color: '#0D1117' }}>{appelsMois}</strong> appels manqués, si tu en signes{' '}
+          <strong style={{ color: '#0D1117' }}>{tauxSignature}%</strong> ({nbClients} clients), c'est{' '}
+          <strong style={{ color: '#059669' }}>+{fmt(gainDirect)}</strong> dès le premier mois.
         </p>
 
         {/* CTA */}
