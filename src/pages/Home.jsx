@@ -358,10 +358,10 @@ function ROICalculator() {
 }
 
 const STATS = [
-  { value: 47,    suffix: '',    label: 'artisans actifs' },
-  { value: 1200,  suffix: '+',   label: 'appels traités' },
-  { value: 4.9,   suffix: '★',   label: 'satisfaction' },
-  { value: 2,     suffix: 's',   label: 'décroche en' },
+  { value: 47,    suffix: '',    label: 'artisans actifs', color: '#3B5BFA' },
+  { value: 1200,  suffix: '+',   label: 'appels traités',  color: '#10B981' },
+  { value: 4.9,   suffix: '★',   label: 'satisfaction',    color: '#F59E0B' },
+  { value: 2,     suffix: 's',   label: 'décroche en',     color: '#8B5CF6' },
 ];
 
 /* ─── Counter animé ─── */
@@ -749,7 +749,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {STATS.map(s => (
               <div key={s.label}>
-                <p className="font-black mb-0.5 text-[#0D1117]" style={{ fontSize: '1.85rem' }}>
+                <p className="font-black mb-0.5" style={{ fontSize: '1.85rem', color: s.color }}>
                   <Counter value={s.value} suffix={s.suffix} />
                 </p>
                 <p className="text-xs" style={{ color: '#6B7280' }}>{s.label}</p>
